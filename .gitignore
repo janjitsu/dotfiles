@@ -1,7 +1,7 @@
 vim/bundle/*
 !vim/bundle/.keep
 vim/tmp/*
-!vim/bundle/.keep
+!vim/tmp/.keep
 tmux/plugins/*
 !tmux/plugins/.keep
 tmux/tpm
