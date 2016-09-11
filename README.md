@@ -13,10 +13,10 @@ Included:
 
 ###Setup
 
-* clone it
+* clone it to your home folder
 
 ```
-$ git clone git@github.com:janfrs/dotfiles.git
+$ git clone git@github.com:janfrs/dotfiles.git ~/dotfiles
 ```
 
 * run setup
