@@ -40,4 +40,12 @@ Any machine-specific or private config can be placed on `.bash_local` file
 
 ***
 
+### Todo
+
+- [ ] Git config
+- [ ] Enable vim folding
+- [ ] Save and restore vim sessions with tmux
+
+***
+
 setup file was inspired by: [this](http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/)
