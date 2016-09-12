@@ -140,7 +140,7 @@ nnoremap <C-l> <C-w>l
 
 " ########################### LEADER SHORTCUTS #################################
 " change leader key (default is \)
-let mapleader = " ,"
+let mapleader = ','
 
 " use ack
 nnoremap <leader>a :Ack
