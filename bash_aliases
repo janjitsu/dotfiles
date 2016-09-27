@@ -1,5 +1,7 @@
 #tmux always with colors
 alias tmux='tmux -2'
+alias c='clear'
+alias cls='clear && ls'
 
 #git
 alias gst='git status'

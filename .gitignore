@@ -3,5 +3,6 @@ vim/bundle/*
 vim/tmp/*
 !vim/tmp/.keep
 tmux/plugins/*
+tmux/resurrect/*
 !tmux/plugins/.keep
 tmux/tpm
