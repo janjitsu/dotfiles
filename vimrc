@@ -26,6 +26,7 @@ Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'slim-template/vim-slim'
 Plugin 'othree/xml.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'editorconfig/editorconfig-vim'
 
 
 " All of your Plugins must be added before the following line
@@ -54,7 +55,7 @@ set softtabstop=4
 set expandtab
 autocmd Filetype ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype eruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " text wrapping
@@ -62,6 +63,11 @@ set wrap
 set textwidth=79
 set formatoptions=qrnl
 set colorcolumn=81
+
+" folding
+set nofoldenable " start with no folds
+autocmd Filetype html setlocal foldmethod=indent fdl=3
+autocmd Filetype php setlocal foldmethod=indent fdl=3
 
 " code completion (not using it for now)
 " set wildmenu               " show completion on status bar
@@ -192,3 +198,5 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+"editor config please don't mess with fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
