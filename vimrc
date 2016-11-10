@@ -132,10 +132,6 @@ nnoremap k gk
 set scrolloff=3    " trigger scroolling 3 lines above the last
 set ttyfast        " faster scrolling
 
-" easily navigate through brackets
-nnoremap <tab> %
-vnoremap <tab> %
-
 " easier window vsplit and motion
 nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
