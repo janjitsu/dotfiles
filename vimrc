@@ -1,4 +1,5 @@
 " ################################## VUNDLE ####################################
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -27,11 +28,17 @@ Plugin 'slim-template/vim-slim'
 Plugin 'othree/xml.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'fatih/vim-go'
 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+" To update vundle run:
+" on vim :PluginInstall
+" on bash $vim +PluginInstall +qall
+
+" ################################## MISC ######################################
 
 " Colorscheme
 syntax on
@@ -48,6 +55,7 @@ set modelines=0    " don't use variable lines
 set backspace=indent,eol,start " backspace will delete control characters
 
 " ############################### INDENTATION ##################################
+
 " default tabstop to 4 spaces, use specific tabing for filetype
 set tabstop=4
 set shiftwidth=4
@@ -55,7 +63,8 @@ set softtabstop=4
 set expandtab
 autocmd Filetype ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype eruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+autocmd Filetype phtml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " text wrapping
@@ -77,15 +86,17 @@ autocmd Filetype php setlocal foldmethod=indent fdl=3
 "inoremap <C-@> <C-Space>
 
 " ############################### STATUS BAR ###################################
+
 set laststatus=2   " always display status line
 set showmode       " show what's the current mode (insert, normal, visual)
 set ruler          " show current column and lines on statusbar
 set showcmd        " show commands while they're typed on bottom right
-" show how far away a line is from current line useful for d<NUMBER>d'
+" show how far away a line is from current line, useful for d<NUMBER>d'
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
 " ######################### SAVING AND BACKUPING ###############################
+
 " keep an undo tree on a separate file
 set undofile
 set backup                        " enable backups
@@ -93,7 +104,7 @@ set noswapfile                    " it's 2013, Vim.
 
 set undodir=~/.vim/tmp/undo//     " undo files
 set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
+set directory=~/.vim/tmp/swap//     " swap files
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
@@ -110,7 +121,7 @@ endif
 au FocusLost * :wa
 
 " ######################## SEARCHING and REPLACING #############################
-" improve search
+
 " use new regex syntax
 nnoremap / /\v
 vnoremap / /\v
@@ -125,6 +136,7 @@ set showmatch
 set hlsearch
 
 " ############################## NAVIGATION ####################################
+
 " movement by screenline instead of file line
 nnoremap j gj
 nnoremap k gk
@@ -141,6 +153,7 @@ nnoremap <C-l> <C-w>l
 
 
 " ########################### LEADER SHORTCUTS #################################
+
 " change leader key (default is \)
 let mapleader = ','
 
@@ -154,6 +167,7 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
 nnoremap <leader><space> :noh<cr>
 
 " ############################ MISC SHORTCUTS ##################################
+
 " easily type commands
 nnoremap ; :
 " Save crt+s
@@ -165,17 +179,17 @@ inoremap <C-Q> <ESC>:q<CR>
 
 " ############################ PLUGIN SPECIFIC #################################
 
-" NERDTree
+"""" NERDTree
 let NERDTreeQuitOnOpen=0
 let NERDTreeWinSize=35
 autocmd VimEnter * nmap <F3> :NERDTreeToggle %<CR>
 autocmd VimEnter * imap <F3> <Esc>:NERDTreeToggle<CR>a
 autocmd VimEnter * nmap <F4> :NERDTreeFind<CR>
 
-" Emmet
+"""" Emmet
 let g:user_emmet_leader_key=','
 
-" Syntastic
+"""" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -186,7 +200,12 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_php_checkers = ['php']
 
-" highlight unwanted trailing spaces
+" Fix syntastic with go
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
+
+"""" Highlight unwanted trailing spaces
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
@@ -194,5 +213,6 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-"editor config please don't mess with fugitive
+"""" EditorConfig please don't mess with fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
