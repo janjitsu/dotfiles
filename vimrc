@@ -52,7 +52,7 @@ set autoindent     " makes indenting a little easier
 set hidden         " don't close unsaved files on buffers
 set visualbell     " disable beeps
 set modelines=0    " don't use variable lines
-set backspace=indent,eol,start " backspace will delete control characters
+set backspace=indent,eol,start    " backspace will delete control characters
 
 " ############################### INDENTATION ##################################
 
@@ -176,6 +176,10 @@ inoremap <C-S> <ESC>:w<CR>
 " Quit ctrl+q
 noremap <C-Q> :q<CR>
 inoremap <C-Q> <ESC>:q<CR>
+" Reload file with F5
+autocmd VimEnter * imap <F5> :checktime<CR>a
+autocmd VimEnter * nmap <F5> :checktime<CR>
+
 
 " ############################ PLUGIN SPECIFIC #################################
 
