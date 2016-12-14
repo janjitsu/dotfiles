@@ -29,6 +29,9 @@ Plugin 'othree/xml.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fatih/vim-go'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-lua-ftplugin'
 
 
 " All of your Plugins must be added before the following line
