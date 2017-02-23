@@ -22,6 +22,7 @@ Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-fugitive'
 Plugin 'sickill/vim-monokai'
+Plugin 'vinhnx/Ciapre.tmTheme'
 Plugin 'bling/vim-airline'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'slim-template/vim-slim'
@@ -29,6 +30,8 @@ Plugin 'othree/xml.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fatih/vim-go'
+Plugin 'joonty/vdebug'
+Plugin 'AndrewRadev/linediff.vim'
 
 
 " All of your Plugins must be added before the following line
@@ -176,9 +179,11 @@ inoremap <C-S> <ESC>:w<CR>
 " Quit ctrl+q
 noremap <C-Q> :q<CR>
 inoremap <C-Q> <ESC>:q<CR>
-" Reload file with F5
-autocmd VimEnter * imap <F5> :checktime<CR>a
-autocmd VimEnter * nmap <F5> :checktime<CR>
+" Reload file with <leader>F5
+autocmd VimEnter * imap <leader><F5> :checktime<CR>a
+autocmd VimEnter * nmap <leader><F5> :checktime<CR>
+" Only Window to new tab
+nnoremap <C-w>o :tab sp<CR>
 
 
 " ############################ PLUGIN SPECIFIC #################################
@@ -220,3 +225,11 @@ autocmd BufWinLeave * call clearmatches()
 """" EditorConfig please don't mess with fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+"""" Vdebug
+let g:vdebug_options = {}
+let g:vdebug_options['port'] = 9001
+"let g:vdebug_options['server'] = '192.168.33.10'
+let g:vdebug_options['ide_key'] = 'netbeans-xdebug'
+let g:vdebug_options['path_maps'] = {
+\   "/var/www/html": "/home/jan/Projetos/sympla"
+\}
