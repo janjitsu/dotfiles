@@ -12,7 +12,7 @@ Included:
 
 ***
 
-###Setup
+### Setup
 
 * clone it to your home folder
 
@@ -28,15 +28,15 @@ $ ./setup.sh
 
 This will symlink all files/folders to your home dir. Any existent file will be moved to ~/dotfiles_old directory
 
-####Vim
+### Vim
 
 Plugins are managed with [Vundle](https://github.com/VundleVim/Vundle.vim)
 
-####Tmux
+### Tmux
 
 Plugins are managed with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
-####Bash
+### Bash
 Any machine-specific or private config can be placed on `.bash_local` file
 
 ***
