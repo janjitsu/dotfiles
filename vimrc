@@ -13,7 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " my plugins
 Plugin 'mileszs/ack.vim'
-Plugin 'wincent/command-t'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -236,3 +236,7 @@ let g:vdebug_options['ide_key'] = 'netbeans-xdebug'
 let g:vdebug_options['path_maps'] = {
 \   "/var/www/html": "/home/jan/Projetos/sympla"
 \}
+
+"""" ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+nnoremap <leader>f :CtrlP<CR>
