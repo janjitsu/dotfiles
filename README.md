@@ -8,6 +8,7 @@ Included:
 * vim
 * tmux
 * bash
+* gitconfig
 
 ***
 
@@ -42,7 +43,7 @@ Any machine-specific or private config can be placed on `.bash_local` file
 
 ### Todo
 
-- [ ] Git config
+- [X] Git config
 - [ ] Enable vim folding
 - [ ] Save and restore vim sessions with tmux
 
