@@ -217,6 +217,10 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
 
+"js
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'eslint -c ~/dotfiles/eslintrc.js'
+
 """" Highlight unwanted trailing spaces
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
@@ -230,11 +234,12 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 """" Vdebug
 let g:vdebug_options = {}
-let g:vdebug_options['port'] = 9001
-"let g:vdebug_options['server'] = '192.168.33.10'
+let g:vdebug_options['port'] = 9000
+""let g:vdebug_options['server'] = 'sympla_master_portal'
+let g:vdebug_options['break_on_open'] = 0
 let g:vdebug_options['ide_key'] = 'netbeans-xdebug'
 let g:vdebug_options['path_maps'] = {
-\   "/var/www/html": "/home/jan/Projetos/sympla"
+\   "/var/www/html": "~/projects/sympla"
 \}
 
 """" ctrlp.vim
