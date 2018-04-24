@@ -46,6 +46,7 @@ Any machine-specific or private config can be placed on `.bash_local` file
 - [X] Git config
 - [ ] Enable vim folding
 - [ ] Save and restore vim sessions with tmux
+- [ ] Enable system copy-paste with tmux
 
 ***
 
