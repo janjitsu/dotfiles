@@ -67,6 +67,9 @@ PS1='\[\033[01;32m\]\u@\h\[\033[00m\]: \[\033[01;34m\]$prompt_dir\[\e[1;36m\]$gi
 function alert {
     notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" \
     "$(history|tail -n1|sed -e 's/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//')"
+    for i in {1..3}; do
+        pacmd play-file /usr/share/sounds/gnome/default/alerts/glass.ogg alsa_output.pci-0000_00_1f.3.analog-stereo; sleep 0.2
+    done
 }
 
 # Alias definitions.
@@ -101,3 +104,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
