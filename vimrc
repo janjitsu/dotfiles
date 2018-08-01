@@ -194,9 +194,9 @@ nnoremap <C-w>o :tab sp<CR>
 """" NERDTree
 let NERDTreeQuitOnOpen=0
 let NERDTreeWinSize=35
-autocmd VimEnter * nmap <F3> :NERDTreeToggle %<CR>
+autocmd VimEnter * nmap <F3> :NERDTreeToggle<CR>
 autocmd VimEnter * imap <F3> <Esc>:NERDTreeToggle<CR>a
-autocmd VimEnter * nmap <F4> :NERDTreeFind .<CR>
+autocmd VimEnter * nmap <F4> :NERDTreeFind<CR>
 
 """" Emmet
 let g:user_emmet_leader_key=','
@@ -244,4 +244,4 @@ let g:vdebug_options['path_maps'] = {
 
 """" ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-nnoremap <leader>f :CtrlP<CR>
+nnoremap <leader>f :CtrlPMixed<CR>
