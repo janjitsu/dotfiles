@@ -1,8 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
-# If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -58,9 +53,15 @@ function find_git_dirty {
         git_dirty='*'
     fi
 }
+current_time="$(date +"%H:%M:%S")"
 PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
-
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]: \[\033[01;34m\]$prompt_dir\[\e[1;36m\]$git_subpath\[\e[0;31m\]$git_branch\[\e[1;33m\]$git_dirty\n\[\033[01;34m\]\$\[\033[00m\] '
+GREEN="\\[\\033[01;32m\\]"
+WHITE="\\[\\033[00m\\]"
+BLUE="\\[\\033[01;34m\\]"
+CYAN="\\[\\e[1;36m\\]"
+RED="\\[\\e[0;31m\\]"
+YELLOW="\\[\\e[1;33m\\]"
+PS1="$GREEN\u@\h$WHITE: $BLUE\$prompt_dir$CYAN\$git_subpath$RED\$git_branch$YELLOW\$git_dirty\n$WHITE\$current_time $BLUE\$$WHITE "
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -73,9 +74,6 @@ function alert {
 }
 
 # Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
