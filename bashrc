@@ -53,7 +53,6 @@ function find_git_dirty {
         git_dirty='*'
     fi
 }
-current_time="$(date +"%H:%M:%S")"
 PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 GREEN="\\[\\033[01;32m\\]"
 WHITE="\\[\\033[00m\\]"
@@ -61,7 +60,7 @@ BLUE="\\[\\033[01;34m\\]"
 CYAN="\\[\\e[1;36m\\]"
 RED="\\[\\e[0;31m\\]"
 YELLOW="\\[\\e[1;33m\\]"
-PS1="$GREEN\u@\h$WHITE: $BLUE\$prompt_dir$CYAN\$git_subpath$RED\$git_branch$YELLOW\$git_dirty\n$WHITE\$current_time $BLUE\$$WHITE "
+PS1="$GREEN\u@\h$WHITE: $BLUE\$prompt_dir$CYAN\$git_subpath$RED\$git_branch$YELLOW\$git_dirty\n$WHITE\$(date +"%H:%M:%S") $BLUE\$$WHITE "
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
