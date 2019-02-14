@@ -35,6 +35,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'joonty/vdebug'
 Plugin 'AndrewRadev/linediff.vim'
+Plugin 'adoy/vim-php-refactoring-toolbox'
 
 
 " All of your Plugins must be added before the following line
@@ -125,6 +126,9 @@ endif
 
 " save on losing focus - is this really working?
 au FocusLost * :wa
+
+" remove trailing whitespaces on save
+autocmd BufWritePre * :%s/\s\+$//e
 
 " ######################## SEARCHING and REPLACING #############################
 
