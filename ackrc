@@ -1,0 +1,12 @@
+# ~/.ackrc
+#
+# configs for ack
+
+# ignore uninteresting folders
+--ignore-dir=vendor/
+--ignore-dir=var/
+--ignore-dir=node_modules/
+
+# ignore tags file
+--ignore-file=is:tags
+
