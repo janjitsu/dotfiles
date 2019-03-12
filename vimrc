@@ -36,7 +36,8 @@ Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'joonty/vdebug'
 Plugin 'AndrewRadev/linediff.vim'
 Plugin 'adoy/vim-php-refactoring-toolbox'
-
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -249,3 +250,11 @@ let g:vdebug_options['path_maps'] = {
 """" ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 nnoremap <leader>f :CtrlPMixed<CR>
+
+"""" Ultsnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
