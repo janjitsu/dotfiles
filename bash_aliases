@@ -26,3 +26,6 @@ alias evernote="google-chrome --app=https://www.evernote.com/Home.action &"
 
 # pomodoro
 alias pomodoro="google-chrome --app=https://tomato-timer.com/ &"
+
+#docker
+function dockerip() { docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1; }
