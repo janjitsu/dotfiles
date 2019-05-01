@@ -47,6 +47,7 @@ Any machine-specific or private config can be placed on `.bash_local` file
 - [ ] Enable vim folding
 - [ ] Save and restore vim sessions with tmux
 - [ ] Enable system copy-paste with tmux
+- [ ] Use geeknote to edit evernote on vim https://emmanuelbernard.com/blog/2017/03/28/evernote-and-vim/
 
 ***
 
