@@ -21,6 +21,7 @@ Plugin 'eruby.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
 Plugin 'sickill/vim-monokai'
 Plugin 'vinhnx/Ciapre.tmTheme'
 Plugin 'bling/vim-airline'
@@ -259,4 +260,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
+"""" Vim-markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
