@@ -21,11 +21,8 @@ alias gc='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
 
-# evernote
-alias evernote="google-chrome --app=https://www.evernote.com/Home.action &"
-
-# pomodoro
-alias pomodoro="google-chrome --app=https://tomato-timer.com/ &"
-
 #docker
 function dockerip() { docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1; }
+
+#always use vimx
+alias vim=vimx
