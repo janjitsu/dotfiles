@@ -220,10 +220,11 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_php_checkers = ['php']
 
-" Fix syntastic with go
+" golang
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
+autocmd BufWritePre *.go :GoBuild<CR><CR>
 
 "js
 let g:syntastic_javascript_checkers = ['eslint']
