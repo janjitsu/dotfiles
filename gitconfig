@@ -4,3 +4,5 @@
 [user]
 	name = Jan Silva
 	email = janfrs3@gmail.com
+[push]
+	default = simple

@@ -88,11 +88,12 @@ stty -ixon
 # set keyboard speed
 xset r rate 180 70
 
-# gnome specific keyboard speed
+# gnome specific keyboard speed and mouse focus
 if [ "$(type -t gsettings)" = file ]
 then
     gsettings set org.gnome.desktop.peripherals.keyboard delay 180
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
+    gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
 fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.

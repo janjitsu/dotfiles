@@ -24,5 +24,10 @@ alias gdc='git diff --cached'
 #docker
 function dockerip() { docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1; }
 
-#always use vimx
-alias vim=vimx
+#use vimx if available
+if which vimx >/dev/null; then
+    alias vim=vimx
+fi
+
+#ktlint
+alias ktlint='mvn antrun:run@ktlint-format | mvn clean install'

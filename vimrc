@@ -40,6 +40,7 @@ Plugin 'adoy/vim-php-refactoring-toolbox'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'etdev/vim-hexcolor'
+Plugin 'udalov/kotlin-vim'
 
 
 " All of your Plugins must be added before the following line
