@@ -91,13 +91,19 @@ xset r rate 180 70
 # gnome specific keyboard speed and mouse focus
 if [ "$(type -t gsettings)" = file ]
 then
-    gsettings set org.gnome.desktop.peripherals.keyboard delay 180
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 170
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
     gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
+
+    # change default screenshot folder
+    gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/jan.silva/Imagens/screenshots'
 fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.local/bin"
+
+# add gopath
+export PATH="$PATH:$HOME/go"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -30,4 +30,10 @@ if which vimx >/dev/null; then
 fi
 
 #ktlint
-alias ktlint='mvn antrun:run@ktlint-format | mvn clean install'
+alias ktlint-format='mvn antrun:run@ktlint-format | mvn clean install'
+
+#youtube
+alias youtube="google-chrome --app=http://youtube.com"
+
+#notion
+alias notion="google-chrome --app=http://notion.so"

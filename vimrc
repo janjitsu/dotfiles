@@ -78,6 +78,7 @@ autocmd Filetype eruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype phtml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " text wrapping
 set wrap

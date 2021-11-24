@@ -1,0 +1,28 @@
+" #############################   IDEAVIMRC   ####################################
+
+source ~/.vimrc
+
+""" find file in projectview
+nnoremap <F4> :action SelectInProjectView<CR>
+
+""" open file in splits
+nnoremap <Leader>i :split<CR>
+nnoremap <Leader>s :vsplit<CR>
+
+""" Git blame
+command! Gblame action Annotate
+nnoremap <Leader>g :Gblame<CR>
+
+""" Hide All Windows
+nnoremap <Leader> :action HideAllWindows<CR>
+
+""" Code Folding
+""" tips:
+""" zo - open current cursor
+""" zc - close current cursor
+""" zO - open recursively
+""" zC - close recursively
+""" zM - close all
+""" zR - open all
+nnoremap zC :action CollapseRegionRecursively<CR>
+nnoremap zO :action ExpandRegionRecursively<CR>
