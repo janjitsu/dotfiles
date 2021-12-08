@@ -72,32 +72,6 @@ function alert {
     done
 }
 
-# Alias definitions.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# local per-machine configurations
-if [ -e ~/.bash_local ]; then
-    . ~/.bash_local
-fi
-
-#stop ctrl+s ctrl+q behavior
-stty -ixon
-
-# set keyboard speed
-xset r rate 180 70
-
-# gnome specific keyboard speed and mouse focus
-if [ "$(type -t gsettings)" = file ]
-then
-    gsettings set org.gnome.desktop.peripherals.keyboard delay 170
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
-    gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
-
-    # change default screenshot folder
-    gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/jan.silva/Imagens/screenshots'
-fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.local/bin"
@@ -110,3 +84,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+source ~/.shellrc

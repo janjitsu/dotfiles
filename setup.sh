@@ -10,7 +10,7 @@ dir=~/dotfiles                    	    # dotfiles directory
 olddir=~/dotfiles_old                   # old dotfiles backup directory
 
 # list of files/folders to symlink in homedir
-files="bashrc vimrc ideavimrc vim bash_aliases tmux.conf tmux gitconfig gitignore ackrc"
+files="bashrc shellrc vimrc ideavimrc vim bash_aliases tmux.conf tmux gitconfig gitignore ackrc zshrc"
 
 ##########
 
@@ -39,3 +39,15 @@ vim +BundleInstall +qa
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 bash ~/.tmux/plugins/tpm/bin/install_plugins
+
+# zsh
+# install
+# install oh-my-zsh
+# install fonts
+# set terminal profile
+
+# docker
+
+# golang
+
+

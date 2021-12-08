@@ -1,0 +1,32 @@
+#!/bin/bash
+############################
+# shellrc
+# Common configurations for bash and zsh
+############################
+
+# Alias definitions.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# local per-machine configurations
+if [ -e ~/.bash_local ]; then
+    . ~/.bash_local
+fi
+
+#stop ctrl+s ctrl+q behavior
+stty -ixon
+
+# set keyboard speed
+xset r rate 180 70
+
+# gnome specific keyboard speed and mouse focus
+if [ "$(command -V gsettings)" = file ]
+then
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 170
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
+    gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
+
+    # change default screenshot folder
+    gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/janjitsu/Imagens/screenshots'
+fi
