@@ -1,7 +1,10 @@
 vim/bundle/*
 !vim/bundle/.keep
 vim/tmp/*
+vim/autoload/*
+!vim/autoload/.keep
 !vim/tmp/.keep
+vim/plugged
 tmux/plugins/*
 tmux/resurrect/*
 !tmux/plugins/.keep

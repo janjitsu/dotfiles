@@ -2,50 +2,42 @@
 
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+"""" PLUG
+call plug#begin('~/.vim/plugged')
 
 " my plugins
-Plugin 'mileszs/ack.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'eruby.vim'
-Plugin 'ConradIrwin/vim-bracketed-paste'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-Plugin 'sickill/vim-monokai'
-Plugin 'vinhnx/Ciapre.tmTheme'
-Plugin 'bling/vim-airline'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'slim-template/vim-slim'
-Plugin 'othree/xml.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'fatih/vim-go'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-lua-ftplugin'
-Plugin 'joonty/vdebug'
-Plugin 'AndrewRadev/linediff.vim'
-Plugin 'adoy/vim-php-refactoring-toolbox'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'etdev/vim-hexcolor'
-Plugin 'udalov/kotlin-vim'
+Plug 'AndrewRadev/linediff.vim'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'SirVer/ultisnips'
+Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'bling/vim-airline'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'etdev/vim-hexcolor'
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries' }
+Plug 'honza/vim-snippets'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'joonty/vdebug'
+Plug 'kchmck/vim-coffee-script'
+Plug 'leafgarland/typescript-vim'
+Plug 'mattn/emmet-vim'
+Plug 'mileszs/ack.vim'
+Plug 'othree/xml.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'sickill/vim-monokai'
+Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+Plug 'udalov/kotlin-vim'
+Plug 'vinhnx/Ciapre.tmTheme'
+Plug 'xolox/vim-lua-ftplugin'
+Plug 'xolox/vim-misc'
 
+call plug#end()            " required
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+filetype plugin indent on  " required
 " To update vundle run:
 " on vim :PluginInstall
 " on bash $vim +PluginInstall +qall

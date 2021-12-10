@@ -9,14 +9,10 @@
 
 #TODO install nvim and copy configs to ~/.config/nvim/init.vim
 
-apt update
-apt install -yq wget git nvim tmux
-
-#nvim init
-cp init.vim ~/.config/nvim/init.vim
+sudo apt update
+sudo apt install -yq wget curl git python3-neovim tmux zsh
 
 # zsh
-apt install -yq zsh
 chsh -s /usr/bin/zsh $USER
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 
@@ -27,19 +23,18 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
 # dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
 
 # docker
-apt install ca-certificates curl gnupg lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-apt update
-apt install docker-ce docker-ce-cli containerd.io
-usermod -aG docker $USER
-newgrp docker
-systemctl enable docker.service
-systemctl enable containerd.service
+#apt install -yq ca-certificates curl gnupg lsb-release
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+#apt update
+#apt install -yq docker-ce docker-ce-cli containerd.io
+#usermod -aG docker $USER
+#newgrp docker
+#systemctl enable docker.service
+#systemctl enable containerd.service
 
 # golang
-wget -c https://go.dev/dl/go1.17.4.linux-amd64.tar.gz -O - | tar -xz -C /usr/local/
-# install
-# add to path
+wget -c https://go.dev/dl/go1.17.4.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local/
+sudo chown janjitsu.janjitsu /usr/local/go/bin
 
 ##### INSTALL PROGRAMS #####
 
@@ -71,11 +66,17 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
-# vim
-# TODO replace plugin manager to vim-plug
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +BundleInstall +qa
+source ~/.bashrc
+#nvim init
+mkdir -p ~/.config/nvim
+ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
+
+# install vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim +PlugInstall +qa
 
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 bash ~/.tmux/plugins/tpm/bin/install_plugins
+
