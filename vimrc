@@ -179,6 +179,8 @@ nnoremap <leader>a :Ack
 nnoremap <leader>v V`]
 " quick vimrc lookup
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
+" quick vimrc reload
+nnoremap <leader>rv :so $MYVIMRC<CR>
 " easily clear search
 nnoremap <leader><space> :noh<cr>
 
@@ -222,14 +224,17 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_php_checkers = ['php']
 
-" golang
+"""" Golang
+let g:go_bin_path = "/usr/local/go/bin"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
-autocmd BufWritePre *.go :GoBuild<CR><CR>
+autocmd BufWritePre *.go <Plug>(go-build)
+autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
 
-"js
+"""" js
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'eslint -c ~/dotfiles/eslintrc.js'
 

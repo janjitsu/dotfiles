@@ -7,15 +7,13 @@
 ##### INSTALL PROGRAMS #####
 #
 
-VIM_VERSION='vim'
-if [ "$(command -V Xorg)" = file ]; then
-    VIM_VERSION='vim-gtk3'
-fi
+#TODO install nvim and copy configs to ~/.config/nvim/init.vim
 
 apt update
-apt install -yq wget git
-apt install -yq $VIM_VERSION
-apt install -yq tmux
+apt install -yq wget git nvim tmux
+
+#nvim init
+cp init.vim ~/.config/nvim/init.vim
 
 # zsh
 apt install -yq zsh
@@ -39,7 +37,7 @@ systemctl enable docker.service
 systemctl enable containerd.service
 
 # golang
-apt install golang-go
+wget -c https://go.dev/dl/go1.17.4.linux-amd64.tar.gz -O - | tar -xz -C /usr/local/
 # install
 # add to path
 
@@ -74,7 +72,7 @@ for file in $files; do
 done
 
 # vim
-# TODO replace plugin manager
+# TODO replace plugin manager to vim-plug
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +BundleInstall +qa
 

@@ -30,3 +30,8 @@ then
     # change default screenshot folder
     gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/janjitsu/Imagens/screenshots'
 fi
+
+# add go to path
+export PATH="$PATH:/usr/local/go/bin"
+# set GOPATH
+export GOPATH="/usr/local/go/bin"
