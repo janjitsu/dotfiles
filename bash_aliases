@@ -37,3 +37,9 @@ alias youtube="google-chrome --app=http://youtube.com"
 
 #notion
 alias notion="google-chrome --app=http://notion.so"
+
+#projects
+alias goprojects="cd ~/projects"
+
+#kubectl
+alias k="kubectl"
