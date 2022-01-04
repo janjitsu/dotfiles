@@ -31,7 +31,12 @@ then
     gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/janjitsu/Imagens/screenshots'
 fi
 
-# add go to path
-export PATH="$PATH:/usr/local/go/bin"
 # set GOPATH
-export GOPATH="/usr/local/go/bin"
+export GOPATH="/home/janjitsu/.go"
+
+# add go to path
+export PATH="$PATH:$GOPATH/bin"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

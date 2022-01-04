@@ -33,8 +33,7 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
 #systemctl enable containerd.service
 
 # golang
-wget -c https://go.dev/dl/go1.17.4.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local/
-sudo chown janjitsu.janjitsu /usr/local/go/bin
+wget -c https://go.dev/dl/go1.17.4.linux-amd64.tar.gz -O - | sudo tar -xz -C /home/janjitsu/.go
 
 ##### INSTALL PROGRAMS #####
 
@@ -70,6 +69,7 @@ source ~/.bashrc
 #nvim init
 mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
+ln -s ~/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
