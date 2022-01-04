@@ -100,4 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+#autocomplete kubernetes to alias k
+compdef __start_kubectl k
 source ~/.shellrc
