@@ -28,7 +28,7 @@ then
     gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
 
     # change default screenshot folder
-    gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/janjitsu/Imagens/screenshots'
+    gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/janjitsu/Pictures/Screenshots'
 
     # prevent screen turning off too fast
     gsettings set org.gnome.desktop.session idle-delay 300

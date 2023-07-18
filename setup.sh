@@ -8,34 +8,25 @@
 #
 
 #TODO install nvim and copy configs to ~/.config/nvim/init.vim
-
-sudo apt update
-sudo apt install -yq wget curl git python3-neovim tmux zsh
+if command -v apt-get >/dev/null; then
+    sudo apt update
+    sudo apt install -yq wget curl git python2-neovim tmux zsh
+elif command -v yum >/dev/null; then
+    sudo yum update
+    sudo yum -y install wget curl git python2-neovim tmux zsh
+fi
 
 # zsh
 chsh -s /usr/bin/zsh $USER
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 
 # to use powerline theme on gnome-terminal
-# git clone https://github.com/powerline/fonts.git --depth=1
-# ./fonts/install.sh
-# rm -rf fonts
-# dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
+git clone https://github.com/powerline/fonts.git --depth=1
+./fonts/install.sh
+rm -rf fonts
+dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
 
-# docker
-#apt install -yq ca-certificates curl gnupg lsb-release
-#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-#apt update
-#apt install -yq docker-ce docker-ce-cli containerd.io
-#usermod -aG docker $USER
-#newgrp docker
-#systemctl enable docker.service
-#systemctl enable containerd.service
-
-# golang
-wget -c https://go.dev/dl/go1.17.4.linux-amd64.tar.gz -O - | sudo tar -xz -C /home/janjitsu/.go
-
-##### INSTALL PROGRAMS #####
+##### INSTALL DOTFILES #####
 
 ########## Variables
 
