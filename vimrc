@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/linediff.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
-Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -17,7 +16,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'etdev/vim-hexcolor'
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform'
-Plug 'honza/vim-snippets'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
@@ -34,7 +32,19 @@ Plug 'udalov/kotlin-vim'
 Plug 'vinhnx/Ciapre.tmTheme'
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-misc'
-Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': ':CocInstall coc-go coc-tsserver' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': ':CocInstall coc-go coc-phpls coc-tsserver' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'arnaud-lb/vim-php-namespace' "run this: ctags -R --PHP-kinds=cfi
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'StanAngeloff/php.vim'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'roxma/nvim-yarp'
+Plug 'tpope/vim-commentary'
+Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'ap/vim-css-color'
+
 
 call plug#end()            " required
 
@@ -52,7 +62,7 @@ colorscheme monokai
 
 " misc configs
 set nocompatible   " vi's compatible mode is off
-set encoding=utf-8 " set default encoding
+set encoding=UTF-8 " set default encoding
 set autoindent     " makes indenting a little easier
 set hidden         " don't close unsaved files on buffers
 set visualbell     " disable beeps
@@ -73,10 +83,13 @@ set expandtab
 autocmd Filetype ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype eruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-autocmd Filetype phtml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype phtml setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+autocmd Filetype json setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype javascriptreact setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " text wrapping
 set wrap
@@ -88,13 +101,6 @@ set colorcolumn=81
 set nofoldenable " start with no folds
 autocmd Filetype html setlocal foldmethod=indent fdl=3
 autocmd Filetype php setlocal foldmethod=indent fdl=3
-
-" code completion (not using it for now)
-" set wildmenu               " show completion on status bar
-" set wildmode=list:longest  " completionmode logenst string first
-" Easy omnicompletion
-"inoremap <C-Space> <C-x><C-o>
-"inoremap <C-@> <C-Space>
 
 " ############################### STATUS BAR ###################################
 
@@ -174,7 +180,7 @@ let mapleader = ','
 " reselect just pasted text
 nnoremap <leader>v V`]
 " quick vimrc lookup
-nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vimrc<CR>
+nnoremap <leader>ev :tabnew ~/.vimrc<CR>
 " quick vimrc reload
 nnoremap <leader>rv :so $MYVIMRC<CR>
 " easily clear search
@@ -212,7 +218,7 @@ autocmd VimEnter * nmap <F4> :NERDTreeFind<CR>
 """" Emmet
 let g:user_emmet_leader_key=','
 
-"""" Syntastic
+"""" Syntastic @TODO REMOVE THIS
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -226,7 +232,7 @@ let g:syntastic_php_checkers = ['php']
 """" Golang
 let g:go_bin_path = "/home/janjitsu/.go/bin"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go', 'php'] }
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 autocmd BufWritePre *.go <Plug>(go-build)
@@ -255,6 +261,8 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
+
+let g:coc_disable_startup_warning = 1
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
@@ -378,9 +386,11 @@ let g:go_def_mapping_enabled = 0
 
 """" ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-nnoremap <leader>f :CtrlPMixed<CR>
+nnoremap <leader>f :CtrlPMRU<CR>
+nnoremap <leader>p :CtrlPMixed<CR>
 
 """" Ultsnips
+"""" use :UltiSnipsEditSplit to customize
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -389,4 +399,40 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
 """" Vim-markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+
+"""" vim-php-namespace
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <leader>u <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <leader>u :call PhpInsertUse()<CR>
+
+function! IPhpExpandClass()
+    call PhpExpandClass()
+    call feedkeys('a', 'n')
+endfunction
+autocmd FileType php inoremap <leader>e <Esc>:call IPhpExpandClass()<CR>
+autocmd FileType php noremap <leader>e :call PhpExpandClass()<CR>
+
+"""" php.vim
+let g:php_version_id = 80002
+syn match phpParentOnly "[()]" contained containedin=phpParent
+hi phpParentOnly guifg=#f08080 guibg=NONE gui=NONE
+
+
+"""" php-cs-fixer
+let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
+let g:php_cs_fixer_config = "default"                  " options: --config
+let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                    " Return the output of command if
+
+autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+
+"""" guttentags
+set statusline+=%{gutentags#statusline()}
 

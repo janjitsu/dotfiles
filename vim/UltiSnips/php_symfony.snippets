@@ -1,0 +1,72 @@
+priority -50
+
+#comment
+snippet class "Class declaration template" b
+<?php
+
+namespace App\\`!p
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
+if m:
+	snip.rv = m.group().replace('/', '\\')
+`;
+
+class `!p
+snip.rv = re.match(r'.*(?=\.)', fn).group()
+`
+{
+	public function __construct()
+	{
+
+	}
+
+	public function ${1:function_name}()
+	{
+
+	}
+}
+endsnippet
+
+snippet interface "Interface declaration template" b
+<?php
+
+namespace App\\`!p
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
+if m:
+	snip.rv = m.group().replace('/', '\\')
+`;
+
+interface `!p
+snip.rv = re.match(r'.*(?=\.)', fn).group()
+`
+{
+	public function ${1:function_name}()
+}
+endsnippet
+
+snippet contr "Symfony6 controller" b
+<?php
+
+namespace App\\`!p
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
+if m:
+	snip.rv = m.group().replace('/', '\\')
+`;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+class `!p
+snip.rv = re.match(r'.*(?=\.)', fn).group()
+`
+{
+	public function ${1:function_name}(Request $request): Response
+	{
+		return new JsonResponse(['message' => 'hello world']);
+	}
+
+}
+endsnippet

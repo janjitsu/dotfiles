@@ -32,14 +32,17 @@ fi
 #ktlint
 alias ktlint-format='mvn antrun:run@ktlint-format | mvn clean install'
 
-#youtube
-alias youtube="google-chrome --app=http://youtube.com"
-
 #notion
 alias notion="google-chrome --app=http://notion.so"
 
+#todoist
+alias todo="google-chrome --app=https://todoist.com/app/filter/2240647440"
+
 #projects
 alias goprojects="cd ~/projects"
+alias gopopis="cd ~/projects/react-tutorials/build-an-pp-and-master-react-in-1hour/ && vim ."
+alias goscripts="cd ~/projects/janscripts/ && vim README.md"
 
 #kubectl
 alias k="kubectl"
+alias z="source ~/.zshrc"

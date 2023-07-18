@@ -1,6 +1,6 @@
 [core]
 	editor = vim
-	excludesfile = /home/jan/.gitignore
+	excludesfile = /home/janjitsu/.gitignore
 [user]
 	name = Jan Silva
 	email = janfrs3@gmail.com
