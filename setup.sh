@@ -13,7 +13,7 @@ if command -v apt-get >/dev/null; then
     sudo apt install -yq wget curl git python2-neovim tmux zsh
 elif command -v yum >/dev/null; then
     sudo yum update
-    sudo yum -y install wget curl git python2-neovim tmux zsh
+    sudo yum install -y wget curl git python2-neovim tmux zsh
 fi
 
 # zsh
@@ -25,6 +25,10 @@ git clone https://github.com/powerline/fonts.git --depth=1
 ./fonts/install.sh
 rm -rf fonts
 dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
+
+## Node
+curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
+npm install -g n
 
 ##### INSTALL DOTFILES #####
 

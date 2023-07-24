@@ -21,18 +21,12 @@ stty -ixon
 xset r rate 180 70
 
 # gnome specific keyboard speed and mouse focus
-if [ "$(command -V gsettings)" = file ]
-then
-    gsettings set org.gnome.desktop.peripherals.keyboard delay 170
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
-    gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
+gsettings set org.gnome.desktop.peripherals.keyboard delay 170
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
+gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
 
-    # change default screenshot folder
-    gsettings set org.gnome.gnome-screenshot auto-save-directory 'file:///home/janjitsu/Pictures/Screenshots'
-
-    # prevent screen turning off too fast
-    gsettings set org.gnome.desktop.session idle-delay 300
-fi
+# prevent screen turning off too fast
+gsettings set org.gnome.desktop.session idle-delay 300
 
 # set GOPATH
 export GOPATH="/home/janjitsu/.go"
@@ -48,7 +42,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export PATH="/home/janjitsu/.rbenv/shims:${PATH}"
 export RBENV_SHELL=zsh
-source "$HOME/.rbenv/completions/rbenv.zsh"
+# source "$HOME/.rbenv/completions/rbenv.zsh"
 command rbenv rehash 2>/dev/null
 rbenv() {
   local command
