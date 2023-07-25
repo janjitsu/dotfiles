@@ -3,9 +3,6 @@ My dotfiles
 
 Simplest possible way I've found to manage my dotfiles
 
-Requirements:
-Must have git installed
-
 Included:
 
 * wget
@@ -15,6 +12,11 @@ Included:
 * bash
 * zsh
 * gitconfig
+
+Requirements:
+
+* git
+
 
 ***
 
