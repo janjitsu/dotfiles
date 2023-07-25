@@ -3,9 +3,11 @@ My dotfiles
 
 Simplest possible way I've found to manage my dotfiles
 
+Requirements:
+Must have git installed
+
 Included:
 
-* git
 * wget
 * curl
 * neovim
@@ -29,6 +31,21 @@ $ git clone git@github.com:janfrs/dotfiles.git ~/dotfiles
 ```
 $ ./setup.sh
 ```
+
+
+### Scripts bellow I'm still testing to include them in the main setup script
+
+* docker installer
+
+```
+$ ./scripts/docker.sh
+```
+
+* import gsettings shortcuts
+```
+$ ./scripts/keybindings.pl -i ~/dotfiles/gsettings.csv
+```
+
 
 This will symlink all files/folders to your home dir. Any existent file will be moved to ~/dotfiles_old directory
 
