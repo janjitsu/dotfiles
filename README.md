@@ -34,21 +34,6 @@ $ git clone git@github.com:janfrs/dotfiles.git ~/dotfiles
 $ ./setup.sh
 ```
 
-
-### Scripts bellow I'm still testing to include them in the main setup script
-
-* docker installer
-
-```
-$ ./scripts/docker.sh
-```
-
-* import gsettings shortcuts
-```
-$ ./scripts/keybindings.pl -i ~/dotfiles/gsettings.csv
-```
-
-
 This will symlink all files/folders to your home dir. Any existent file will be moved to ~/dotfiles_old directory
 
 ### Vim
@@ -73,5 +58,22 @@ Any machine-specific or private config can be placed on `.bash_local` file
 - [ ] Enable system copy-paste with tmux
 
 ***
+
+### Other Scripts
+
+Still testing these to include them in the main setup script
+
+* Docker installer
+
+```
+$ ./scripts/docker.sh
+```
+
+* Import gsettings shortcuts
+```
+$ ./scripts/keybindings.pl -i ~/dotfiles/gsettings.csv
+```
+
+
 
 setup file was inspired by: [this](http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/)
