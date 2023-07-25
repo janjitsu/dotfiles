@@ -10,10 +10,10 @@
 #TODO install nvim and copy configs to ~/.config/nvim/init.vim
 if command -v apt-get >/dev/null; then
     sudo apt update
-    sudo apt install -yq wget curl git python2-neovim tmux zsh
+    sudo apt install -y wget curl python3-neovim tmux zsh
 elif command -v yum >/dev/null; then
     sudo yum update
-    sudo yum install -y wget curl git python2-neovim tmux zsh
+    sudo yum install -y wget curl python2-neovim tmux zsh
 fi
 
 # zsh
@@ -61,10 +61,10 @@ for file in $files; do
 done
 
 source ~/.bashrc
-#nvim init
+# Neovim init
 mkdir -p ~/.config/nvim
-ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
-ln -s ~/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
+ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+ln -s ~/dotfiles/nvim/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

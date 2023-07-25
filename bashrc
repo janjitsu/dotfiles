@@ -62,14 +62,4 @@ RED="\\[\\e[0;31m\\]"
 YELLOW="\\[\\e[1;33m\\]"
 PS1="$GREEN\u@\h$WHITE: $BLUE\$prompt_dir$CYAN\$git_subpath$RED\$git_branch$YELLOW\$git_dirty\n$WHITE\$(date +"%H:%M:%S") $BLUE\$$WHITE "
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-function alert {
-    notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" \
-    "$(history|tail -n1|sed -e 's/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//')"
-    for i in {1..3}; do
-        pacmd play-file /usr/share/sounds/gnome/default/alerts/glass.ogg alsa_output.pci-0000_00_1f.3.analog-stereo; sleep 0.2
-    done
-}
-
 source ~/.shellrc
