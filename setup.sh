@@ -10,10 +10,10 @@
 #TODO install nvim and copy configs to ~/.config/nvim/init.vim
 if command -v apt-get >/dev/null; then
     sudo apt update
-    sudo apt install -y wget curl python3-neovim tmux zsh
+    sudo apt install -y wget curl python3-neovim tmux zsh htop
 elif command -v yum >/dev/null; then
     sudo yum update
-    sudo yum install -y wget curl python2-neovim tmux zsh
+    sudo yum install -y wget curl python2-neovim tmux zsh htop
 fi
 
 # zsh
@@ -75,3 +75,6 @@ nvim +PlugInstall +qa
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 bash ~/.tmux/plugins/tpm/bin/install_plugins
 
+# htop
+mv ~/.config/htop/htoprc ~/dotfiles_old/
+ln -s $dir/htoprc ~/.config/htop/htoprc

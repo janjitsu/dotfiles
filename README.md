@@ -11,6 +11,7 @@ Included:
 * tmux
 * bash
 * zsh
+* htop
 * gitconfig
 
 Requirements:
@@ -52,10 +53,12 @@ Any machine-specific or private config can be placed on `.bash_local` file
 ### Todo
 
 - [X] Git config
-- [ ] Enable vim folding
-- [ ] Improve setup automation to not ask for sudo
 - [ ] Save and restore vim sessions with tmux
 - [ ] Enable system copy-paste with tmux
+- [ ] desktop application launchers
+    - [ ] notion
+    - [ ] Idea
+- [ ] gnome extensions and configs
 
 ***
 
