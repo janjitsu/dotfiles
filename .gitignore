@@ -9,3 +9,4 @@ tmux/plugins/*
 tmux/resurrect/*
 !tmux/plugins/.keep
 tmux/tpm
+bash_local

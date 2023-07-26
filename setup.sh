@@ -38,7 +38,7 @@ dir=~/dotfiles                    	    # dotfiles directory
 olddir=~/dotfiles_old                   # old dotfiles backup directory
 
 # list of files/folders to symlink in homedir
-files="bashrc shellrc vimrc ideavimrc vim bash_aliases tmux.conf tmux gitconfig gitignore ackrc zshrc"
+files="bashrc shellrc zshrc bash_local bash_aliases vimrc ackrc ideavimrc vim tmux.conf tmux gitconfig gitignore"
 
 ##########
 
