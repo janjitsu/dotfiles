@@ -34,13 +34,11 @@ alias notion="google-chrome --app=http://notion.so"
 #todoist
 alias todo="google-chrome --app=https://todoist.com/app/filter/2240647440"
 
-#google-chrome flatpak
-alias google-chrome="/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chrome --file-forwarding com.google.Chrome @@u %U @@"
-
 #projects
 alias goprojects="cd ~/projects"
 alias gopopis="cd ~/projects/react-tutorials/build-an-pp-and-master-react-in-1hour/ && vim ."
 alias goscripts="cd ~/projects/janscripts/ && vim README.md"
+alias gomobly="cd ~/projects/mobly/ && cat README.md"
 
 #kubectl
 alias k="kubectl"
