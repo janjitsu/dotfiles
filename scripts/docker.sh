@@ -31,9 +31,15 @@ elif command -v yum >/dev/null; then
     sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 fi
 
-
 sudo usermod -aG docker $USER
 newgrp docker
+
+cat <<EOT >> /usr/local/bin/docker-compose
+#!/usr/bin/env sh
+
+exec docker compose "$@"
+EOT
+sudo chmod +x /usr/local/bin/docker-compose
 
 sudo systemctl start docker
 sudo systemctl enable docker.service
