@@ -53,7 +53,7 @@ function find_git_dirty {
         git_dirty='*'
     fi
 }
-PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
+#PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 GREEN="\\[\\033[01;32m\\]"
 WHITE="\\[\\033[00m\\]"
 BLUE="\\[\\033[01;34m\\]"

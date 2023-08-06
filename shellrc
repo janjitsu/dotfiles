@@ -35,7 +35,7 @@ export GOPATH="/home/janjitsu/.go"
 export PATH="$PATH:$GOPATH/bin"
 
 # python packages
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="/home/janjitsu/.local/bin:$PATH"
 
 # rbenv for ruby version management
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -61,7 +61,7 @@ rbenv() {
 
 
 # n for node version management
-export N_PREFIX=$HOME/.n
+export N_PREFIX=/home/janjitsu/.n
 export PATH=$N_PREFIX/bin:$PATH
 
 

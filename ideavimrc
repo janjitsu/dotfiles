@@ -2,19 +2,33 @@
 
 source ~/.vimrc
 
+set showmode
+
+""" easy update ideavim
+nnoremap <leader>ev :e ~/.ideavimrc<CR>
+nnoremap <leader>rv :source ~/.ideavimrc<CR>
+
 """ find file in projectview
 nnoremap <F4> :action SelectInProjectView<CR>
+
+""" find all
+nnoremap <Leader>F :action SearchEverywhere<CR>
+nnoremap <Leader>f :action FindInPath<CR>
+nnoremap <Leader>p :action FindUsages<CR>
 
 """ open file in splits
 nnoremap <Leader>i :split<CR>
 nnoremap <Leader>s :vsplit<CR>
+
+""" copy filepath
+nnoremap <leader>c :action CopyPaths<CR>
 
 """ Git blame
 command! Gblame action Annotate
 nnoremap <Leader>g :Gblame<CR>
 
 """ Hide All Windows
-nnoremap <Leader> :action HideAllWindows<CR>
+nnoremap <Leader><Space> :action HideAllWindows<CR>
 
 """ Code Folding
 """ tips:

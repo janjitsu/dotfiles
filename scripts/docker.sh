@@ -3,7 +3,7 @@ if command -v apt-get >/dev/null; then
     for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
     sudo apt update
-    sudo apt-get install ca-certificates curl gnupg
+    sudo apt-get install -y ca-certificates curl gnupg
 
     sudo install -m 0755 -d /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -13,7 +13,7 @@ if command -v apt-get >/dev/null; then
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 elif command -v yum >/dev/null; then
     sudo dnf remove -y docker \
       docker-client \
@@ -28,13 +28,13 @@ elif command -v yum >/dev/null; then
 
     sudo dnf -y install dnf-plugins-core
     sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-    sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 fi
 
 sudo usermod -aG docker $USER
 newgrp docker
 
-cat <<EOT >> /usr/local/bin/docker-compose
+cat <<EOT > /usr/local/bin/docker-compose
 #!/usr/bin/env sh
 
 exec docker compose "$@"
