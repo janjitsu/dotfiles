@@ -1,5 +1,8 @@
 #!/bin/bash
-
+## @FIXME: Not working yet
+## what this does
+# 1. Add hibernate option to system
+# 2. Add resome option to grup and update it
 echo "Enable hibernate file..."
 
 sudo cat <<'EOF' > /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla

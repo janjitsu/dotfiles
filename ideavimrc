@@ -3,6 +3,8 @@
 source ~/.vimrc
 
 set showmode
+""" set relativenumber
+set number
 
 """ easy update ideavim
 nnoremap <leader>ev :e ~/.ideavimrc<CR>
@@ -10,15 +12,34 @@ nnoremap <leader>rv :source ~/.ideavimrc<CR>
 
 """ find file in projectview
 nnoremap <F4> :action SelectInProjectView<CR>
+""" show class structure
+nnoremap <S-F4> :action FileStructurePopup<CR>
 
 """ find all
-nnoremap <Leader>F :action SearchEverywhere<CR>
+nnoremap <Leader>p :action SearchEverywhere<CR>
 nnoremap <Leader>f :action FindInPath<CR>
-nnoremap <Leader>p :action FindUsages<CR>
+nnoremap <Leader>F :action FindUsages<CR>
 
 """ open file in splits
 nnoremap <Leader>i :split<CR>
 nnoremap <Leader>s :vsplit<CR>
+
+""" resizing window splits
+nmap <C-w>= <Action>(MaximizeEditorInSplit)
+nmap <C-S-h> <Action>(StretchSplitToLeft)
+nmap <C-S-l> <Action>(StretchSplitToRight)
+nmap <C-S-j> <Action>(StretchSplitToBottom)
+nmap <C-S-k> <Action>(StretchSplitToTop)
+
+""" move between panes
+sethandler <C-h> Vim
+sethandler <C-l> Vim
+sethandler <C-j> Vim
+sethandler <C-k> Vim
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 
 """ copy filepath
 nnoremap <leader>c :action CopyPaths<CR>
@@ -40,3 +61,6 @@ nnoremap <Leader><Space> :action HideAllWindows<CR>
 """ zR - open all
 nnoremap zC :action CollapseRegionRecursively<CR>
 nnoremap zO :action ExpandRegionRecursively<CR>
+
+""" Save on Ctrl+S
+sethandler <C-s> a:vim

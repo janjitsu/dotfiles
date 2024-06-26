@@ -70,8 +70,30 @@ if [ "$TMUX" = "" ]; then
     tmux
 fi
 
+## @TODO MOVE THIS to zsh
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/janjitsu/Programs/google-cloud-sdk/path.zsh.inc' ]; then . '/home/janjitsu/Programs/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/janjitsu/Programs/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/janjitsu/Programs/google-cloud-sdk/completion.zsh.inc'; fi
+
+# use fzf on zsh history (ctrl+R)
+source <(fzf --zsh)
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+
+# ANDROID SDK
+export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export ANDROID_AVD_HOME=~/.android/avd
+export ANDROID_SDK_ROOT=~/SSD2/Downloads/android-sdk
+export ANDROID_SDK_HOME=~/SSD2/Downloads/android-sdk
+export ANDROID_HOME=~/SSD2/Downloads/android-sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools

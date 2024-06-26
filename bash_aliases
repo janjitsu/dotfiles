@@ -20,6 +20,7 @@ alias glg='git log --pretty=format:"%h%x09%an%x09%ad%x09%s"'
 alias gc='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gdg='git show --color --pretty=format:%b $@'
 
 if which nvim >/dev/null; then
     alias vim=nvim
@@ -27,9 +28,6 @@ fi
 
 #ktlint
 alias ktlint-format='mvn antrun:run@ktlint-format | mvn clean install'
-
-#notion
-alias notion="google-chrome --app=http://notion.so"
 
 #todoist
 alias todo="google-chrome --app=https://todoist.com/app/filter/2240647440"

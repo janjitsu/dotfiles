@@ -6,7 +6,13 @@
 --ignore-dir=vendor/
 --ignore-dir=var/
 --ignore-dir=node_modules/
-
+--ignore-dir=bower_components/
+--ignore-dir=live/
+--ignore-dir=.git/
+--ignore-dir=.idea/
+--ignore-dir=.sass-cache/
+--ignore-dir=data/cache/
 # ignore tags file
 --ignore-file=is:tags
+--ignore-file=is:tags.temp
 

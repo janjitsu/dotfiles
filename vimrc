@@ -89,6 +89,7 @@ autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd Filetype javascriptreact setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " text wrapping
@@ -388,6 +389,18 @@ let g:go_def_mapping_enabled = 0
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 nnoremap <leader>f :CtrlPMRU<CR>
 nnoremap <leader>p :CtrlPMixed<CR>
+let g:ctrlp_user_command =
+  \ ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+"""" ack.vim
+"""" use the silver searcher
+let g:ackprg = 'ag --vimgrep'
+nnoremap <Leader>a :Ack!<Space>
 
 """" Ultsnips
 """" use :UltiSnipsEditSplit to customize

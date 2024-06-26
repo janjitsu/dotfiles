@@ -10,4 +10,5 @@ mv go ~/.go
 # glow markdown cli reader
 go install github.com/charmbracelet/glow@latest
 
-
+# fzf
+go install github.com/junegunn/fzf@latest
