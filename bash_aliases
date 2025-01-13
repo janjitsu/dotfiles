@@ -35,8 +35,12 @@ alias todo="google-chrome --app=https://todoist.com/app/filter/2240647440"
 #kubectl
 alias k="kubectl"
 alias z="source ~/.zshrc"
+alias aws="awsv2"
 
 # aliases files
 for f in ~/dotfiles/aliases/*; do
     source $f
 done
+
+# clear ubuntu cached
+alias cache-clear-ubuntu="rm -fr ~/.cache/*"
