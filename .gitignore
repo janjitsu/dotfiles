@@ -10,3 +10,4 @@ tmux/resurrect/*
 !tmux/plugins/.keep
 tmux/tpm
 bash_local
+gitconfig_local
