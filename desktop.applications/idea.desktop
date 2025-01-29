@@ -4,6 +4,6 @@ Type=Application
 Terminal=false
 Icon[en_US]=/home/janjitsu/Programs/idea-IU/bin/idea.png
 Name[en_US]=IntelliJ
-Exec=/home/janjitsu/Programs/idea-IU/bin/idea.sh
+Exec=/home/janjitsu/Programs/idea-IU/bin/idea
 Name=IntelliJ
 Icon=/home/janjitsu/Programs/idea-IU/bin/idea.png

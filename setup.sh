@@ -10,7 +10,7 @@
 #TODO install nvim and copy configs to ~/.config/nvim/init.vim
 if command -v apt-get >/dev/null; then
     sudo apt update
-    sudo apt install -y wget curl python3-neovim tmux zsh htop ack-grep silversearcher-ag
+    sudo apt install -y wget curl python3-neovim tmux zsh htop ack-grep silversearcher-ag fzf
 elif command -v yum >/dev/null; then
     sudo yum update
     sudo yum install -y wget curl python3-neovim tmux zsh htop ack silversearcher-ag
