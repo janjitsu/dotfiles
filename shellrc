@@ -29,7 +29,7 @@ gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
 gsettings set org.gnome.desktop.session idle-delay 300
 
 # set GOPATH
-export GOPATH="/home/janjitsu/.go"
+export GOPATH="/home/janjitsu/.local/go"
 
 # add go to path
 export PATH="$PATH:$GOPATH/bin"
@@ -69,6 +69,13 @@ export PATH=$N_PREFIX/bin:$PATH
 if [ "$TMUX" = "" ]; then
     tmux
 fi
+
+# start showing neofetch
+if command -v neofetch 2>&1 >/dev/null; then
+    neofetch
+fi
+
+# show neofetch
 
 ## @TODO MOVE THIS to zsh
 # The next line updates PATH for the Google Cloud SDK.
