@@ -30,9 +30,10 @@ gsettings set org.gnome.desktop.session idle-delay 300
 
 # set GOPATH
 export GOPATH="/home/janjitsu/.local/go"
+export GOBIN="/home/janjitsu/.go/bin"
 
 # add go to path
-export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
 
 # python packages
 export PATH="/home/janjitsu/.local/bin:$PATH"
@@ -97,10 +98,13 @@ setopt appendhistory
 export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export ANDROID_AVD_HOME=~/.android/avd
-export ANDROID_SDK_ROOT=~/SSD2/Downloads/android-sdk
-export ANDROID_SDK_HOME=~/SSD2/Downloads/android-sdk
-export ANDROID_HOME=~/SSD2/Downloads/android-sdk
+export ANDROID_SDK_ROOT=/mnt/old_ubuntu/@home/janjitsu/Android/SDK
+export ANDROID_SDK_HOME=/mnt/old_ubuntu/@home/janjitsu/Android/SDK
+export ANDROID_HOME=/mnt/old_ubuntu/@home/janjitsu/Android/SDK
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Calibre dark mode
+export CALIBRE_USE_DARK_PALETTE=1
