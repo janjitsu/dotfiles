@@ -3,3 +3,4 @@ tags.*
 .env
 .idea/
 package-lock.json
+*.iml
