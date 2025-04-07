@@ -9,3 +9,5 @@ function alert {
         paplay /usr/share/sounds/gnome/default/alerts/glass.ogg; sleep 0.1
     done
 }
+
+alias prettyjson='python -m json.tool'
