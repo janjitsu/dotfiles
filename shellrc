@@ -108,3 +108,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Calibre dark mode
 export CALIBRE_USE_DARK_PALETTE=1
+
+# cargo rust packages
+export PATH=$PATH:/home/janjitsu/.cargo/bin
