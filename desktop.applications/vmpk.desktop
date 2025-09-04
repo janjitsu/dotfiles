@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=0.9.1
+Type=Application
+Terminal=false
+Exec=/home/janjitsu/Programs/Vmpk/vmpk-0.9.1-x86_64.AppImage
+Name=Vmpk
+Categories=AudioVideo;X-AudioEditing;Audio;Recorder;Piano;
+Icon=/home/janjitsu/Programs/Vmpk/vmpk.png

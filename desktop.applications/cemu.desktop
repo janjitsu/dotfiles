@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=2.0
+Type=Application
+Terminal=false
+Exec=/home/janjitsu/Programs/Cemu/Cemu-2.0-28-x86_64.AppImage
+Name=Cemu - Wii Emulator
+Icon=/home/janjitsu/Programs/Cemu/cemu_icon.png

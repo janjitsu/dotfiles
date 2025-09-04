@@ -10,5 +10,9 @@ mv go ~/.go
 # glow markdown cli reader
 go install github.com/charmbracelet/glow@latest
 
-# fzf
+# fzf - fuzzy finder
 go install github.com/junegunn/fzf@latest
+
+# logalize - colored logs
+go install github.com/deponian/logalize@latest
+
