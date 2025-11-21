@@ -20,10 +20,16 @@ stty -ixon
 # set keyboard speed
 xset r rate 180 70
 
+# mouse
+
 # make second left click on K400 work for a left handed mouse setup
 # xinput set-button-map `xinput list --id-only "pointer:Logitech K400 Plus"` 3 2 1
 # K400 mouse click default
 xinput set-button-map `xinput list --id-only "pointer:Logitech K400 Plus"` 1 2 3
+
+# K380 make F1 be act as a mouse click
+xmodmap -e "keycode 67 = Pointer_Button1"
+
 
 # gnome specific keyboard speed and mouse focus
 gsettings set org.gnome.desktop.peripherals.keyboard delay 170

@@ -71,12 +71,34 @@ docker run -it --rm \
   -v /run/user/$(id -u)/keyring/ssh:/ssh-auth.sock \
   -v /etc/passwd:/etc/passwd:ro \
   -v /etc/group:/etc/group:ro \
+  -p 8000:8000 \
   -w /app \
   $IMAGE_NAME php "\${@:1}"
 EOF
 chmod +x "$PHP_PATH"
 [ -f "$PHP_PATH" ] && echo "✅ Done"
 
+
+echo "💾 Creating executable in $PHP_PATH-runner"
+
+cat <<EOF > "$PHP_PATH-runner"
+#!/bin/bash
+
+docker run -it --rm \
+  --user "$(id -u):$(id -g)" \
+  -e COMPOSER_HOME=/composer-data/.composer \
+  -e COMPOSER_CACHE_DIR=/composer-data/.composer/cache \
+  -e SSH_AUTH_SOCK=/ssh-auth.sock \
+  -v "\$(pwd)":/app \
+  -v "$COMPOSER_FILES_PATH":/composer-data/.composer \
+  -v /run/user/$(id -u)/keyring/ssh:/ssh-auth.sock \
+  -v /etc/passwd:/etc/passwd:ro \
+  -v /etc/group:/etc/group:ro \
+  -w /app \
+  $IMAGE_NAME "\${@:1}"
+EOF
+chmod +x "$PHP_PATH-runner"
+[ -f "$PHP_PATH-runner" ] && echo "✅ Done"
 
 echo "💾 Creating executable in $COMPOSER_PATH"
 
@@ -98,6 +120,11 @@ docker run -it --rm \
 EOF
 chmod +x "$COMPOSER_PATH"
 [ -f "$COMPOSER_PATH" ] && echo "✅ Done"
+
+
+echo "💾 Setting Default Executables for php and composer"
+ln -s $PHP_PATH "$TARGET_PATH/php"
+ln -s $COMPOSER_PATH "$TARGET_PATH/composer"
 
 # troubleshooting - run interactivelly as root
 #docker run -it --rm \
