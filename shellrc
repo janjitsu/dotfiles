@@ -18,7 +18,8 @@ fi
 stty -ixon
 
 # set keyboard speed
-xset r rate 180 70
+xset r rate 180 70 # for vim
+# xset r rate 5000 1 # for vmpk
 
 # mouse
 
@@ -38,6 +39,9 @@ gsettings set org.gnome.desktop.wm.preferences focus-mode sloppy
 
 # prevent screen turning off too fast
 gsettings set org.gnome.desktop.session idle-delay 300
+
+# set nvim PATH
+export PATH="$PATH:/opt/nvim/bin"
 
 # set GOPATH
 export GOPATH="/home/janjitsu/.local/go"

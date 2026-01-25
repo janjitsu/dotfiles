@@ -6,14 +6,14 @@
 
 ##### INSTALL PROGRAMS #####
 #
+# @TODO start calling /setup/common scripts
 
-#TODO install nvim and copy configs to ~/.config/nvim/init.vim
 if command -v apt-get >/dev/null; then
     sudo apt update
-    sudo apt install -y wget curl python3-neovim tmux zsh htop ack-grep silversearcher-ag fzf
+    sudo apt install -y wget curl python3-neovim tmux zsh htop ack-grep silversearcher-ag fzf exuberant-ctags lua5.4
 elif command -v yum >/dev/null; then
     sudo yum update
-    sudo yum install -y wget curl python3-neovim tmux zsh htop ack silversearcher-ag
+    sudo yum install -y wget curl python3-neovim tmux zsh htop ack silversearcher-ag fzf exuberant-ctags lua5.4
 fi
 
 # zsh
@@ -25,10 +25,6 @@ git clone https://github.com/powerline/fonts.git --depth=1
 ./fonts/install.sh
 rm -rf fonts
 dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
-
-## Node
-curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
-npm install -g n
 
 ##### INSTALL DOTFILES #####
 
@@ -77,5 +73,5 @@ bash ~/.tmux/plugins/tpm/bin/install_plugins
 
 # htop
 mv ~/.config/htop/htoprc ~/dotfiles_old/
-if [! -d ~/.config/htop ]; then mkdir -p ~/.config/htop/; fi
+if [ ! -d ~/.config/htop ]; then mkdir -p ~/.config/htop/; fi
 ln -s $dir/htoprc ~/.config/htop/htoprc

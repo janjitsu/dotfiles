@@ -74,3 +74,4 @@ ZSH_THEME="agnoster"
 
 source $ZSH/oh-my-zsh.sh
 source ~/.shellrc
+
