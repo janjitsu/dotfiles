@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=2.0
+Type=Application
+Terminal=false
+Exec=/home/janjitsu/Programs/Yuzu/linux-portable-latest.AppImage
+Name=Yuzu - Swith Emulator
+Icon=/home/janjitsu/Programs/Yuzu/yuzu.png
