@@ -44,3 +44,6 @@ done
 
 # clear ubuntu cached
 alias cache-clear-ubuntu="rm -fr ~/.cache/*"
+
+# easy xclip
+alias xclip="xclip -selection c"
