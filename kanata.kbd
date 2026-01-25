@@ -1,0 +1,23 @@
+(defcfg
+  ;; Only target the internal laptop keyboard
+  linux-dev-names-include ("AT Translated Set 2 keyboard")
+  process-unmapped-keys yes
+)
+
+;; Define the raw Linux evdev keycode 97 as 'mykey'
+(deflocalkeys-linux
+  mykey 77
+)
+
+(defsrc
+  alt   spc   ro
+)
+
+(deflayer default
+  ;; Alt becomes Space
+  spc
+  ;; Space becomes Enter
+  ret
+  ;; Keycode 97 becomes Left Alt
+  lalt
+)
