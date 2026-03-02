@@ -11,3 +11,5 @@ function alert {
 }
 
 alias prettyjson='python -m json.tool'
+
+alias diskfree='df -h --total | grep /dev/nvme0n1p4'

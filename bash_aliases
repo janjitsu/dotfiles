@@ -35,7 +35,7 @@ alias todo="google-chrome --app=https://todoist.com/app/filter/2240647440"
 #kubectl
 alias k="kubectl"
 alias z="source ~/.zshrc"
-alias aws="awsv2"
+alias aws="/usr/local/aws-cli/v2/current/bin/aws"
 
 # aliases files
 for f in ~/dotfiles/aliases/*; do
@@ -43,7 +43,7 @@ for f in ~/dotfiles/aliases/*; do
 done
 
 # clear ubuntu cached
-alias cache-clear-ubuntu="rm -fr ~/.cache/*"
+alias cache-clear-ubuntu="diskfree && sudo apt autoremove -y && sudo apt autoclean && rm -fr ~/.cache/* && diskfree"
 
 # easy xclip
 alias xclip="xclip -selection c"
