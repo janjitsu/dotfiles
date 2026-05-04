@@ -4,20 +4,27 @@
   process-unmapped-keys yes
 )
 
-;; Define the raw Linux evdev keycode 97 as 'mykey'
-(deflocalkeys-linux
-  mykey 77
+
+(defalias
+  ;; Tap: Space | Hold: Left Control (timeout: 150ms)
+  spc-ctrl (tap-hold 150 150 spc lctl)
+)
+
+(defalias
+  ;; Tap: Enter | Hold: Left Shift (timeout: 150ms)
+  ret-shift (tap-hold 150 150 ret lshift)
 )
 
 (defsrc
-  alt   spc   ro
+  spc ralt ro
 )
 
+
 (deflayer default
-  ;; Alt becomes Space
-  spc
-  ;; Space becomes Enter
-  ret
-  ;; Keycode 97 becomes Left Alt
-  lalt
+  @spc-ctrl @ret-shift ralt
 )
+
+;;(layer-toggle layer1)
+;;(deflayer layer1
+;;  _ _ lalt _
+;;)
