@@ -75,3 +75,7 @@ bash ~/.tmux/plugins/tpm/bin/install_plugins
 mv ~/.config/htop/htoprc ~/dotfiles_old/
 if [ ! -d ~/.config/htop ]; then mkdir -p ~/.config/htop/; fi
 ln -s $dir/htoprc ~/.config/htop/htoprc
+
+# claude
+mkdir -p ~/.claude
+ln -sf $dir/.claude/settings.json ~/.claude/settings.json

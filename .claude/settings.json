@@ -1,0 +1,17 @@
+{
+  "theme": "dark",
+  "mcpServers": {
+    "atlassian-mcp-server": {
+      "command": "/usr/bin/env",
+      "args": [
+        "PATH=/home/janjitsu/.n/bin:/usr/local/bin:/usr/bin:/bin",
+        "/home/janjitsu/.n/bin/node",
+        "/home/janjitsu/.n/bin/npx",
+        "-y",
+        "mcp-remote",
+        "https://mcp.atlassian.com/v1/mcp"
+      ],
+      "env": {}
+    }
+  }
+}

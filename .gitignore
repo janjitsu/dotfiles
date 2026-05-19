@@ -11,3 +11,4 @@ tmux/resurrect/*
 tmux/tpm
 bash_local
 gitconfig_local
+.claude/settings.local.json
