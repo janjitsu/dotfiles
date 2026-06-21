@@ -126,3 +126,6 @@ export CALIBRE_USE_DARK_PALETTE=1
 
 # cargo rust packages
 export PATH=$PATH:/home/janjitsu/.cargo/bin
+
+# antigravity
+export GEMINI_CLI_TRUST_WORKSPACE=true

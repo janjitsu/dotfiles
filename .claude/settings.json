@@ -1,5 +1,11 @@
 {
   "theme": "dark",
+  "permissions": {
+    "allow": [
+      "Bash(npx jest *)",
+      "Bash(npm info *)"
+    ]
+  },
   "mcpServers": {
     "atlassian-mcp-server": {
       "command": "/usr/bin/env",
@@ -13,5 +19,8 @@
       ],
       "env": {}
     }
+  },
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": true
   }
 }

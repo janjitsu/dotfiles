@@ -75,3 +75,9 @@ ZSH_THEME="agnoster"
 source $ZSH/oh-my-zsh.sh
 source ~/.shellrc
 
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/janjitsu/.local/bin:$PATH"
+
+export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

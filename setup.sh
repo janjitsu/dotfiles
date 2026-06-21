@@ -6,15 +6,13 @@
 
 ##### INSTALL PROGRAMS #####
 #
-# @TODO start calling /setup/common scripts
 
 if command -v apt-get >/dev/null; then
-    sudo apt update
-    sudo apt install -y wget curl python3-neovim tmux zsh htop ack-grep silversearcher-ag fzf exuberant-ctags lua5.4
+    ./setup/ubuntu/setup.sh
 elif command -v yum >/dev/null; then
-    sudo yum update
-    sudo yum install -y wget curl python3-neovim tmux zsh htop ack silversearcher-ag fzf exuberant-ctags lua5.4
+    ./setup/fedora/setup.sh
 fi
+
 
 # zsh
 chsh -s /usr/bin/zsh $USER
@@ -26,7 +24,7 @@ git clone https://github.com/powerline/fonts.git --depth=1
 rm -rf fonts
 dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
 
-##### INSTALL DOTFILES #####
+##### SYMLINK SIMPLE DOTFILES #####
 
 ########## Variables
 
@@ -57,6 +55,11 @@ for file in $files; do
 done
 
 source ~/.bashrc
+
+# @TODO start calling /setup/common scripts
+#nvim
+./setup/common/nvim.sh
+
 # Neovim init
 mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim

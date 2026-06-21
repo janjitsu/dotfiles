@@ -12,3 +12,5 @@
 	defaultBranch = main
 [include]
     path = ~/dotfiles/gitconfig_local
+[rerere]
+	enabled = true

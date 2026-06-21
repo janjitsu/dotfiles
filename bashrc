@@ -63,3 +63,7 @@ YELLOW="\\[\\e[1;33m\\]"
 PS1="$GREEN\u@\h$WHITE: $BLUE\$prompt_dir$CYAN\$git_subpath$RED\$git_branch$YELLOW\$git_dirty\n$WHITE\$(date +"%H:%M:%S") $BLUE\$$WHITE "
 
 source ~/.shellrc
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/janjitsu/.local/bin:$PATH"

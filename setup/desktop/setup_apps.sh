@@ -1,4 +1,5 @@
 #!/bin/bash
+# @TODO replace username in desktop files - for this we cannot symlink anymore
 
 ln -s ~/dotfiles/desktop.applications/idea.desktop ~/.local/share/applications/idea.desktop
 ln -s ~/dotfiles/desktop.applications/postman.desktop ~/.local/share/applications/postman.desktop

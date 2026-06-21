@@ -48,35 +48,5 @@ Plugins are managed with [Tmux Plugin Manager](https://github.com/tmux-plugins/t
 ### Bash
 Any machine-specific or private config can be placed on `.bash_local` file
 
-***
-
-### Todo
-
-- [X] Git config
-- [ ] Save and restore vim sessions with tmux
-- [ ] Enable system copy-paste with tmux
-- [ ] desktop application launchers
-    - [ ] notion
-    - [ ] Idea
-- [ ] gnome extensions and configs
-
-***
-
-### Other Scripts
-
-Still testing these to include them in the main setup script
-
-* Docker installer
-
-```
-$ ./scripts/docker.sh
-```
-
-* Import gsettings shortcuts
-```
-$ ./scripts/keybindings.pl -i ~/dotfiles/gsettings.csv
-```
-
-
 
 setup file was inspired by: [this](http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/)

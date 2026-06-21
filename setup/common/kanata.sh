@@ -1,11 +1,12 @@
 #!/bin/bash
+# @TODO install kanata in /usr/local/bin
 
 # --- Configuration ---
 ZIP_URL="https://github.com/jtroo/kanata/releases/download/v1.10.1/kanata-linux-binaries-v1.10.1-x64.zip"
 TARGET_DIR="$HOME/Programs/kanata"
 BIN_PATH="$TARGET_DIR/kanata"
 # Change this to the actual path of your .kbd file
-CONFIG_PATH="$HOME/.config/kanata/config.kbd"
+CONFIG_PATH="$HOME/dotfiles/kanata.kbd"
 
 # --- 1. Download and Extract ---
 echo "Creating directory at $TARGET_DIR..."
