@@ -22,8 +22,7 @@ bootstrap.sh
         ├── setup/ubuntu.sh  or  setup/fedora.sh   (distro packages)
         ├── setup/symlinks.sh                       (dotfile symlinks)
         ├── setup/common.sh                         (distro-agnostic tools)
-        ├── setup/apps.sh                           (desktop apps)
-        └── backup/gnome.sh restore                 (GNOME settings)
+        └── setup/apps.sh                           (desktop apps)
 ```
 
 ### Directory Structure
@@ -156,21 +155,32 @@ Creates a timestamped zip in `tmp/` with:
 - GNOME settings (extensions, dconf, keybindings, guake)
 - Sticky notes
 
-### Restore (after reinstall)
+### Restore (separate from setup)
+
+Restore is **not** part of `setup.sh` — not all systems run GNOME or need the same credentials. After setup completes, restore manually:
 
 ```bash
-./backup/restore.sh tmp/backup-YYYYMMDD-HHMMSS.zip
+# 1. Copy your backup zip to the machine (USB, cloud, scp, etc.)
+cp /media/usb/backup-20260622-120000.zip ~/dotfiles/tmp/
+
+# 2. See what backups are available
+ls ~/dotfiles/tmp/backup-*.zip
+
+# 3. Restore credentials + GNOME settings
+./backup/restore.sh tmp/backup-20260622-120000.zip
+
+# 4. Restore sticky notes separately (if needed)
+ls ~/dotfiles/tmp/sticky-notes-*.zip
+./backup/sticky-notes.sh restore tmp/sticky-notes-20260622.zip
 ```
 
-Restores all credentials with proper permissions, plus GNOME settings.
+The restore script handles SSH keys, AWS, Docker, mkcert, keyrings, gitconfig_local, npmrc, and GNOME settings — all with proper file permissions.
 
-### Individual backup/restore
+### Individual restore (if you only need one thing)
 
 ```bash
-./backup/gnome.sh backup          # GNOME only
-./backup/gnome.sh restore
-./backup/sticky-notes.sh backup   # Sticky notes only
-./backup/sticky-notes.sh restore tmp/sticky-notes-*.zip
+./backup/gnome.sh restore                              # GNOME only
+./backup/sticky-notes.sh restore tmp/sticky-notes-*.zip  # Sticky notes only
 ```
 
 ## Pre-Reinstall Checklist

@@ -43,7 +43,4 @@ bash ~/.tmux/plugins/tpm/bin/install_plugins
 # ——— Desktop apps ———
 "$DIR/setup/apps.sh"
 
-# ——— GNOME restore ———
-"$DIR/backup/gnome.sh" restore
-
 source ~/.bashrc
