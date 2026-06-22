@@ -1,66 +1,107 @@
-My dotfiles
-==========
+# Dotfiles
 
-### Quick Setup (fresh machine, no git required)
+Personal dotfiles and system setup automation for Ubuntu and Fedora workstations running GNOME.
+
+One command on a fresh machine sets up everything — packages, configs, desktop apps, GNOME extensions, keybindings — exactly how it was before.
+
+## Quick Start
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/master/bootstrap.sh | bash
 ```
 
-### Manual Setup
+No git required. The bootstrap downloads the repo as a tarball, runs setup, then initializes git for future updates.
 
-```bash
-git clone git@github.com:janjitsu/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./setup.sh
+## How It Works
+
+### Bootstrap Flow
+
+```
+bootstrap.sh
+  └── setup.sh
+        ├── setup/ubuntu.sh  or  setup/fedora.sh   (distro packages)
+        ├── setup/symlinks.sh                       (dotfile symlinks)
+        ├── setup/common.sh                         (distro-agnostic tools)
+        ├── setup/apps.sh                           (desktop apps)
+        └── backup/gnome.sh restore                 (GNOME settings)
 ```
 
-This will symlink all files/folders to your home dir. Any existent file will be moved to ~/dotfiles_old directory.
+### Directory Structure
 
-***
+```
+dotfiles/
+├── setup.sh                 # Main entry point
+├── bootstrap.sh             # Curl-friendly bootstrapper
+│
+├── setup/
+│   ├── ubuntu.sh            # Runs all setup/ubuntu/*.sh
+│   ├── fedora.sh            # Runs all setup/fedora/*.sh
+│   ├── common.sh            # Runs all setup/common/*.sh
+│   ├── apps.sh              # Runs all setup/desktop/*.sh
+│   ├── symlinks.sh          # All symlink operations
+│   ├── ubuntu/              # apt-based installs (one script per tool)
+│   ├── fedora/              # dnf-based installs (mirrors ubuntu/)
+│   ├── common/              # Distro-agnostic (nvim, go, docker, node, kanata)
+│   └── desktop/             # Desktop apps (idea, postman, vmpk)
+│
+├── backup/
+│   ├── gnome.sh             # GNOME backup/restore (extensions, dconf, keybindings)
+│   ├── sticky-notes.sh      # Sticky notes backup/restore (sensitive, gitignored zip)
+│   └── gnome_keybindings.pl # Keybinding import/export via gsettings
+│
+├── gnome/                   # GNOME backup artifacts (committed)
+│   ├── extensions-*.list    # Extension lists for reinstall
+│   ├── dconf/               # dconf dumps (shell, desktop, extensions, terminal)
+│   └── gsettings.csv        # Custom keybindings
+│
+├── scripts/                 # Utility scripts (docker, cpf generator, etc.)
+│
+│   # Config directories (symlinked to ~/.config/)
+├── htop/                    # → ~/.config/htop
+├── pulseeffects/            # → ~/.config/PulseEffects
+├── vmpk/                    # → ~/.config/vmpk.sourceforge.net
+├── nvim/                    # → ~/.config/nvim
+│
+│   # Dotfiles (symlinked to ~/)
+├── bashrc, zshrc, shellrc   # Shell configs
+├── vimrc, ideavimrc         # Editor configs
+├── tmux.conf, tmux/         # Tmux config + plugins
+├── gitconfig, gitignore     # Git config
+├── touchegg.conf            # Trackpad gestures
+├── kanata.kbd               # Keyboard remapping
+└── tmp/                     # Gitignored temp files (backup zips, etc.)
+```
 
-### What's included
+### Design Principles
 
-* git, wget, curl
-* neovim, vim
-* tmux
-* bash, zsh
-* htop
-* gitconfig
-* PulseEffects
-* Touchegg (trackpad gestures)
+- **Drop a script, it runs.** The orchestrators (`ubuntu.sh`, `fedora.sh`, `common.sh`, `apps.sh`) glob `*.sh` in their folder. Add a new script and it's automatically picked up.
+- **Symlink everything possible.** Config changes go straight to the repo.
+- **dconf dump/load for GNOME.** GNOME settings live in a binary database, so we dump text files for version control and load them on restore.
+- **Desktop file templates.** `.desktop` files use `%USER%` placeholders, resolved at install time.
+- **Sensitive data stays out.** Sticky notes backup goes to `tmp/` (gitignored).
 
-### Backup & Restore
+## Backup & Restore
 
 ```bash
-# GNOME settings, extensions, keybindings
+# GNOME (extensions + settings + keybindings)
 ./backup/gnome.sh backup
 ./backup/gnome.sh restore
 
-# Sticky notes (sensitive — saved to gitignored tmp/)
+# Sticky notes (creates zip in tmp/)
 ./backup/sticky-notes.sh backup
 ./backup/sticky-notes.sh restore tmp/sticky-notes-YYYYMMDD.zip
 ```
 
-### Desktop Apps
+## Desktop Apps
+
+Downloaded directly (not from package managers), installed to `~/apps/`:
 
 ```bash
-# Install all desktop apps (IntelliJ, Postman, VMPK)
-./setup/apps.sh
-
-# Or individually
-./setup/desktop/idea.sh
-./setup/desktop/postman.sh
-./setup/desktop/vmpk.sh
+./setup/desktop/idea.sh      # IntelliJ IDEA → ~/apps/idea/
+./setup/desktop/postman.sh   # Postman → ~/apps/postman/
+./setup/desktop/vmpk.sh      # VMPK → ~/apps/vmpk/ (+ symlinked config & mappings)
 ```
 
-### Vim
+## Shell
 
-Plugins are managed with [vim-plug](https://github.com/junegunn/vim-plug)
-
-### Tmux
-
-Plugins are managed with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
-
-### Bash
-Any machine-specific or private config can be placed on `.bash_local` file
+Machine-specific or private config goes in `.bash_local` (gitignored).
