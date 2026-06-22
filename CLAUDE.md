@@ -53,7 +53,7 @@ Ubuntu and Fedora are both supported. Each has its own folder under `setup/` wit
 | `setup/symlinks.sh` | All symlink operations in one place |
 | `backup/gnome.sh` | GNOME backup/restore (extensions, dconf, keybindings) |
 | `backup/gnome_keybindings.pl` | Perl script for gsettings keybinding I/O |
-| `setup/desktop/*.desktop` | Templates with `%USER%` placeholder |
+| `setup/apps/*.desktop` | Templates with `%USER%` placeholder |
 
 ## Conventions
 

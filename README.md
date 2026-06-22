@@ -37,12 +37,12 @@ dotfiles/
 │   ├── ubuntu.sh            # Runs all setup/ubuntu/*.sh
 │   ├── fedora.sh            # Runs all setup/fedora/*.sh
 │   ├── common.sh            # Runs all setup/common/*.sh
-│   ├── apps.sh              # Runs all setup/desktop/*.sh
+│   ├── apps.sh              # Runs all setup/apps/*.sh
 │   ├── symlinks.sh          # All symlink operations
 │   ├── ubuntu/              # apt-based installs (one script per tool)
 │   ├── fedora/              # dnf-based installs (mirrors ubuntu/)
 │   ├── common/              # Distro-agnostic (nvim, go, docker, node, kanata)
-│   └── desktop/             # Desktop apps (idea, postman, vmpk)
+│   └── apps/                # Desktop apps (idea, postman, vmpk, ardour)
 │
 ├── backup/
 │   ├── gnome.sh             # GNOME backup/restore (extensions, dconf, keybindings)
@@ -51,15 +51,16 @@ dotfiles/
 │
 ├── gnome/                   # GNOME backup artifacts (committed)
 │   ├── extensions-*.list    # Extension lists for reinstall
-│   ├── dconf/               # dconf dumps (shell, desktop, extensions, terminal)
+│   ├── dconf/               # dconf dumps (shell, desktop, extensions, terminal, guake)
 │   └── gsettings.csv        # Custom keybindings
 │
-├── scripts/                 # Utility scripts (docker, cpf generator, etc.)
+├── scripts/                 # Utility scripts (disk-health, fix-nvme-sleep, etc.)
 │
 │   # Config directories (symlinked to ~/.config/)
 ├── htop/                    # → ~/.config/htop
 ├── pulseeffects/            # → ~/.config/PulseEffects
 ├── vmpk/                    # → ~/.config/vmpk.sourceforge.net
+├── ardour/                  # → ~/.config/ardour<N>/config, ui_config
 ├── nvim/                    # → ~/.config/nvim
 │
 │   # Dotfiles (symlinked to ~/)
@@ -97,9 +98,17 @@ dotfiles/
 Downloaded directly (not from package managers), installed to `~/apps/`:
 
 ```bash
-./setup/desktop/idea.sh      # IntelliJ IDEA → ~/apps/idea/
-./setup/desktop/postman.sh   # Postman → ~/apps/postman/
-./setup/desktop/vmpk.sh      # VMPK → ~/apps/vmpk/ (+ symlinked config & mappings)
+./setup/apps/idea.sh         # IntelliJ IDEA → ~/apps/idea/
+./setup/apps/postman.sh      # Postman → ~/apps/postman/
+./setup/apps/vmpk.sh         # VMPK → ~/apps/vmpk/ (+ symlinked config & mappings)
+./setup/apps/ardour.sh FILE  # Ardour → ~/apps/ardour/ (requires manual download)
+```
+
+## Utility Scripts
+
+```bash
+sudo ./scripts/disk-health.sh          # SMART health check for all drives
+sudo ./scripts/fix-nvme-sleep.sh       # Fix NVMe sleep/wake issues via GRUB
 ```
 
 ## Shell

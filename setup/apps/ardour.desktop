@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Ardour
+GenericName=Digital Audio Workstation
+Comment=Record, mix, and master audio
+Exec=/home/%USER%/apps/ardour/bin/ardour
+Icon=/home/%USER%/apps/ardour/share/icons/ardour.png
+Terminal=false
+Categories=AudioVideo;Audio;Music;
+MimeType=application/x-ardour;
