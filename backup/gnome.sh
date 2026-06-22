@@ -87,6 +87,9 @@ do_backup() {
     dconf dump /org/gnome/terminal/ > "$DCONF_DIR/terminal.dconf"
     echo "  → Terminal profiles"
 
+    dconf dump /apps/guake/ > "$DCONF_DIR/guake.dconf"
+    echo "  → Guake settings"
+
     # ——— Step 3: Keybindings (existing Perl script) ———
     echo "[3/3] Exporting keybindings..."
     if [[ -f "$SCRIPT_DIR/gnome_keybindings.pl" ]]; then
@@ -185,9 +188,10 @@ do_restore() {
         ["shell.dconf"]="/org/gnome/shell/"
         ["extensions.dconf"]="/org/gnome/shell/extensions/"
         ["terminal.dconf"]="/org/gnome/terminal/"
+        ["guake.dconf"]="/apps/guake/"
     )
 
-    for file in desktop.dconf shell.dconf extensions.dconf terminal.dconf; do
+    for file in desktop.dconf shell.dconf extensions.dconf terminal.dconf guake.dconf; do
         if [[ -f "$DCONF_DIR/$file" ]]; then
             dconf load "${DCONF_MAP[$file]}" < "$DCONF_DIR/$file"
             echo "  → Loaded $file"

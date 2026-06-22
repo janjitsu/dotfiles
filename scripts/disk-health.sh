@@ -59,10 +59,21 @@ check_drive() {
         echo -e "  Health:       ${RED}✗ FAILING — $health${NC}"
     fi
 
-    # Temperature
+    # Get all SMART attributes once
+    local smart_all
+    smart_all=$(smartctl -A "$dev" 2>/dev/null) || true
+
+    # Temperature — different format for NVMe vs SATA
     local temp
-    temp=$(smartctl -A "$dev" 2>/dev/null | grep -i "temperature" | head -1 | awk '{for(i=1;i<=NF;i++) if($i+0==$i && $i>0 && $i<200) {print $i; exit}}') || true
-    if [ -n "$temp" ]; then
+    if [[ "$tran" == "nvme" ]]; then
+        # NVMe: "Temperature:                        38 Celsius"
+        temp=$(echo "$smart_all" | grep -i "^Temperature:" | grep -oP '\d+') || true
+    else
+        # SATA: "194 Temperature_Celsius ... - 45 (Min/Max 22/52)"
+        # RAW_VALUE is the last number before any parenthetical
+        temp=$(echo "$smart_all" | grep -i "Temperature_Celsius" | awk '{print $10}') || true
+    fi
+    if [ -n "$temp" ] && [ "$temp" -gt 0 ] && [ "$temp" -lt 150 ] 2>/dev/null; then
         if [ "$temp" -ge 60 ]; then
             echo -e "  Temperature:  ${RED}${temp}°C (HOT!)${NC}"
         elif [ "$temp" -ge 45 ]; then
@@ -74,20 +85,40 @@ check_drive() {
 
     # Power on hours
     local hours
-    hours=$(smartctl -A "$dev" 2>/dev/null | grep -i "power.on.hour\|Power On Hours" | awk '{for(i=NF;i>=1;i--) if($i+0==$i) {print $i; exit}}') || true
-    if [ -n "$hours" ]; then
+    hours=$(echo "$smart_all" | grep -i "power.on.hour\|Power On Hours" | grep -oP '[\d,]+' | tail -1 | tr -d ',') || true
+    if [ -n "$hours" ] && [ "$hours" -gt 0 ] 2>/dev/null; then
         local days=$((hours / 24))
-        local years=$(echo "scale=1; $hours / 8760" | bc 2>/dev/null || echo "?")
-        echo -e "  Power on:     ${hours} hours (${days} days / ~${years} years)"
+        local years=$((hours / 8760))
+        local months=$(( (hours % 8760) / 730 ))
+        if [ "$years" -gt 0 ]; then
+            echo -e "  Power on:     ${hours} hours (~${years}y ${months}m)"
+        else
+            echo -e "  Power on:     ${hours} hours (${days} days)"
+        fi
+    fi
+
+    # Power cycles
+    local cycles
+    cycles=$(echo "$smart_all" | grep -i "Power_Cycle_Count\|Power Cycles" | grep -oP '[\d,]+' | tail -1 | tr -d ',') || true
+    [ -n "$cycles" ] && [ "$cycles" -gt 0 ] 2>/dev/null && echo -e "  Power cycles: ${cycles}"
+
+    # Unsafe shutdowns / unexpected power loss
+    local unsafe
+    unsafe=$(echo "$smart_all" | grep -iE "Unsafe.Shutdown|Unexpected.*Power|Power.Lost|Power.Off.Retract|POR.Recovery" | grep -oP '[\d,]+' | tail -1 | tr -d ',') || true
+    if [ -n "$unsafe" ] && [ "$unsafe" -gt 0 ] 2>/dev/null; then
+        if [ "$unsafe" -ge 50 ]; then
+            echo -e "  Unsafe stops: ${RED}${unsafe} (check power/sleep issues)${NC}"
+        elif [ "$unsafe" -ge 10 ]; then
+            echo -e "  Unsafe stops: ${YELLOW}${unsafe}${NC}"
+        else
+            echo -e "  Unsafe stops: ${unsafe}"
+        fi
     fi
 
     # NVMe specific
     if [[ "$tran" == "nvme" ]]; then
-        local nvme_info
-        nvme_info=$(smartctl -A "$dev" 2>/dev/null) || true
-
         local pct_used
-        pct_used=$(echo "$nvme_info" | grep -i "Percentage Used" | awk '{print $NF}' | tr -d '%') || true
+        pct_used=$(echo "$smart_all" | grep -i "Percentage Used" | awk '{print $NF}' | tr -d '%') || true
         if [ -n "$pct_used" ]; then
             if [ "$pct_used" -ge 80 ]; then
                 echo -e "  Life used:    ${RED}${pct_used}%${NC}"
@@ -99,54 +130,97 @@ check_drive() {
         fi
 
         local data_written
-        data_written=$(echo "$nvme_info" | grep -i "Data Units Written" | sed 's/.*\[//' | tr -d ']') || true
+        data_written=$(echo "$smart_all" | grep -i "Data Units Written" | sed 's/.*\[//' | tr -d ']') || true
         [ -n "$data_written" ] && echo -e "  Written:      $data_written"
 
         local data_read
-        data_read=$(echo "$nvme_info" | grep -i "Data Units Read" | sed 's/.*\[//' | tr -d ']') || true
+        data_read=$(echo "$smart_all" | grep -i "Data Units Read" | sed 's/.*\[//' | tr -d ']') || true
         [ -n "$data_read" ] && echo -e "  Read:         $data_read"
+
+        local media_errors
+        media_errors=$(echo "$smart_all" | grep -i "Media and Data Integrity" | grep -oP '\d+') || true
+        if [ -n "$media_errors" ] && [ "$media_errors" -gt 0 ] 2>/dev/null; then
+            echo -e "  Media errors: ${RED}${media_errors}${NC}"
+        fi
     fi
 
     # SATA SSD / HDD specific
     if [[ "$tran" == "sata" || "$tran" == "ata" ]]; then
-        local smart_attrs
-        smart_attrs=$(smartctl -A "$dev" 2>/dev/null) || true
-
         # Reallocated sectors (bad sign if > 0)
         local realloc
-        realloc=$(echo "$smart_attrs" | grep -i "Reallocated_Sector" | awk '{print $NF}') || true
+        realloc=$(echo "$smart_all" | grep -i "Reallocated_Sector" | awk '{print $NF}') || true
         if [ -n "$realloc" ] && [ "$realloc" != "0" ]; then
             echo -e "  Reallocated:  ${RED}${realloc} sectors (WARNING)${NC}"
         elif [ -n "$realloc" ]; then
             echo -e "  Reallocated:  ${GREEN}0 sectors${NC}"
         fi
 
-        # Wear leveling / SSD life
+        # Wear leveling / SSD life (only SSDs have this)
         local wear
-        wear=$(echo "$smart_attrs" | grep -iE "Wear_Leveling|SSD_Life_Left|Media_Wearout" | awk '{print $(NF-3)}') || true
-        if [ -n "$wear" ]; then
+        wear=$(echo "$smart_all" | grep -iE "Wear_Leveling|SSD_Life_Left|Media_Wearout" | awk '{print $4}') || true
+        if [ -n "$wear" ] && [ "$wear" -gt 0 ] 2>/dev/null; then
+            local used=$((100 - wear))
             if [ "$wear" -le 20 ]; then
-                echo -e "  SSD life:     ${RED}${wear}%${NC}"
+                echo -e "  SSD life:     ${RED}${wear}% remaining (${used}% used)${NC}"
             elif [ "$wear" -le 50 ]; then
-                echo -e "  SSD life:     ${YELLOW}${wear}%${NC}"
+                echo -e "  SSD life:     ${YELLOW}${wear}% remaining (${used}% used)${NC}"
             else
-                echo -e "  SSD life:     ${GREEN}${wear}%${NC}"
+                echo -e "  SSD life:     ${GREEN}${wear}% remaining${NC}"
             fi
+        fi
+
+        # Data written / read (Total_LBAs_Written/Read — each LBA is 512 bytes)
+        local lbas_written
+        lbas_written=$(echo "$smart_all" | grep -iE "Total_LBAs_Written|Host_Writes" | awk '{print $NF}') || true
+        if [ -n "$lbas_written" ] && [ "$lbas_written" -gt 0 ] 2>/dev/null; then
+            local tb_written=$(awk "BEGIN {printf \"%.1f\", $lbas_written * 512 / 1000000000000}")
+            echo -e "  Written:      ${tb_written} TB"
+        fi
+
+        local lbas_read
+        lbas_read=$(echo "$smart_all" | grep -iE "Total_LBAs_Read|Host_Reads" | awk '{print $NF}') || true
+        if [ -n "$lbas_read" ] && [ "$lbas_read" -gt 0 ] 2>/dev/null; then
+            local tb_read=$(awk "BEGIN {printf \"%.1f\", $lbas_read * 512 / 1000000000000}")
+            echo -e "  Read:         ${tb_read} TB"
         fi
 
         # Pending sectors
         local pending
-        pending=$(echo "$smart_attrs" | grep -i "Current_Pending_Sector" | awk '{print $NF}') || true
+        pending=$(echo "$smart_all" | grep -i "Current_Pending_Sector" | awk '{print $NF}') || true
         if [ -n "$pending" ] && [ "$pending" != "0" ]; then
             echo -e "  Pending:      ${RED}${pending} sectors (WARNING)${NC}"
         fi
 
         # Uncorrectable errors
         local uncorr
-        uncorr=$(echo "$smart_attrs" | grep -i "Offline_Uncorrectable" | awk '{print $NF}') || true
+        uncorr=$(echo "$smart_all" | grep -i "Offline_Uncorrectable" | awk '{print $NF}') || true
         if [ -n "$uncorr" ] && [ "$uncorr" != "0" ]; then
             echo -e "  Uncorrectable:${RED} ${uncorr} errors (WARNING)${NC}"
         fi
+
+        # HDD-specific: spin retry (sign of motor issues)
+        local spin_retry
+        spin_retry=$(echo "$smart_all" | grep -i "Spin_Retry_Count" | awk '{print $NF}') || true
+        if [ -n "$spin_retry" ] && [ "$spin_retry" != "0" ]; then
+            echo -e "  Spin retries: ${RED}${spin_retry} (motor issue)${NC}"
+        fi
+
+        # HDD-specific: seek errors
+        local seek_err
+        seek_err=$(echo "$smart_all" | grep -i "Seek_Error_Rate" | awk '{print $NF}') || true
+        if [ -n "$seek_err" ] && [ "$seek_err" != "0" ] 2>/dev/null; then
+            # Some drives report this as a composite value, only warn if VALUE ($4) is low
+            local seek_val
+            seek_val=$(echo "$smart_all" | grep -i "Seek_Error_Rate" | awk '{print $4}') || true
+            if [ -n "$seek_val" ] && [ "$seek_val" -lt 60 ] 2>/dev/null; then
+                echo -e "  Seek errors:  ${RED}degraded (value: ${seek_val})${NC}"
+            fi
+        fi
+
+        # HDD-specific: start/stop count
+        local start_stop
+        start_stop=$(echo "$smart_all" | grep -i "Start_Stop_Count" | awk '{print $NF}') || true
+        [ -n "$start_stop" ] && [ "$start_stop" -gt 0 ] 2>/dev/null && echo -e "  Start/stops:  ${start_stop}"
     fi
 
     echo ""
