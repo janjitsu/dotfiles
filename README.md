@@ -1,45 +1,62 @@
 My dotfiles
 ==========
 
-Simplest possible way I've found to manage my dotfiles
+### Quick Setup (fresh machine, no git required)
 
-Included:
+```bash
+curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/master/bootstrap.sh | bash
+```
 
-* wget
-* curl
-* neovim
-* tmux
-* bash
-* zsh
-* htop
-* gitconfig
+### Manual Setup
 
-Requirements:
+```bash
+git clone git@github.com:janjitsu/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./setup.sh
+```
 
-* git
-
+This will symlink all files/folders to your home dir. Any existent file will be moved to ~/dotfiles_old directory.
 
 ***
 
-### Setup
+### What's included
 
-* clone it to your home folder
+* git, wget, curl
+* neovim, vim
+* tmux
+* bash, zsh
+* htop
+* gitconfig
+* PulseEffects
+* Touchegg (trackpad gestures)
 
+### Backup & Restore
+
+```bash
+# GNOME settings, extensions, keybindings
+./backup/gnome.sh backup
+./backup/gnome.sh restore
+
+# Sticky notes (sensitive — saved to gitignored tmp/)
+./backup/sticky-notes.sh backup
+./backup/sticky-notes.sh restore tmp/sticky-notes-YYYYMMDD.zip
 ```
-$ git clone git@github.com:janfrs/dotfiles.git ~/dotfiles
-```
 
-* run setup
+### Desktop Apps
 
-```
-$ ./setup.sh
-```
+```bash
+# Install all desktop apps (IntelliJ, Postman, VMPK)
+./setup/apps.sh
 
-This will symlink all files/folders to your home dir. Any existent file will be moved to ~/dotfiles_old directory
+# Or individually
+./setup/desktop/idea.sh
+./setup/desktop/postman.sh
+./setup/desktop/vmpk.sh
+```
 
 ### Vim
 
-Plugins are managed with [Vundle](https://github.com/VundleVim/Vundle.vim)
+Plugins are managed with [vim-plug](https://github.com/junegunn/vim-plug)
 
 ### Tmux
 
@@ -47,6 +64,3 @@ Plugins are managed with [Tmux Plugin Manager](https://github.com/tmux-plugins/t
 
 ### Bash
 Any machine-specific or private config can be placed on `.bash_local` file
-
-
-setup file was inspired by: [this](http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/)
