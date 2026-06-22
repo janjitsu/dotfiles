@@ -1,0 +1,16 @@
+# GNOME Shell Extensions — Enabled
+# Generated: 2026-06-21T17:32:57+02:00
+# Use restore.sh to reinstall from extensions.gnome.org
+
+vertical-workspaces@G-dH.github.com
+bluetooth-quick-connect@bjarosze.gmail.com
+sound-output-device-chooser@kgshank.net
+toggle-night-light@cansozbir.github.io
+date-menu-formatter@marcinjakubowski.github.com
+gTile@vibou
+timezones@masquerade-circus.net
+all-windows-srwp@jkavery.github.io
+volume-mixer@evermiss.net
+ddc-brightness-contrast-extra-dimming@tzawezin.github.io
+openweather-extension@jenslody.de
+display-ddc-brightness-volume@sagrland.de

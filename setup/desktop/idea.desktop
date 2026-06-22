@@ -2,8 +2,8 @@
 Version=13.0
 Type=Application
 Terminal=false
-Icon[en_US]=/home/janjitsu/Programs/idea-IU/bin/idea.png
+Icon[en_US]=/home/%USER%/apps/idea/bin/idea.png
 Name[en_US]=IntelliJ
-Exec=/home/janjitsu/Programs/idea-IU/bin/idea
+Exec=/home/%USER%/apps/idea/bin/idea
 Name=IntelliJ
-Icon=/home/janjitsu/Programs/idea-IU/bin/idea.png
+Icon=/home/%USER%/apps/idea/bin/idea.png

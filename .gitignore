@@ -12,3 +12,5 @@ tmux/tpm
 bash_local
 gitconfig_local
 .claude/settings.local.json
+tmp/*
+!tmp/.keep

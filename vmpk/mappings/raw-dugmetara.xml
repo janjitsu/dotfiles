@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rawkeyboardmap>
+<!--
+
+VMPK Layout Dugmetara Style - Cromatic Button Accordion Style
+
+Goes very well together with the qwerty buttons alignments
+Current configuration goes from E2 to D#5 aligned in
+5 rows of 12 columns, following the disposition
+of the South Slavic Dugmetara B-system
+Also know as chromatic button accordion aligned to B
+
+The keyboard layout shown here is a unicode en
+You might need to fix for your keyboard layout
+
+-->
+<rawkeymap version="1.0">
+    <!-- Extra Notes -->
+    <mapping keycode="49" note="38"/> <!-- `  : D2  -->
+    <mapping keycode="50" note="41"/> <!-- Left Shift  : F2 -->
+    <!-- 1st Column -->
+    <mapping keycode="67" note="40"/> <!-- F1  : E2  -->
+    <mapping keycode="10" note="41"/> <!--  1  : F2  -->
+    <mapping keycode="24" note="42"/> <!--  Q  : F#2 -->
+    <mapping keycode="38" note="43"/> <!--  A  : G2  -->
+    <mapping keycode="52" note="44"/> <!--  Z  : A#2 -->
+    <!-- 2nd Column -->
+    <mapping keycode="68" note="43"/> <!-- F2  : G2  -->
+    <mapping keycode="11" note="44"/> <!--  2  : G#2 -->
+    <mapping keycode="25" note="45"/> <!--  W  : A2  -->
+    <mapping keycode="39" note="46"/> <!--  S  : A#2 -->
+    <mapping keycode="53" note="47"/> <!--  X  : B2  -->
+    <!-- 3rd Column -->
+    <mapping keycode="69" note="46"/> <!-- F3  : A#2 -->
+    <mapping keycode="12" note="47"/> <!--  3  : B2  -->
+    <mapping keycode="26" note="48"/> <!--  E  : C3  -->
+    <mapping keycode="40" note="49"/> <!--  D  : C#3 -->
+    <mapping keycode="54" note="50"/> <!--  C  : D3  -->
+    <!-- 4th Column -->
+    <mapping keycode="70" note="49"/> <!-- F4  : C#3 -->
+    <mapping keycode="13" note="50"/> <!--  4  : D3  -->
+    <mapping keycode="27" note="51"/> <!--  R  : D#3 -->
+    <mapping keycode="41" note="52"/> <!--  F  : E3  -->
+    <mapping keycode="55" note="53"/> <!--  V  : F3  -->
+    <!-- 5th Column -->
+    <mapping keycode="71" note="52"/> <!-- F5  : E3  -->
+    <mapping keycode="14" note="53"/> <!--  5  : F3  -->
+    <mapping keycode="28" note="54"/> <!--  T  : F#3 -->
+    <mapping keycode="42" note="55"/> <!--  G  : G3  -->
+    <mapping keycode="56" note="56"/> <!--  B  : G#3 -->
+    <!-- 6th Column -->
+    <mapping keycode="72" note="55"/> <!-- F6  : G3  -->
+    <mapping keycode="15" note="56"/> <!--  6  : G#3 -->
+    <mapping keycode="29" note="57"/> <!--  Y  : A3  -->
+    <mapping keycode="43" note="58"/> <!--  H  : A#3 -->
+    <mapping keycode="57" note="59"/> <!--  N  : B3  -->
+    <!-- 7th Column -->
+    <mapping keycode="73" note="58"/> <!-- F7  : A#3 -->
+    <mapping keycode="16" note="59"/> <!--  7  : B3  -->
+    <mapping keycode="30" note="60"/> <!--  U  : C4  -->
+    <mapping keycode="44" note="61"/> <!--  J  : C#4 -->
+    <mapping keycode="58" note="62"/> <!--  M  : D4  -->
+    <!-- 8th Column -->
+    <mapping keycode="74" note="61"/> <!-- F8  : C#4 -->
+    <mapping keycode="17" note="62"/> <!--  8  : D4  -->
+    <mapping keycode="31" note="63"/> <!--  I  : D#4 -->
+    <mapping keycode="45" note="64"/> <!--  K  : E4  -->
+    <mapping keycode="59" note="65"/> <!--  ,  : F4  -->
+    <!-- 9th Column -->
+    <mapping keycode="75" note="64"/> <!-- F9  : E4  -->
+    <mapping keycode="18" note="65"/> <!--  9  : F4  -->
+    <mapping keycode="32" note="66"/> <!--  O  : F#4 -->
+    <mapping keycode="46" note="67"/> <!--  L  : G4  -->
+    <mapping keycode="60" note="68"/> <!--  .  : G#4 -->
+    <!-- 10th Column -->
+    <mapping keycode="76" note="67"/> <!-- F10 : G4  -->
+    <mapping keycode="19" note="68"/> <!--  0  : G#4 -->
+    <mapping keycode="33" note="69"/> <!--  P  : A4  -->
+    <mapping keycode="47" note="70"/> <!--  ;  : A#4 -->
+    <mapping keycode="61" note="71"/> <!--  /  : B4  -->
+    <!-- 11th Column -->
+    <mapping keycode="95" note="70"/> <!-- F11 : A#4   -->
+    <mapping keycode="20" note="71"/> <!--  -  : B4    -->
+    <mapping keycode="34" note="72"/> <!--  [  : C5    -->
+    <mapping keycode="48" note="73"/> <!--  "  : C#5   -->
+    <mapping keycode="62" note="74"/> <!--  Shift : D5 -->
+    <!-- 12th Column -->
+    <mapping keycode="96" note="73"/> <!-- F12 : C#5   -->
+    <mapping keycode="21" note="74"/> <!--  +  : D5    -->
+    <mapping keycode="35" note="75"/> <!--  ]  : D#5   -->
+    <mapping keycode="51" note="76"/> <!--  \ : E5  for laptop -->
+    <mapping keycode="36" note="76"/> <!--  Enter : E5 -->
+</rawkeymap>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

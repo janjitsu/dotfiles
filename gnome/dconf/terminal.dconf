@@ -1,0 +1,17 @@
+[legacy/profiles:]
+default='b86f446e-38ab-47c7-86cd-de32559ba8e3'
+list=['b86f446e-38ab-47c7-86cd-de32559ba8e3']
+
+[legacy/profiles:/:b86f446e-38ab-47c7-86cd-de32559ba8e3]
+audible-bell=false
+background-color='rgb(23,20,33)'
+custom-command='/usr/bin/zsh'
+default-size-columns=91
+default-size-rows=101
+font='Meslo LG M DZ for Powerline Bold 10'
+foreground-color='rgb(208,207,204)'
+login-shell=true
+use-custom-command=true
+use-system-font=false
+use-theme-colors=false
+visible-name='janjitsu'

@@ -1,0 +1,435 @@
+[a11y]
+always-show-universal-access-status=true
+
+[a11y/applications]
+screen-magnifier-enabled=false
+
+[a11y/interface]
+high-contrast=false
+
+[a11y/keyboard]
+mousekeys-enable=false
+stickykeys-enable=false
+
+[a11y/magnifier]
+cross-hairs-thickness=7
+lens-mode=false
+mouse-tracking='proportional'
+screen-position='right-half'
+show-cross-hairs=true
+
+[app-folders]
+folder-children=['Utilities', 'YaST']
+
+[app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
+
+[app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[background]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///home/janjitsu/Downloads/Deletar/background-naca-top-down.png'
+picture-uri-dark='file:///usr/share/backgrounds/jj_dark_by_Hiking93.jpg'
+primary-color='#000000'
+secondary-color='#000000'
+
+[calendar]
+show-weekdate=false
+
+[datetime]
+automatic-timezone=false
+
+[input-sources]
+mru-sources=[('xkb', 'us+colemak'), ('xkb', 'me+cyrillic'), ('xkb', 'us'), ('xkb', 'latam+colemak-gaming')]
+per-window=false
+sources=[('xkb', 'me+cyrillic'), ('xkb', 'us+colemak'), ('xkb', 'us'), ('xkb', 'latam+colemak-gaming')]
+xkb-options=['caps:backspace']
+
+[interface]
+color-scheme='prefer-dark'
+cursor-size=96
+document-font-name='Sans 10'
+enable-hot-corners=true
+font-hinting='none'
+font-name='Ubuntu 10'
+gtk-theme='Yaru-magenta-dark'
+icon-theme='Yaru-magenta'
+monospace-font-name='Ubuntu Mono 12'
+show-battery-percentage=true
+text-scaling-factor=1.1499999999999999
+toolkit-accessibility=true
+
+[notifications]
+application-children=['snap-store-ubuntu-software', 'gnome-power-panel', 'spotify-spotify', 'gnome-control-center', 'io-snapcraft-sessionagent', 'google-chrome', 'org-gnome-evolution-alarm-notify', 'obs-studio-obs-studio', 'xdg-desktop-portal-gnome', 'pavucontrol', 'org-gnome-nautilus', 'snap-store-snap-store', 'slack-slack', 'apport-gtk', 'vlc-vlc', 'org-gnome-software', 'com-getpostman-postman', 'gimp-gimp', 'org-gnome-baobab', 'update-manager', 'chrome-mdpkiolbdkhdjpekfbkbmhigcaggjagi-default', 'org-gnome-terminal', 'org-gnome-pomodoro', 'gnome-datetime-panel', 'gnome-network-panel', 'transmission-gtk', 'org-gnome-dejadup', 'firefox-firefox', 'org-gnome-shell-extensions', 'audacity', 'org-gnome-eog', 'forticlient', 'org-gnome-evince', 'org-gnome-totem', 'com-vixalien-sticky', 'org-gnome-gedit', 'surfshark', 'solaar', 'dbeaver-ce-dbeaver-ce', 'gimp', 'ardour', 'com-obsproject-studio', 'org-gnome-fileroller', 'com-mattjakeman-extensionmanager-desktop', 'com-playonlinux-playonlinux4', 'gvim', 'org-gnome-calculator', 'gparted', 'mountable-volume-f423a005-e3f8-41a7-9d13-979e66ac3710', 'org-gnome-diskutility', 'wine-programs-stardew-valley-gog-com-stardew-valley', 'mountable-volume-46d642b720112526', 'mountable-volume-a8f8f228-ab5c-4307-889d-2d6443cfb801', 'spotify', 'thunderbird', 'mountable-volume-e7b7-614b', 'mountable-volume-0123-4567', 'wine-programs-infogrames-interactive-rollercoaster-tycoon-2-rollercoaster-tycoon-2', 'gnome-printers-panel', 'org-gnome-calendar', 'postman', 'display-im6-q16', 'calibre-gui', 'indicator-stickynotes', 'viber', 'vlc', 'org-gnome-tweaks', 'youtube-to-mp3', 'libreoffice-writer', 'vmpk', 'calibre-ebook-edit', 'calibre-ebook-viewer', 'libreoffice-calc', 'antigravity', 'com-github-wwmm-pulseeffects', 'cemu']
+show-banners=true
+
+[notifications/application/antigravity]
+application-id='antigravity.desktop'
+
+[notifications/application/apport-gtk]
+application-id='apport-gtk.desktop'
+
+[notifications/application/ardour]
+application-id='ardour.desktop'
+
+[notifications/application/audacity]
+application-id='audacity.desktop'
+
+[notifications/application/calibre-ebook-edit]
+application-id='calibre-ebook-edit.desktop'
+
+[notifications/application/calibre-ebook-viewer]
+application-id='calibre-ebook-viewer.desktop'
+
+[notifications/application/calibre-gui]
+application-id='calibre-gui.desktop'
+
+[notifications/application/cemu]
+application-id='cemu.desktop'
+
+[notifications/application/chrome-mdpkiolbdkhdjpekfbkbmhigcaggjagi-default]
+application-id='chrome-mdpkiolbdkhdjpekfbkbmhigcaggjagi-Default.desktop'
+
+[notifications/application/com-getpostman-postman]
+application-id='com.getpostman.Postman.desktop'
+
+[notifications/application/com-github-wwmm-pulseeffects]
+application-id='com.github.wwmm.pulseeffects.desktop'
+
+[notifications/application/com-mattjakeman-extensionmanager-desktop]
+application-id='com.mattjakeman.ExtensionManager.desktop.desktop'
+
+[notifications/application/com-obsproject-studio]
+application-id='com.obsproject.Studio.desktop'
+
+[notifications/application/com-playonlinux-playonlinux4]
+application-id='com.playonlinux.PlayOnLinux4.desktop'
+
+[notifications/application/com-vixalien-sticky]
+application-id='com.vixalien.sticky.desktop'
+
+[notifications/application/dbeaver-ce-dbeaver-ce]
+application-id='dbeaver-ce_dbeaver-ce.desktop'
+
+[notifications/application/display-im6-q16]
+application-id='display-im6.q16.desktop'
+
+[notifications/application/firefox-firefox]
+application-id='firefox_firefox.desktop'
+
+[notifications/application/forticlient]
+application-id='forticlient.desktop'
+
+[notifications/application/gimp-gimp]
+application-id='gimp_gimp.desktop'
+
+[notifications/application/gimp]
+application-id='gimp.desktop'
+
+[notifications/application/gnome-control-center]
+application-id='gnome-control-center.desktop'
+
+[notifications/application/gnome-datetime-panel]
+application-id='gnome-datetime-panel.desktop'
+
+[notifications/application/gnome-network-panel]
+application-id='gnome-network-panel.desktop'
+
+[notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
+[notifications/application/gnome-printers-panel]
+application-id='gnome-printers-panel.desktop'
+
+[notifications/application/google-chrome]
+application-id='google-chrome.desktop'
+enable=true
+force-expanded=false
+
+[notifications/application/gparted]
+application-id='gparted.desktop'
+
+[notifications/application/gvim]
+application-id='gvim.desktop'
+
+[notifications/application/indicator-stickynotes]
+application-id='indicator-stickynotes.desktop'
+
+[notifications/application/io-snapcraft-sessionagent]
+application-id='io.snapcraft.SessionAgent.desktop'
+
+[notifications/application/libreoffice-calc]
+application-id='libreoffice-calc.desktop'
+
+[notifications/application/libreoffice-writer]
+application-id='libreoffice-writer.desktop'
+
+[notifications/application/mountable-volume-0123-4567]
+application-id='mountable-volume:0123-4567.desktop'
+
+[notifications/application/mountable-volume-46d642b720112526]
+application-id='mountable-volume:46D642B720112526.desktop'
+
+[notifications/application/mountable-volume-a8f8f228-ab5c-4307-889d-2d6443cfb801]
+application-id='mountable-volume:a8f8f228-ab5c-4307-889d-2d6443cfb801.desktop'
+
+[notifications/application/mountable-volume-e7b7-614b]
+application-id='mountable-volume:E7B7-614B.desktop'
+
+[notifications/application/mountable-volume-f423a005-e3f8-41a7-9d13-979e66ac3710]
+application-id='mountable-volume:f423a005-e3f8-41a7-9d13-979e66ac3710.desktop'
+
+[notifications/application/obs-studio-obs-studio]
+application-id='obs-studio_obs-studio.desktop'
+
+[notifications/application/org-gnome-baobab]
+application-id='org.gnome.baobab.desktop'
+
+[notifications/application/org-gnome-calculator]
+application-id='org.gnome.Calculator.desktop'
+
+[notifications/application/org-gnome-calendar]
+application-id='org.gnome.Calendar.desktop'
+
+[notifications/application/org-gnome-dejadup]
+application-id='org.gnome.DejaDup.desktop'
+
+[notifications/application/org-gnome-diskutility]
+application-id='org.gnome.DiskUtility.desktop'
+
+[notifications/application/org-gnome-eog]
+application-id='org.gnome.eog.desktop'
+
+[notifications/application/org-gnome-evince]
+application-id='org.gnome.Evince.desktop'
+
+[notifications/application/org-gnome-evolution-alarm-notify]
+application-id='org.gnome.Evolution-alarm-notify.desktop'
+
+[notifications/application/org-gnome-fileroller]
+application-id='org.gnome.FileRoller.desktop'
+
+[notifications/application/org-gnome-gedit]
+application-id='org.gnome.gedit.desktop'
+
+[notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
+[notifications/application/org-gnome-pomodoro]
+application-id='org.gnome.Pomodoro.desktop'
+
+[notifications/application/org-gnome-shell-extensions]
+application-id='org.gnome.Shell.Extensions.desktop'
+
+[notifications/application/org-gnome-software]
+application-id='org.gnome.Software.desktop'
+
+[notifications/application/org-gnome-terminal]
+application-id='org.gnome.Terminal.desktop'
+
+[notifications/application/org-gnome-totem]
+application-id='org.gnome.Totem.desktop'
+
+[notifications/application/org-gnome-tweaks]
+application-id='org.gnome.tweaks.desktop'
+
+[notifications/application/pavucontrol]
+application-id='pavucontrol.desktop'
+
+[notifications/application/postman]
+application-id='postman.desktop'
+
+[notifications/application/slack-slack]
+application-id='slack_slack.desktop'
+
+[notifications/application/snap-store-snap-store]
+application-id='snap-store_snap-store.desktop'
+
+[notifications/application/snap-store-ubuntu-software]
+application-id='snap-store_ubuntu-software.desktop'
+
+[notifications/application/solaar]
+application-id='solaar.desktop'
+
+[notifications/application/spotify-spotify]
+application-id='spotify_spotify.desktop'
+
+[notifications/application/spotify]
+application-id='spotify.desktop'
+
+[notifications/application/surfshark]
+application-id='surfshark.desktop'
+
+[notifications/application/thunderbird]
+application-id='thunderbird.desktop'
+
+[notifications/application/transmission-gtk]
+application-id='transmission-gtk.desktop'
+
+[notifications/application/update-manager]
+application-id='update-manager.desktop'
+
+[notifications/application/viber]
+application-id='viber.desktop'
+
+[notifications/application/vlc-vlc]
+application-id='vlc_vlc.desktop'
+
+[notifications/application/vlc]
+application-id='vlc.desktop'
+
+[notifications/application/vmpk]
+application-id='vmpk.desktop'
+
+[notifications/application/wine-programs-infogrames-interactive-rollercoaster-tycoon-2-rollercoaster-tycoon-2]
+application-id='wine-Programs-Infogrames Interactive-RollerCoaster Tycoon 2-RollerCoaster Tycoon 2.desktop'
+
+[notifications/application/wine-programs-stardew-valley-gog-com-stardew-valley]
+application-id='wine-Programs-Stardew Valley [GOG.com]-Stardew Valley.desktop'
+
+[notifications/application/xdg-desktop-portal-gnome]
+application-id='xdg-desktop-portal-gnome.desktop'
+
+[notifications/application/youtube-to-mp3]
+application-id='youtube-to-mp3.desktop'
+
+[peripherals/keyboard]
+delay=uint32 170
+numlock-state=true
+repeat-interval=uint32 10
+
+[peripherals/mouse]
+accel-profile='adaptive'
+left-handed=false
+speed=1.0
+
+[peripherals/touchpad]
+edge-scrolling-enabled=false
+natural-scroll=false
+speed=0.20588235294117641
+tap-to-click=true
+two-finger-scrolling-enabled=true
+
+[privacy]
+report-technical-problems=true
+
+[remote-desktop/rdp]
+enable=true
+tls-cert='/home/janjitsu/.local/share/gnome-remote-desktop/rdp-tls.crt'
+tls-key='/home/janjitsu/.local/share/gnome-remote-desktop/rdp-tls.key'
+
+[remote-desktop/vnc]
+enable=false
+
+[screensaver]
+color-shading-type='solid'
+lock-delay=uint32 0
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/jj_dark_by_Hiking93.jpg'
+primary-color='#000000'
+secondary-color='#000000'
+
+[session]
+idle-delay=uint32 300
+
+[sound]
+event-sounds=true
+theme-name='__custom'
+
+[wm/keybindings]
+activate-window-menu=['<Alt>space']
+always-on-top=@as []
+begin-move=['<Alt>F7']
+begin-resize=['<Alt>F8']
+close=['<Alt>F4']
+cycle-group=['<Alt>F6']
+cycle-group-backward=['<Shift><Alt>F6']
+cycle-panels=['<Control><Alt>Escape']
+cycle-panels-backward=['<Shift><Control><Alt>Escape']
+cycle-windows=['<Alt>Escape']
+cycle-windows-backward=['<Shift><Alt>Escape']
+lower=@as []
+maximize=['<Super>Up']
+maximize-horizontally=@as []
+maximize-vertically=@as []
+minimize=@as []
+move-to-center=@as []
+move-to-corner-ne=@as []
+move-to-corner-nw=@as []
+move-to-corner-se=@as []
+move-to-corner-sw=@as []
+move-to-monitor-down=['<Super><Shift>Down']
+move-to-monitor-left=['<Super><Shift>Left']
+move-to-monitor-right=['<Super><Shift>Right']
+move-to-monitor-up=['<Super><Shift>Up']
+move-to-side-e=@as []
+move-to-side-n=@as []
+move-to-side-s=@as []
+move-to-side-w=@as []
+move-to-workspace-1=['<Super><Shift>Home']
+move-to-workspace-10=@as []
+move-to-workspace-11=@as []
+move-to-workspace-12=@as []
+move-to-workspace-2=@as []
+move-to-workspace-3=@as []
+move-to-workspace-4=@as []
+move-to-workspace-5=@as []
+move-to-workspace-6=@as []
+move-to-workspace-7=@as []
+move-to-workspace-8=@as []
+move-to-workspace-9=@as []
+move-to-workspace-down=['<Super><Shift>Page_Down', '<Control><Shift><Alt>Down']
+move-to-workspace-last=['<Super><Shift>End']
+move-to-workspace-left=['<Control><Shift><Alt>Left']
+move-to-workspace-right=['<Control><Shift><Alt>Right']
+move-to-workspace-up=['<Super><Shift>Page_Up', '<Control><Shift><Alt>Up']
+panel-main-menu=['<Alt>F1']
+panel-run-dialog=['<Alt>F2']
+raise=@as []
+raise-or-lower=@as []
+set-spew-mark=@as []
+show-desktop=['<Primary><Super>d', '<Primary><Alt>d', '<Super>d']
+switch-applications=['<Super>Tab']
+switch-applications-backward=['<Shift><Super>Tab']
+switch-group=['<Super>Above_Tab', '<Alt>Above_Tab']
+switch-group-backward=['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']
+switch-input-source=['<Super>space', 'XF86Keyboard']
+switch-input-source-backward=['<Shift><Super>space', '<Shift>XF86Keyboard']
+switch-panels=['<Control><Alt>Tab']
+switch-panels-backward=['<Shift><Control><Alt>Tab']
+switch-to-workspace-1=['<Super>Home']
+switch-to-workspace-10=@as []
+switch-to-workspace-11=@as []
+switch-to-workspace-12=@as []
+switch-to-workspace-2=@as []
+switch-to-workspace-3=@as []
+switch-to-workspace-4=@as []
+switch-to-workspace-5=@as []
+switch-to-workspace-6=@as []
+switch-to-workspace-7=@as []
+switch-to-workspace-8=@as []
+switch-to-workspace-9=@as []
+switch-to-workspace-down=@as []
+switch-to-workspace-last=['<Super>End']
+switch-to-workspace-left=['<Super>h']
+switch-to-workspace-right=['<Super>u']
+switch-to-workspace-up=@as []
+switch-windows=['<Alt>Tab']
+switch-windows-backward=['<Shift><Alt>Tab']
+toggle-above=@as []
+toggle-fullscreen=@as []
+toggle-maximized=['<Alt>F10']
+toggle-on-all-workspaces=@as []
+toggle-shaded=@as []
+unmaximize=['<Super>Down', '<Alt>F5']
+
+[wm/preferences]
+focus-mode='sloppy'
+titlebar-font='Ubuntu Bold 10'
