@@ -14,7 +14,6 @@ sudo add-apt-repository ppa:touchegg/stable -y
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7EA12677D47B593CE22727D4C0FCE32AF6B96252
 sudo apt update
 sudo apt install -y touchegg
-mkdir -p ~/.config/touchegg && ln -s ~/dotfiles/touchegg.conf ~/.config/touchegg/touchegg.conf
 
 #@TODO - setup daemon
 
