@@ -26,7 +26,7 @@ if [ -d "$DOTFILES_DIR" ]; then
     mv "$DOTFILES_DIR" "${DOTFILES_DIR}.bak.$(date +%s)"
 fi
 
-TMP_FILE=$(mktemp /tmp/dotfiles-XXXXXX.tar.gz)
+TMP_FILE=$(mktemp /tmp/dotfiles-XXXXXX)
 curl -fsSL -o "$TMP_FILE" "$TARBALL_URL"
 
 # GitHub tarballs extract to repo-branch/, move to ~/dotfiles
