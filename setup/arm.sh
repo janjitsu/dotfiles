@@ -12,7 +12,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "=== ARM Setup ==="
 
-bash "$DIR/arm/deps-apt.sh"
+bash "$DIR/arm/deps.sh"
 bash "$DIR/arm/symlinks.sh"
 bash "$DIR/common/vim-plugins.sh"
 bash "$DIR/common/tmux-plugins.sh"
