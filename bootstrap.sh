@@ -5,13 +5,13 @@
 # Downloads the repo as a tarball from GitHub and runs setup.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/master/bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/main/bootstrap.sh | bash
 ############################
 
 set -euo pipefail
 
 REPO="janjitsu/dotfiles"
-BRANCH="master"
+BRANCH="main"
 DOTFILES_DIR="$HOME/dotfiles"
 TARBALL_URL="https://github.com/$REPO/archive/refs/heads/$BRANCH.tar.gz"
 
@@ -32,7 +32,7 @@ curl -fsSL -o "$TMP_FILE" "$TARBALL_URL"
 # GitHub tarballs extract to repo-branch/, move to ~/dotfiles
 TMP_EXTRACT=$(mktemp -d /tmp/dotfiles-extract-XXXXXX)
 tar -xzf "$TMP_FILE" -C "$TMP_EXTRACT"
-mv "$TMP_EXTRACT"/dotfiles-"$BRANCH" "$DOTFILES_DIR"
+mv "$TMP_EXTRACT"/*/ "$DOTFILES_DIR"
 rm -rf "$TMP_FILE" "$TMP_EXTRACT"
 
 echo "  → Extracted to $DOTFILES_DIR"

@@ -7,7 +7,7 @@ One command on a fresh machine sets up everything — packages, configs, desktop
 ## Quick Start
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/master/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/main/bootstrap.sh | bash
 ```
 
 No git required. The bootstrap downloads the repo as a tarball, runs setup, then initializes git for future updates.
