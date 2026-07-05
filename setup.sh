@@ -1,46 +1,20 @@
 #!/bin/bash
 ############################
 # setup.sh
-# Main entry point for dotfiles setup.
-# Detects the distro and runs the appropriate scripts.
+# Detects the environment and delegates to the appropriate setup orchestrator.
 ############################
 
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# ——— Distro-specific packages ———
-if command -v apt-get >/dev/null; then
+# aarch64 means we're on an Android device — either native Termux or a
+# proot-distro container (e.g. slim Ubuntu server). Both get the lean setup:
+# no desktop apps, no GNOME, no GUI fonts.
+if [[ "$(uname -m)" == aarch64 ]]; then
+    "$DIR/setup/arm.sh"
+elif command -v apt-get >/dev/null; then
     "$DIR/setup/ubuntu.sh"
 elif command -v dnf >/dev/null; then
     "$DIR/setup/fedora.sh"
 fi
-
-# ——— Shell setup ———
-chsh -s /usr/bin/zsh $USER
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
-
-# Powerline fonts for gnome-terminal
-git clone https://github.com/powerline/fonts.git --depth=1
-./fonts/install.sh
-rm -rf fonts
-
-# ——— Symlinks ———
-"$DIR/setup/symlinks.sh"
-
-# ——— Common tools ———
-"$DIR/setup/common.sh"
-
-# ——— Vim/Neovim plugins ———
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim +PlugInstall +qa
-
-# ——— Tmux plugins ———
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-bash ~/.tmux/plugins/tpm/bin/install_plugins
-
-# ——— Desktop apps ———
-"$DIR/setup/apps.sh"
-
-source ~/.bashrc

@@ -177,6 +177,10 @@ nnoremap <C-l> <C-w>l
 
 " change leader key (default is \)
 let mapleader = ','
+" Space as a secondary leader — easier to reach on Termux; all , mappings work with Space too
+nmap <Space> <leader>
+" longer timeout for virtual keyboards
+set timeoutlen=2000
 
 " reselect just pasted text
 nnoremap <leader>v V`]
@@ -215,6 +219,8 @@ let NERDTreeWinSize=35
 autocmd VimEnter * nmap <F3> :NERDTreeToggle<CR>
 autocmd VimEnter * imap <F3> <Esc>:NERDTreeToggle<CR>a
 autocmd VimEnter * nmap <F4> :NERDTreeFind<CR>
+nnoremap <leader>3 :NERDTreeToggle<CR>
+nnoremap <leader>4 :NERDTreeFind<CR>
 
 """" Emmet
 let g:user_emmet_leader_key=','
