@@ -38,7 +38,7 @@ bootstrap.sh
 
 | Flag | Effect |
 |------|--------|
-| `--no-desktop` | Skips `setup/apps.sh` (no IntelliJ, Postman, VMPK, Ardour, …) — useful for servers/VMs |
+| `--no-desktop` | Skips `setup/{ubuntu,fedora}/desktop/*.sh` (GUI-only packages: calibre, GIMP, VLC, GNOME Tweaks, PulseEffects/EasyEffects, Guake, touchegg, …) and `setup/apps.sh` (IntelliJ, Postman, VMPK, Ardour) — useful for servers/VMs |
 
 #### ARM (Termux / proot-distro)
 
@@ -68,7 +68,9 @@ dotfiles/
 │   ├── apps.sh              # Runs all setup/apps/*.sh
 │   ├── symlinks.sh          # All symlink operations
 │   ├── ubuntu/              # apt-based installs (one script per tool)
+│   │   └── desktop/         # GUI-only packages, skipped by --no-desktop
 │   ├── fedora/              # dnf-based installs (mirrors ubuntu/)
+│   │   └── desktop/         # GUI-only packages, skipped by --no-desktop
 │   ├── arm/                 # deps (apk/apt/pkg) + symlinks for aarch64
 │   ├── common/              # Distro-agnostic (nvim, go, node, kanata)
 │   └── apps/                # Desktop apps (idea, postman, vmpk, ardour)

@@ -13,14 +13,17 @@ Personal dotfiles repo for a GNOME desktop running on Ubuntu (primary) and Fedor
 `bootstrap.sh` downloads the repo as a tarball (no git needed), then runs `setup.sh` which orchestrates:
 
 1. **Distro packages** — `setup/ubuntu.sh` or `setup/fedora.sh` (auto-detected)
-2. **Symlinks** — `setup/symlinks.sh` creates all config symlinks
-3. **Common tools** — `setup/common.sh` (nvim, go, node, kanata)
-4. **Desktop apps** — `setup/apps.sh` (IntelliJ, Postman, VMPK)
-5. **GNOME restore** — `backup/gnome.sh restore`
+2. **Desktop-only distro packages** — `setup/ubuntu/desktop/*.sh` or `setup/fedora/desktop/*.sh`, skipped when `--no-desktop` is passed
+3. **Symlinks** — `setup/symlinks.sh` creates all config symlinks
+4. **Common tools** — `setup/common.sh` (nvim, go, node, kanata)
+5. **Desktop apps** — `setup/apps.sh` (IntelliJ, Postman, VMPK), also skipped by `--no-desktop`
+6. **GNOME restore** — `backup/gnome.sh restore`
+
+`setup.sh` parses `--no-desktop` and exports `NO_DESKTOP`; `ubuntu.sh`/`fedora.sh` read it (defaulting to `false` via `${NO_DESKTOP:-false}`) to decide whether to run the `desktop/` subfolder and `apps.sh`.
 
 ### Orchestrator Pattern
 
-`setup/ubuntu.sh`, `setup/fedora.sh`, `setup/common.sh`, and `setup/apps.sh` are generic runners — they glob `*.sh` in their respective folders. To add a new tool, drop a script in the folder.
+`setup/ubuntu.sh`, `setup/fedora.sh`, `setup/common.sh`, and `setup/apps.sh` are generic runners — they glob `*.sh` in their respective folders. To add a new tool, drop a script in the folder. Within `setup/ubuntu/` and `setup/fedora/`, packages that need a display/GUI (GNOME apps, media players, tray utilities, etc.) go in the `desktop/` subfolder so `--no-desktop` skips them; CLI/headless-safe tools (and anything another common script depends on, like `pip.sh`) stay in the folder root and always run.
 
 ### Config Management
 

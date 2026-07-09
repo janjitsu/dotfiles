@@ -17,6 +17,16 @@ for script in "$DIR/fedora"/*.sh; do
     bash "$script"
 done
 
+# ——— Desktop-only distro packages ———
+if [[ "$NO_DESKTOP" == true ]]; then
+    echo "→ Skipping desktop packages (--no-desktop)"
+else
+    for script in "$DIR/fedora/desktop"/*.sh; do
+        echo "→ $(basename "$script")..."
+        bash "$script"
+    done
+fi
+
 # ——— Common steps (ordered) ———
 bash "$DIR/common/zsh.sh"
 bash "$DIR/common/fonts.sh"
