@@ -14,7 +14,7 @@ Personal dotfiles repo for a GNOME desktop running on Ubuntu (primary) and Fedor
 
 1. **Distro packages** — `setup/ubuntu.sh` or `setup/fedora.sh` (auto-detected)
 2. **Symlinks** — `setup/symlinks.sh` creates all config symlinks
-3. **Common tools** — `setup/common.sh` (nvim, go, docker, node, kanata)
+3. **Common tools** — `setup/common.sh` (nvim, go, node, kanata)
 4. **Desktop apps** — `setup/apps.sh` (IntelliJ, Postman, VMPK)
 5. **GNOME restore** — `backup/gnome.sh restore`
 
@@ -36,7 +36,7 @@ Located in `backup/`, using subcommand pattern (`backup` / `restore`):
 
 ### Distro Support
 
-Ubuntu and Fedora are both supported. Each has its own folder under `setup/` with equivalent scripts. Key package name differences:
+Ubuntu and Fedora are both supported. Each has its own folder under `setup/` with equivalent scripts. Anything that branches on package manager (e.g. `docker.sh`, `ctags.sh`) belongs in `setup/ubuntu/` and `setup/fedora/` as separate per-distro scripts, not in `setup/common/` — `common/` is reserved for scripts that run the same commands regardless of distro. Key package name differences:
 - `ack-grep` (Ubuntu) → `ack` (Fedora)
 - `silversearcher-ag` → `the_silver_searcher`
 - `exuberant-ctags` → `ctags`

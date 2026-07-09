@@ -70,7 +70,7 @@ dotfiles/
 │   ├── ubuntu/              # apt-based installs (one script per tool)
 │   ├── fedora/              # dnf-based installs (mirrors ubuntu/)
 │   ├── arm/                 # deps (apk/apt/pkg) + symlinks for aarch64
-│   ├── common/              # Distro-agnostic (nvim, go, docker, node, kanata)
+│   ├── common/              # Distro-agnostic (nvim, go, node, kanata)
 │   └── apps/                # Desktop apps (idea, postman, vmpk, ardour)
 │
 ├── backup/
@@ -312,7 +312,7 @@ sudo ./scripts/fix-nvme-sleep.sh        # Fix NVMe sleep issues
 
 ### Other
 - [ ] Kanata: install binary to `/usr/local/bin` instead of `~/Programs`
-- [ ] Move old `scripts/docker.sh` to `setup/common/docker.sh` (already done, clean up old)
+- [ ] Clean up leftover `scripts/docker/php.sh` (superseded by `setup/common/php82-docker.sh`)
 - [ ] Add a `setup/desktop/cemu.sh` for the Wii emulator (desktop file exists, no setup script)
 - [ ] Consolidate the gnome/ and backup/ todo files into this one
 - [ ] Add health check script that verifies all symlinks and services are in place
