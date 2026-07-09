@@ -5,6 +5,10 @@ tar xvz
 
 mv go ~/.go
 
+# shellrc adds ~/.go/bin to PATH for future shells, but this script needs
+# the `go` binary right now to install the tools below
+export PATH="$HOME/.go/bin:$PATH"
+
 # go tools
 #
 # glow markdown cli reader

@@ -5,3 +5,4 @@ sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
 rm nvim-linux-x86_64.tar.gz
 sudo mv /opt/nvim-linux-x86_64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/vim
+sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim

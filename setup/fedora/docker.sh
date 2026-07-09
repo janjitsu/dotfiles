@@ -16,7 +16,9 @@ sudo dnf remove -y docker \
   docker-engine
 
 sudo dnf -y install dnf-plugins-core
-sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+# DNF5 (Fedora 41+) replaced `config-manager --add-repo <url>` with the
+# `addrepo` subcommand; the old flag just errors out with dnf5.
+sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo usermod -aG docker $USER

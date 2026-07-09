@@ -47,5 +47,10 @@ else
     bash "$DIR/apps.sh"
 fi
 
+# bashrc's `[ -z "$PS1" ] && return` guard trips "unbound variable" under
+# set -u when sourced non-interactively (PS1 usually isn't exported even in
+# a real terminal) — relax -u just for this line
+set +u
 source ~/.bashrc
+set -u
 echo "=== Fedora setup complete ==="
