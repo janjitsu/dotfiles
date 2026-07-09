@@ -7,6 +7,7 @@
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+NO_DESKTOP="${NO_DESKTOP:-false}"
 
 echo "=== Fedora Setup ==="
 
@@ -32,7 +33,11 @@ bash "$DIR/common/vim-plugins.sh"
 bash "$DIR/common/tmux-plugins.sh"
 
 # ——— Desktop apps ———
-bash "$DIR/apps.sh"
+if [[ "$NO_DESKTOP" == true ]]; then
+    echo "→ Skipping desktop apps (--no-desktop)"
+else
+    bash "$DIR/apps.sh"
+fi
 
 source ~/.bashrc
 echo "=== Fedora setup complete ==="

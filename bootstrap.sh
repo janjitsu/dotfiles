@@ -6,6 +6,9 @@
 #
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/main/bootstrap.sh | bash
+#
+# Any arguments are forwarded to setup.sh, e.g.:
+#   curl -fsSL .../bootstrap.sh | bash -s -- --no-desktop
 ############################
 
 set -euo pipefail
@@ -40,7 +43,7 @@ echo "  → Extracted to $DOTFILES_DIR"
 # ——— Step 2: Run setup ———
 echo "[2/2] Running setup..."
 cd "$DOTFILES_DIR"
-bash setup.sh
+bash setup.sh "$@"
 
 # After setup, git is installed — init the repo so you can push/pull
 if command -v git &>/dev/null; then

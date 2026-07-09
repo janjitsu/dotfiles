@@ -8,6 +8,17 @@ set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# ——— Parse parameters ———
+# Parsed once here and exported so distro orchestrators just read the
+# variable instead of each re-parsing $@.
+NO_DESKTOP=false
+for arg in "$@"; do
+    case "$arg" in
+        --no-desktop) NO_DESKTOP=true ;;
+    esac
+done
+export NO_DESKTOP
+
 # aarch64 means we're on an Android device — either native Termux or a
 # proot-distro container (e.g. slim Ubuntu server). Both get the lean setup:
 # no desktop apps, no GNOME, no GUI fonts.
