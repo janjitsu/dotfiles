@@ -12,6 +12,12 @@ curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/main/bootstrap.sh
 
 No git required. The bootstrap downloads the repo as a tarball, runs setup, then initializes git for future updates.
 
+Skip desktop apps (e.g. servers, headless boxes, VMs) with `--no-desktop`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/janjitsu/dotfiles/main/bootstrap.sh | bash -s -- --no-desktop
+```
+
 ## How It Works
 
 ### Bootstrap Flow
@@ -27,6 +33,12 @@ bootstrap.sh
 ```
 
 `setup.sh` branches on `uname -m`: `aarch64` runs `setup/arm.sh`; everything else detects `apt-get`/`dnf` and runs the Ubuntu/Fedora flow.
+
+`setup.sh` also parses its own arguments once and exports them for the orchestrators it delegates to, so `ubuntu.sh`/`fedora.sh` just read the resulting variable instead of re-parsing `$@` themselves:
+
+| Flag | Effect |
+|------|--------|
+| `--no-desktop` | Skips `setup/apps.sh` (no IntelliJ, Postman, VMPK, Ardour, …) — useful for servers/VMs |
 
 #### ARM (Termux / proot-distro)
 
