@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal dotfiles and system setup automation for Ubuntu and Fedora workstations running GNOME.
+Personal dotfiles and system setup automation for Ubuntu and Fedora workstations running GNOME, plus a lean setup for ARM (Termux / proot-distro on Android).
 
 One command on a fresh machine sets up everything — packages, configs, desktop apps, GNOME extensions, keybindings — exactly how it was before.
 
@@ -19,10 +19,26 @@ No git required. The bootstrap downloads the repo as a tarball, runs setup, then
 ```
 bootstrap.sh
   └── setup.sh
-        ├── setup/ubuntu.sh  or  setup/fedora.sh   (distro packages)
+        ├── setup/arm.sh                             (aarch64: Termux / proot-distro — lean setup)
+        ├── setup/ubuntu.sh  or  setup/fedora.sh    (distro packages)
         ├── setup/symlinks.sh                       (dotfile symlinks)
         ├── setup/common.sh                         (distro-agnostic tools)
         └── setup/apps.sh                           (desktop apps)
+```
+
+`setup.sh` branches on `uname -m`: `aarch64` runs `setup/arm.sh`; everything else detects `apt-get`/`dnf` and runs the Ubuntu/Fedora flow.
+
+#### ARM (Termux / proot-distro)
+
+`aarch64` means an Android device — either native Termux or a proot-distro container (e.g. a slim Ubuntu or Alpine server running inside Termux). This gets a lean setup: dotfiles + Neovim + Tmux only, no desktop apps, fonts, or GNOME.
+
+```
+setup/arm.sh
+  ├── setup/arm/deps.sh        # detects package manager, delegates below
+  │     ├── deps-apk.sh        # Alpine (proot-distro), via apk
+  │     ├── deps-apt.sh        # Ubuntu (proot-distro), via apt-get
+  │     └── deps-pkg.sh        # native Termux, via pkg
+  └── setup/arm/symlinks.sh    # home dotfiles + nvim only
 ```
 
 ### Directory Structure
@@ -35,11 +51,13 @@ dotfiles/
 ├── setup/
 │   ├── ubuntu.sh            # Runs all setup/ubuntu/*.sh
 │   ├── fedora.sh            # Runs all setup/fedora/*.sh
+│   ├── arm.sh               # Lean orchestrator for aarch64 (Termux / proot-distro)
 │   ├── common.sh            # Runs all setup/common/*.sh
 │   ├── apps.sh              # Runs all setup/apps/*.sh
 │   ├── symlinks.sh          # All symlink operations
 │   ├── ubuntu/              # apt-based installs (one script per tool)
 │   ├── fedora/              # dnf-based installs (mirrors ubuntu/)
+│   ├── arm/                 # deps (apk/apt/pkg) + symlinks for aarch64
 │   ├── common/              # Distro-agnostic (nvim, go, docker, node, kanata)
 │   └── apps/                # Desktop apps (idea, postman, vmpk, ardour)
 │
@@ -81,6 +99,7 @@ dotfiles/
 - **dconf dump/load for GNOME.** GNOME settings live in a binary database, so we dump text files for version control and load them on restore.
 - **Desktop file templates.** `.desktop` files use `%USER%` placeholders, resolved at install time.
 - **Sensitive data stays out.** Backups go to `tmp/` (gitignored).
+- **ARM gets a lean subset, not a smaller version of the same thing.** `setup/arm.sh` only symlinks dotfiles + nvim and installs CLI deps — no desktop apps, fonts, or GNOME steps ever run there.
 
 ## Shell Architecture
 
@@ -286,4 +305,3 @@ sudo ./scripts/fix-nvme-sleep.sh        # Fix NVMe sleep issues
 - [ ] Consolidate the gnome/ and backup/ todo files into this one
 - [ ] Add health check script that verifies all symlinks and services are in place
 - [ ] Add `--dry-run` flag to setup.sh to preview what would be changed
-- [ ] Add Termux setup support (setup/termux/ exists but is minimal)

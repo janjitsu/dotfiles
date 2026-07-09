@@ -57,6 +57,7 @@ Ubuntu and Fedora are both supported. Each has its own folder under `setup/` wit
 
 ## Conventions
 
+- **Commit messages**: `type: description` — single-line subject, no body. `type` is one of `feat`, `fix`, or `chore` (no other types are used in this repo). Description is a short imperative phrase, lowercase after the colon (e.g. `fix: check for apk first`, `feat: add setup deps for alpine`, `chore: update readme`). No trailing period.
 - Scripts should be idempotent (safe to re-run)
 - Existing configs are backed up to `~/dotfiles_old/` before symlinking
 - Sensitive data goes to `tmp/` which is gitignored
