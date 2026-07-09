@@ -1,0 +1,9 @@
+.git
+tmp
+vim/bundle
+vim/plugged
+vim/autoload
+vim/tmp
+tmux/plugins
+tmux/resurrect
+tmux/tpm

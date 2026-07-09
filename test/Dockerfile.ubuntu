@@ -1,0 +1,24 @@
+############################
+# test/Dockerfile.ubuntu
+# Approximates a freshly-installed Ubuntu machine: systemd as PID 1 (so
+# `systemctl enable/start` calls in setup scripts actually work), plus the
+# baseline tools a real machine already has (sudo, curl, git).
+#
+# Built and run via test/test.sh — not meant to be used standalone.
+############################
+
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV USER=root
+ENV HOME=/root
+
+RUN apt-get update && \
+    apt-get install -y systemd systemd-sysv udev sudo curl git ca-certificates && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY . /root/dotfiles
+
+STOPSIGNAL SIGRTMIN+3
+VOLUME [ "/sys/fs/cgroup" ]
+CMD ["/sbin/init"]

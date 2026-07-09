@@ -1,0 +1,21 @@
+############################
+# test/Dockerfile.arm-ubuntu
+# Approximates a proot-distro Ubuntu container on ARM — the target for
+# setup/arm/deps-apt.sh. No real aarch64 emulation is available in this
+# environment, so this runs on the host's native architecture: it exercises
+# package-manager detection, the dependency install list, symlinks, and
+# vim/tmux plugin setup, not actual ARM binaries.
+#
+# Unlike the desktop Ubuntu test, setup/arm.sh never touches systemd, so
+# this container needs no --privileged/systemd bootstrapping.
+#
+# Built and run via test/test.sh — not meant to be used standalone.
+############################
+
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+COPY . /root/dotfiles
+
+CMD ["/bin/bash"]

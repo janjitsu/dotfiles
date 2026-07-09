@@ -1,0 +1,21 @@
+############################
+# test/Dockerfile.fedora
+# Approximates a freshly-installed Fedora machine: systemd as PID 1 (so
+# `systemctl enable/start` calls in setup scripts actually work), plus the
+# baseline tools a real machine already has (sudo, curl, git).
+#
+# Built and run via test/test.sh — not meant to be used standalone.
+############################
+
+FROM fedora:latest
+
+ENV USER=root
+ENV HOME=/root
+
+RUN dnf install -y systemd sudo curl git ca-certificates && dnf clean all
+
+COPY . /root/dotfiles
+
+STOPSIGNAL SIGRTMIN+3
+VOLUME [ "/sys/fs/cgroup" ]
+CMD ["/sbin/init"]
