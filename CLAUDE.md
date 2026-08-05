@@ -4,13 +4,13 @@ Project context for AI assistants working on this codebase.
 
 ## What This Is
 
-Personal dotfiles repo for a GNOME desktop running on Ubuntu (primary) and Fedora (secondary), plus a lean CLI-only setup for ARM (Termux / proot-distro on Android). Automates full system setup from a fresh install via a single bootstrap command.
+Personal dotfiles repo for a GNOME desktop running on Ubuntu (primary) and Fedora (secondary), a CLI/dev-tools-only setup for Arch/CachyOS (targets a low-memory handheld gaming PC, no GNOME), plus a lean CLI-only setup for ARM (Termux / proot-distro on Android). Automates full system setup from a fresh install via a single bootstrap command.
 
 ## Architecture
 
 ### Setup Flow
 
-`bootstrap.sh` downloads the repo as a tarball (no git needed), then runs `setup.sh`, which branches on `uname -m`: `aarch64` runs `setup/arm.sh` (lean path); everything else detects `apt-get`/`dnf` and runs the Ubuntu/Fedora flow:
+`bootstrap.sh` downloads the repo as a tarball (no git needed), then runs `setup.sh`, which branches on `uname -m`: `aarch64` runs `setup/arm.sh` (lean path); everything else detects `apt-get`/`dnf`/`pacman` and runs the Ubuntu/Fedora/Arch flow:
 
 1. **Distro packages** — `setup/ubuntu.sh` or `setup/fedora.sh` (auto-detected)
 2. **Desktop-only distro packages** — `setup/ubuntu/desktop/*.sh` or `setup/fedora/desktop/*.sh`, skipped when `--no-desktop` is passed
@@ -32,6 +32,18 @@ setup/arm.sh
   └── setup/arm/symlinks.sh    # home dotfiles + nvim only
 ```
 
+**Arch/CachyOS**: targets CachyOS Handheld Edition (Arch-based, KDE Plasma + gamescope session, no GNOME) on low-memory handheld hardware. CLI/dev-tools base only (mirrors the Ubuntu/Fedora non-GUI scripts) — no GNOME-specific pieces at all, since this platform never runs GNOME:
+
+```
+setup/arch.sh
+  ├── setup/arch/*.sh              # CLI/dev-tools base packages (glob, like ubuntu.sh)
+  ├── setup/arch/optional-apps.conf  # user-editable list of optional apps to install
+  │     └── setup/arch/optional/<name>.sh   # one script per optional app
+  └── setup/arch/symlinks.sh       # home dotfiles + nvim + htop only (trimmed, like arm/symlinks.sh)
+```
+
+Instead of the Ubuntu/Fedora `desktop/` + `--no-desktop` all-or-nothing split, Arch uses a **customizable optional-apps list**: `setup/arch/optional-apps.conf` is a plain-text file (one app name per line, `#` comments allowed) that `arch.sh` reads and runs the matching `setup/arch/optional/<name>.sh` for each entry. Add an app by dropping a script + a line in the conf; remove one by deleting/commenting its line — no orchestrator edits needed. `NO_DESKTOP=true` (from `--no-desktop`) skips the whole optional-apps loop, same as it skips `desktop/` on Ubuntu/Fedora. Ships seeded with only `obs-studio`, `ardour` (delegates to the existing `setup/apps/ardour.sh`), `vlc`, `transmission` (the `transmission-gtk` package, not `transmission-daemon`, to avoid an always-on background service), and `solaar`.
+
 ### Orchestrator Pattern
 
 `setup/ubuntu.sh`, `setup/fedora.sh`, `setup/common.sh`, and `setup/apps.sh` are generic runners — they glob `*.sh` in their respective folders. To add a new tool, drop a script in the folder. Within `setup/ubuntu/` and `setup/fedora/`, packages that need a display/GUI (GNOME apps, media players, tray utilities, etc.) go in the `desktop/` subfolder so `--no-desktop` skips them; CLI/headless-safe tools (and anything another common script depends on, like `pip.sh`) stay in the folder root and always run. `00-base.sh` in each is prefixed to always run first in the glob order — it does `apt update`/`dnf update` plus core CLI tools, and other scripts assume that already happened (e.g. `git` being available).
@@ -43,11 +55,12 @@ dotfiles/
 ├── setup.sh                 # Main entry point
 ├── bootstrap.sh              # Curl-friendly bootstrapper
 ├── setup/
-│   ├── ubuntu.sh / fedora.sh / arm.sh   # Per-platform orchestrators
+│   ├── ubuntu.sh / fedora.sh / arch.sh / arm.sh   # Per-platform orchestrators
 │   ├── common.sh             # Runs all setup/common/*.sh
 │   ├── apps.sh                # Runs all setup/apps/*.sh
 │   ├── symlinks.sh           # All symlink operations
 │   ├── ubuntu/, fedora/       # Per-tool install scripts (+ desktop/ subfolder, GUI-only)
+│   ├── arch/                  # CLI/dev-tools base + optional/ (customizable apps) + symlinks.sh
 │   ├── arm/                   # deps (apk/apt/pkg) + symlinks for aarch64
 │   ├── common/                 # Distro-agnostic (nvim, go, node, kanata, docker via common/php82-docker.sh)
 │   └── apps/                  # Desktop apps (idea, postman, vmpk, ardour)
@@ -113,6 +126,12 @@ Ubuntu and Fedora are both supported. Each has its own folder under `setup/` wit
 - OBS on Fedora needs RPM Fusion for ffmpeg
 - Fedora 41+ ships DNF5, which changed `dnf config-manager --add-repo <url>` to `dnf config-manager addrepo --from-repofile=<url>`
 - Debian/Ubuntu enforce PEP 668 (`externally-managed-environment`) on system `pip install`; needs `--break-system-packages`. Fedora doesn't enforce this.
+
+**Arch/CachyOS** (`setup/arch/`, CLI/dev-tools only — no `desktop/` subfolder or GNOME pieces at all): everything needed is a plain `pacman -S` package in official `extra` except `ack`, which is AUR-only — installed via `paru` (ships preinstalled on CachyOS). Notable simplifications vs Ubuntu/Fedora:
+- Arch's `ctags` package **is** universal-ctags directly — no from-source build like `setup/ubuntu/ctags.sh` needs
+- `docker`/`docker-compose`/`terraform`/`aws-cli-v2` are plain pacman packages, no custom repo/GPG-key setup (`setup/arch/awscli.sh` replaces `common/awscli.sh`'s pip install for this reason — it's per-distro, not common, per the rule above)
+- No snap/flatpak ships by default, so there's no `debloat.sh` equivalent
+- `transmission-gtk` (not `transmission-daemon`) is used deliberately to avoid an always-on background seeding service on a low-memory handheld
 
 ## Utility Scripts
 

@@ -28,4 +28,6 @@ elif command -v apt-get >/dev/null; then
     bash "$DIR/setup/ubuntu.sh"
 elif command -v dnf >/dev/null; then
     bash "$DIR/setup/fedora.sh"
+elif command -v pacman >/dev/null; then
+    bash "$DIR/setup/arch.sh"
 fi
