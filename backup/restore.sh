@@ -36,6 +36,12 @@ echo "=== Restore from backup ==="
 echo "Source: $BACKUP_ZIP"
 echo ""
 
+confirm() {
+    local prompt="$1"
+    read -r -p "$prompt [y/N] " reply
+    [[ "$reply" =~ ^[Yy]$ ]]
+}
+
 # Extract to temp dir
 TMP_DIR=$(mktemp -d)
 unzip -q "$BACKUP_ZIP" -d "$TMP_DIR"
@@ -50,85 +56,109 @@ fi
 
 # ——— SSH keys ———
 if [ -d "$BACKUP_DIR/ssh" ]; then
-    echo "[1/7] Restoring SSH keys..."
-    if [ -d "$HOME/.ssh" ]; then
-        echo "  ⚠  ~/.ssh already exists, merging..."
-        cp -rn "$BACKUP_DIR/ssh/"* "$HOME/.ssh/" 2>/dev/null || true
+    if confirm "[1/7] Restore SSH keys?"; then
+        if [ -d "$HOME/.ssh" ]; then
+            echo "  ⚠  ~/.ssh already exists, merging..."
+            cp -rn "$BACKUP_DIR/ssh/"* "$HOME/.ssh/" 2>/dev/null || true
+        else
+            cp -r "$BACKUP_DIR/ssh" "$HOME/.ssh"
+        fi
+        chmod 700 "$HOME/.ssh"
+        chmod 600 "$HOME/.ssh"/id_rsa* 2>/dev/null || true
+        chmod 600 "$HOME/.ssh"/v14 2>/dev/null || true
+        chmod 644 "$HOME/.ssh"/*.pub 2>/dev/null || true
+        chmod 600 "$HOME/.ssh/config" 2>/dev/null || true
+        echo "  → Restored ~/.ssh"
     else
-        cp -r "$BACKUP_DIR/ssh" "$HOME/.ssh"
+        echo "  → Skipped"
     fi
-    chmod 700 "$HOME/.ssh"
-    chmod 600 "$HOME/.ssh"/id_rsa* 2>/dev/null || true
-    chmod 600 "$HOME/.ssh"/v14 2>/dev/null || true
-    chmod 644 "$HOME/.ssh"/*.pub 2>/dev/null || true
-    chmod 600 "$HOME/.ssh/config" 2>/dev/null || true
-    echo "  → Restored ~/.ssh"
 else
     echo "[1/7] No SSH keys in backup"
 fi
 
 # ——— AWS ———
 if [ -d "$BACKUP_DIR/aws" ]; then
-    echo "[2/7] Restoring AWS credentials..."
-    cp -r "$BACKUP_DIR/aws" "$HOME/.aws"
-    chmod 600 "$HOME/.aws/credentials" 2>/dev/null || true
-    echo "  → Restored ~/.aws"
+    if confirm "[2/7] Restore AWS credentials?"; then
+        cp -r "$BACKUP_DIR/aws" "$HOME/.aws"
+        chmod 600 "$HOME/.aws/credentials" 2>/dev/null || true
+        echo "  → Restored ~/.aws"
+    else
+        echo "  → Skipped"
+    fi
 else
     echo "[2/7] No AWS credentials in backup"
 fi
 
 # ——— Docker ———
 if [ -d "$BACKUP_DIR/docker" ]; then
-    echo "[3/7] Restoring Docker config..."
-    mkdir -p "$HOME/.docker"
-    cp "$BACKUP_DIR/docker/config.json" "$HOME/.docker/config.json"
-    echo "  → Restored ~/.docker/config.json"
+    if confirm "[3/7] Restore Docker config?"; then
+        mkdir -p "$HOME/.docker"
+        cp "$BACKUP_DIR/docker/config.json" "$HOME/.docker/config.json"
+        echo "  → Restored ~/.docker/config.json"
+    else
+        echo "  → Skipped"
+    fi
 else
     echo "[3/7] No Docker config in backup"
 fi
 
 # ——— mkcert ———
 if [ -d "$BACKUP_DIR/mkcert" ]; then
-    echo "[4/7] Restoring mkcert root CA..."
-    mkdir -p "$HOME/.local/share/mkcert"
-    cp -r "$BACKUP_DIR/mkcert/"* "$HOME/.local/share/mkcert/"
-    echo "  → Restored ~/.local/share/mkcert"
+    if confirm "[4/7] Restore mkcert root CA?"; then
+        mkdir -p "$HOME/.local/share/mkcert"
+        cp -r "$BACKUP_DIR/mkcert/"* "$HOME/.local/share/mkcert/"
+        echo "  → Restored ~/.local/share/mkcert"
+    else
+        echo "  → Skipped"
+    fi
 else
     echo "[4/7] No mkcert CA in backup"
 fi
 
 # ——— GNOME Keyrings ———
 if [ -d "$BACKUP_DIR/keyrings" ]; then
-    echo "[5/7] Restoring GNOME keyrings..."
-    mkdir -p "$HOME/.local/share/keyrings"
-    cp "$BACKUP_DIR/keyrings/"* "$HOME/.local/share/keyrings/"
-    echo "  → Restored ~/.local/share/keyrings"
+    if confirm "[5/7] Restore GNOME keyrings?"; then
+        mkdir -p "$HOME/.local/share/keyrings"
+        cp "$BACKUP_DIR/keyrings/"* "$HOME/.local/share/keyrings/"
+        echo "  → Restored ~/.local/share/keyrings"
+    else
+        echo "  → Skipped"
+    fi
 else
     echo "[5/7] No keyrings in backup"
 fi
 
 # ——— Gitconfig local ———
 if [ -f "$BACKUP_DIR/gitconfig_local" ]; then
-    echo "[6/7] Restoring .gitconfig_local..."
-    cp "$BACKUP_DIR/gitconfig_local" "$HOME/.gitconfig_local"
-    echo "  → Restored ~/.gitconfig_local"
+    if confirm "[6/7] Restore .gitconfig_local?"; then
+        cp "$BACKUP_DIR/gitconfig_local" "$HOME/.gitconfig_local"
+        echo "  → Restored ~/.gitconfig_local"
+    else
+        echo "  → Skipped"
+    fi
 else
     echo "[6/7] No .gitconfig_local in backup"
 fi
 
 # ——— NPM config ———
 if [ -f "$BACKUP_DIR/npmrc" ]; then
-    echo "[7/7] Restoring .npmrc..."
-    cp "$BACKUP_DIR/npmrc" "$HOME/.npmrc"
-    echo "  → Restored ~/.npmrc"
+    if confirm "[7/7] Restore .npmrc?"; then
+        cp "$BACKUP_DIR/npmrc" "$HOME/.npmrc"
+        echo "  → Restored ~/.npmrc"
+    else
+        echo "  → Skipped"
+    fi
 else
     echo "[7/7] No .npmrc in backup"
 fi
 
 # ——— GNOME settings ———
 echo ""
-echo "Restoring GNOME settings..."
-bash "$SCRIPT_DIR/gnome.sh" restore
+if confirm "Restore GNOME settings?"; then
+    bash "$SCRIPT_DIR/gnome.sh" restore
+else
+    echo "  → Skipped"
+fi
 
 # Cleanup
 rm -rf "$TMP_DIR"

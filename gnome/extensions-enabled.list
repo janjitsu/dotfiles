@@ -1,6 +1,6 @@
 # GNOME Shell Extensions — Enabled
-# Generated: 2026-06-21T17:32:57+02:00
-# Use restore.sh to reinstall from extensions.gnome.org
+# Generated: 2026-08-09T14:59:16+02:00
+# Use '/home/janjitsu/dotfiles/backup/gnome.sh restore' to reinstall from extensions.gnome.org
 
 vertical-workspaces@G-dH.github.com
 bluetooth-quick-connect@bjarosze.gmail.com
