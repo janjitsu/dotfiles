@@ -1,11 +1,17 @@
 {
-  "theme": "dark",
+  "preferredNotifChannel":"terminal_bell",
   "permissions": {
     "allow": [
       "Bash(npx jest *)",
       "Bash(npm info *)"
     ]
   },
+  "model": "sonnet",
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": true
+  },
+  "tui": "fullscreen",
+  "theme": "dark",
   "mcpServers": {
     "atlassian-mcp-server": {
       "command": "/usr/bin/env",
@@ -19,8 +25,5 @@
       ],
       "env": {}
     }
-  },
-  "enabledPlugins": {
-    "atlassian@claude-plugins-official": true
   }
 }
