@@ -19,6 +19,7 @@ apk add \
     py3-pip \
     nodejs \
     npm \
+    go \
     ripgrep \
     fd \
     ctags \

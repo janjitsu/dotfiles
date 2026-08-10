@@ -16,6 +16,7 @@ pkg install -y \
     build-essential \
     python \
     nodejs \
+    golang \
     ripgrep \
     fd \
     universal-ctags \

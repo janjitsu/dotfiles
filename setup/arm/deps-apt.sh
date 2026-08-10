@@ -18,6 +18,7 @@ apt-get install -y \
     python3-pip \
     nodejs \
     npm \
+    golang-go \
     ripgrep \
     fd-find \
     universal-ctags \

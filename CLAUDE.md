@@ -21,7 +21,7 @@ Personal dotfiles repo for a GNOME desktop running on Ubuntu (primary) and Fedor
 
 `setup.sh` parses `--no-desktop` and exports `NO_DESKTOP`; `ubuntu.sh`/`fedora.sh` read it (defaulting to `false` via `${NO_DESKTOP:-false}`) to decide whether to run the `desktop/` subfolder and `apps.sh`.
 
-**ARM (Termux / proot-distro)**: `aarch64` means an Android device — either native Termux or a proot-distro container (e.g. a slim Ubuntu or Alpine server running inside Termux). Scope is dotfiles + Neovim + Tmux only, no desktop apps, fonts, or GNOME:
+**ARM (Termux / proot-distro)**: `aarch64` means an Android device — either native Termux or a proot-distro container (e.g. a slim Ubuntu or Alpine server running inside Termux). Scope is dotfiles + Neovim + Tmux only, no desktop apps, fonts, or GNOME. Each `deps-*.sh` also installs `go` (alongside python3/nodejs) since the shared `vimrc`'s `vim-go`/`coc-go` plugins need it — this is a Neovim plugin dependency, not new desktop/app scope:
 
 ```
 setup/arm.sh
