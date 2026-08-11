@@ -1,18 +1,18 @@
 #!/bin/bash
 ############################
-# setup/fedora/nvidia.sh
+# setup/fedora/manual/nvidia.sh
 # Install proprietary Nvidia drivers on Fedora Workstation via RPM Fusion's
 # akmod-nvidia-580xx branch (Maxwell/Pascal — GTX 800/900/10 series,
 # Fedora 44+), handling Secure Boot MOK enrollment when needed. Standalone,
-# manually run on the
-# Nvidia box — not wired into setup.sh/fedora.sh, since it needs a reboot
-# + interactive MOK enrollment mid-process and would be wrong to run on a
-# machine without an Nvidia GPU.
+# manually run on the Nvidia box — lives in manual/ (not setup/fedora/
+# directly) so fedora.sh's `fedora/*.sh` glob never picks it up. It needs a
+# reboot + interactive MOK enrollment mid-process and would break setup on
+# a machine without an Nvidia GPU.
 #
 # Source: https://github.com/fady-saied/Nvidia-Fedora-Guide
 #
 # Usage:
-#   ./setup/fedora/nvidia.sh
+#   ./setup/fedora/manual/nvidia.sh
 ############################
 
 set -euo pipefail
