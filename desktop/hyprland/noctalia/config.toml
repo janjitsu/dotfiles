@@ -176,19 +176,10 @@ color = "error"
 [widget.spacer_1]
 type = "spacer"
 
-[widget.sysmon_2]
-glyph = "gpu-usage"
-show_label = false
-stat = "gpu_temp"
-type = "sysmon"
-
 [widget.sysmon_3]
 glyph = "cpu-2"
 stat = "ram_used"
 type = "sysmon"
-
-[widget.temp]
-show_label = false
 
 [widget.tray]
 capsule = true
@@ -201,6 +192,5 @@ color = "secondary"
 active_pill_size = 2.5
 capsule = true
 capsule_fill = "on_primary"
-display = "none"
 inactive_pill_size = 1.0
 pill_scale = 0.80000000000000004
