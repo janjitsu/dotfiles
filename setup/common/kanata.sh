@@ -3,7 +3,7 @@
 
 # --- Configuration ---
 ZIP_URL="https://github.com/jtroo/kanata/releases/download/v1.10.1/kanata-linux-binaries-v1.10.1-x64.zip"
-TARGET_DIR="$HOME/Programs/kanata"
+TARGET_DIR="$HOME/apps/kanata"
 BIN_PATH="$TARGET_DIR/kanata"
 # Change this to the actual path of your .kbd file
 CONFIG_PATH="$HOME/dotfiles/kanata.kbd"

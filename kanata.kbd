@@ -1,3 +1,6 @@
+(deflocalkeys-linux
+  ro 89
+)
 (defcfg
   ;; Only target the internal laptop keyboard
   linux-dev-names-include ("AT Translated Set 2 keyboard")
