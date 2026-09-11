@@ -167,10 +167,32 @@ set ttyfast        " faster scrolling
 
 " easier window vsplit and motion
 nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" C-j/C-k: left to vim-tmux-navigator's own mappings (defined at plugin load),
+" which already fall through to tmux pane switching at vim split edges.
+" C-h/C-l: same, but additionally fall through to prev/next tmux window when
+" there is no tmux pane in that direction either (mirrors ~/.tmux.conf).
+function! s:TmuxNavigateOrWindow(direction)
+  if empty($TMUX)
+    execute 'wincmd ' . a:direction
+    return
+  endif
+  let nr = winnr()
+  try
+    execute 'wincmd ' . a:direction
+  catch
+  endtry
+  if nr != winnr()
+    return
+  endif
+  let edge = a:direction ==# 'h' ? 'pane_at_left' : 'pane_at_right'
+  let window_cmd = a:direction ==# 'h' ? 'previous-window' : 'next-window'
+  let pane_cmd = a:direction ==# 'h' ? 'select-pane -L' : 'select-pane -R'
+  let at_edge = system("tmux display-message -p '#{" . edge . "}'") =~# '1'
+  call system('tmux ' . (at_edge ? window_cmd : pane_cmd))
+endfunction
+
+nnoremap <silent> <C-h> :call <SID>TmuxNavigateOrWindow('h')<CR>
+nnoremap <silent> <C-l> :call <SID>TmuxNavigateOrWindow('l')<CR>
 
 
 " ########################### LEADER SHORTCUTS #################################
@@ -452,6 +474,25 @@ let g:php_cs_fixer_verbose = 0                    " Return the output of command
 
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 
-"""" guttentags
+"""" gutentags
 set statusline+=%{gutentags#statusline()}
+let g:gutentags_ctags_exclude = [
+  \ 'node_modules',
+  \ 'dist',
+  \ 'build',
+  \ '.git',
+  \ 'data',
+  \ '.venv',
+  \ 'venv',
+  \ '__pycache__',
+  \ 'coverage',
+  \ '.dart_tool',
+  \ '.gradle',
+  \ '.terraform',
+  \ 'Pods',
+  \ '.cxx',
+  \ '*.sqlite',
+  \ '*.sqlite-wal',
+  \ '*.min.js'
+  \ ]
 
