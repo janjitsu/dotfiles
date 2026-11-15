@@ -142,9 +142,7 @@ cmd "<Super>Return" "ptyxis --new-window"
 cmd "<Super>d"      "rofi -show drun"
 cmd "<Super>e"      "thunar"
 cmd "<Super>s"      "snip"
-# Bare Super tap -> F13 (kanata.kbd tap-hold on lmet, fires on release) -> window switcher.
-cmd "F13"           "rofi -show window"
-cmd "<Super>b"      "rofi -show window"   # same switcher without kanata (e.g. external keyboards)
+cmd "<Super>b"      "rofi -show window"   # window switcher
 # Windows
 bind "<Super>q" close_window_key
 bind "<Super>f" maximize_window_key
@@ -157,6 +155,7 @@ done
 bind "<Super>h" left_workspace_key
 bind "<Super>l" right_workspace_key
 xfconf-query -c xfce4-keyboard-shortcuts -r -p "/xfwm4/custom/<Super>u" 2>/dev/null || true
+xfconf-query -c xfce4-keyboard-shortcuts -r -p "/commands/custom/F13" 2>/dev/null || true
 bind "<Super>Home" workspace_1_key
 bind "<Super>End"  workspace_last_key
 # Move window
