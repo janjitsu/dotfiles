@@ -43,6 +43,13 @@ fi
 ln -sfn "$DIR/pulseeffects" ~/.config/PulseEffects
 echo "→ ~/.config/PulseEffects"
 
+# ——— Rofi ———
+if [ -d ~/.config/rofi ] && [ ! -L ~/.config/rofi ]; then
+    mv ~/.config/rofi "$OLDDIR/"
+fi
+ln -sfn "$DIR/rofi" ~/.config/rofi
+echo "→ ~/.config/rofi"
+
 # ——— Touchegg ———
 mkdir -p ~/.config/touchegg
 ln -sfn "$DIR/touchegg.conf" ~/.config/touchegg/touchegg.conf

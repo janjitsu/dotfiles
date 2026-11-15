@@ -133,6 +133,10 @@ Ubuntu and Fedora are both supported. Each has its own folder under `setup/` wit
 - No snap/flatpak ships by default, so there's no `debloat.sh` equivalent
 - `transmission-gtk` (not `transmission-daemon`) is used deliberately to avoid an always-on background seeding service on a low-memory handheld
 
+### Xfce (Fedora)
+
+`setup/fedora/desktop/xfce.sh` installs Xfce next to GNOME and configures it through `xfconf-query` (needs a session bus, otherwise it only installs): Adwaita-dark, `elementary-xfce-dark` icons, Iosevka Nerd Font (via `setup/common/nerd-font-iosevka.sh`), 1.15 scale via `Xft/DPI`=110, five workspaces, panel layout, and a Super-based keybinding scheme (`Super+Return` Ptyxis, `Super+d` rofi, tapping bare `Super` opens the rofi window switcher (kanata maps a tap of lmet to F13 on release; internal keyboard only) or `Super+b` when kanata is off, `Super+h/l` previous/next workspace, `Super+1..5`, `Ctrl+Super+L` lock). Panels get re-pinned to the largest connected output on every run (a stale `output-name` hides them). `scripts/xkb-bell-sound` (autostarted) plays the sound theme's bell instead of the raw X beep; `scripts/snip` is the screenshot-to-clipboard helper. `rofi/` is symlinked by `setup/symlinks.sh`.
+
 ## Utility Scripts
 
 `scripts/` — standalone, not part of setup: `disk-health.sh` (SMART report, auto-installs `smartmontools`), `fix-nvme-sleep.sh` (GRUB fix for NVMe sleep/wake hangs), `pactl_switch_sink.sh` (cycle audio outputs), `share_folder_smb.sh` (Samba share setup), `thirds.sh` (window snapping), `generate_cpf.sh`/`generate_cnpj_bugado.sh` (Brazilian document generators), `enable-hibernate.sh` (WIP).

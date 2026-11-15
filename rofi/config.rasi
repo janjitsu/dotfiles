@@ -1,0 +1,21 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    font: "Iosevka Nerd Font 12";
+    display-drun: "Apps";
+    display-window: "Windows";
+}
+
+* {
+    bg:   #171421;
+    fg:   #d0cfcc;
+    sel:  #3584e4;
+    background-color: @bg;
+    text-color: @fg;
+}
+
+window { width: 40%; border: 2px; border-color: @sel; padding: 8px; }
+inputbar { padding: 6px; border: 0 0 1px 0; border-color: @sel; }
+listview { lines: 10; padding: 6px 0 0 0; }
+element { padding: 4px; }
+element selected { background-color: @sel; text-color: #ffffff; }

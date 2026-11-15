@@ -18,16 +18,22 @@
   ret-shift (tap-hold 150 150 ret lshift)
 )
 
+(defalias
+  ;; Tap Left Super (fires on release): F13 -> XFCE rofi window switcher | Hold / combo: Super
+  ;; tap-hold-release resolves to Super immediately when another key is pressed (Super+h, ...)
+  met-f13 (tap-hold-release 200 200 f13 lmet)
+)
+
 (defsrc
-  spc ralt ro
+  spc ralt ro f1 lmet
 )
 
 
 (deflayer default
-  @spc-ctrl @ret-shift ralt
+  @spc-ctrl @ret-shift ralt mlft @met-f13
 )
 
 ;;(layer-toggle layer1)
 ;;(deflayer layer1
-;;  _ _ lalt _
+;;  _ _ lalt _ _
 ;;)
