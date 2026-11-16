@@ -105,31 +105,29 @@ if [ -n "$OUT" ]; then
 fi
 
 P=/plugins
-LDIR=~/.config/xfce4/panel
-mk_launcher() { # mk_launcher <plugin-id> <desktop file>
-  mkdir -p "$LDIR/launcher-$1"
-  cp -f "$2" "$LDIR/launcher-$1/"
-  xset_ xfce4-panel "$P/plugin-$1" string launcher
-  xfconf-query -c xfce4-panel -n -a -p "$P/plugin-$1/items" -t string -s "$(basename "$2")"
-}
-# panel-1 (top bar, video layout): whisker | pager | launchers | tasks | tray | clock
+# panel-1 (top bar), left to right: tasklist | <expand> | whisker | pager (miniatures)
+# | systray | power manager | clock | separator.  Plugin ids match a stock Xfce panel.
+xset_ xfce4-panel "$P/plugin-2" string tasklist
+xset_ xfce4-panel "$P/plugin-2/grouping" uint 1
+xset_ xfce4-panel "$P/plugin-7" string separator
+xset_ xfce4-panel "$P/plugin-7/style" uint 0
+xset_ xfce4-panel "$P/plugin-7/expand" bool true
 xset_ xfce4-panel "$P/plugin-1" string whiskermenu
-xset_ xfce4-panel "$P/plugin-22" string separator
-xset_ xfce4-panel "$P/plugin-22/style" uint 0
-xset_ xfce4-panel "$P/plugin-4/miniature-view" bool false
+xset_ xfce4-panel "$P/plugin-4" string pager
+xset_ xfce4-panel "$P/plugin-4/miniature-view" bool true
 xset_ xfce4-panel "$P/plugin-4/rows" uint 1
-xset_ xfce4-panel "$P/plugin-5/style" uint 0
-mk_launcher 23 /usr/share/applications/google-chrome-beta.desktop
-mk_launcher 24 /usr/share/applications/org.gnome.Ptyxis.desktop
-mk_launcher 25 /usr/share/applications/thunar.desktop
+xset_ xfce4-panel "$P/plugin-4/numbering" bool false
+xset_ xfce4-panel "$P/plugin-4/wrap-workspaces" bool false
+xset_ xfce4-panel "$P/plugin-6" string systray
+xset_ xfce4-panel "$P/plugin-6/square-icons" bool true
+xset_ xfce4-panel "$P/plugin-9" string power-manager-plugin
+xset_ xfce4-panel "$P/plugin-8" string clock
 xset_ xfce4-panel "$P/plugin-8/digital-layout" uint 3
 xset_ xfce4-panel "$P/plugin-8/digital-time-format" string "%H:%M"
 xset_ xfce4-panel "$P/plugin-8/digital-time-font" string "Iosevka Nerd Font Propo Semi-Bold 12"
-xfconf-query -c xfce4-panel -r -R -p "$P/plugin-9" 2>/dev/null || true
-xfconf-query -c xfce4-panel -r -R -p "$P/plugin-10" 2>/dev/null || true
+xset_ xfce4-panel "$P/plugin-10" string separator
 xfconf-query -c xfce4-panel -n -a -p /panels/panel-1/plugin-ids \
-  -t int -s 1 -t int -s 22 -t int -s 4 -t int -s 5 -t int -s 23 -t int -s 24 -t int -s 25 \
-  -t int -s 2 -t int -s 3 -t int -s 6 -t int -s 7 -t int -s 8
+  -t int -s 2 -t int -s 7 -t int -s 1 -t int -s 4 -t int -s 6 -t int -s 9 -t int -s 8 -t int -s 10
 xset_ xfce4-panel /panels/panel-1/size uint 28
 xset_ xfce4-panel /panels/panel-1/icon-size uint 22
 # panel-2 is the autohide dock: left exactly as it was.
