@@ -43,6 +43,11 @@ fi
 ln -sfn "$DIR/pulseeffects" ~/.config/PulseEffects
 echo "→ ~/.config/PulseEffects"
 
+# ——— Scripts on PATH ———
+mkdir -p ~/.local/bin
+ln -sfn "$DIR/scripts/tile-thirds" ~/.local/bin/tile-thirds
+echo "→ ~/.local/bin/tile-thirds"
+
 # ——— Rofi ———
 if [ -d ~/.config/rofi ] && [ ! -L ~/.config/rofi ]; then
     mv ~/.config/rofi "$OLDDIR/"

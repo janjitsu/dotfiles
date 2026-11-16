@@ -1,6 +1,6 @@
 #!/bin/bash
-# Install and configure Xfce alongside GNOME: packages, Adwaita-dark +
-# elementary-xfce icons, Iosevka Nerd Font, 1.15 scale, panel layout, rofi,
+# Install and configure Xfce alongside GNOME: packages, Greybird-dark +
+# elementary-xfce icons, Iosevka Nerd Font, DPI 125 scale, panel layout, rofi,
 # GNOME-like terminal bell sound, and a Super-based keybinding scheme.
 # Idempotent: safe to re-run (xfconf-query -n creates or overwrites).
 
@@ -16,8 +16,8 @@ fi
 echo "→ Installing Xfce"
 sudo dnf group install -y xfce-desktop-environment
 sudo dnf install -y xfce4-whiskermenu-plugin elementary-xfce-icon-theme \
-  adwaita-icon-theme rofi maim xclip ptyxis python3 libcanberra-gtk3 \
-  sound-theme-freedesktop
+  adwaita-icon-theme greybird-dark-theme greybird-xfwm4-theme rofi maim xclip ptyxis python3 libcanberra-gtk3 \
+  sound-theme-freedesktop gnome-calendar
 
 echo "→ Iosevka Nerd Font"
 bash "$DIR/setup/common/nerd-font-iosevka.sh"
@@ -39,18 +39,23 @@ cmd() { # cmd <accelerator> <command>
 }
 
 # ——— Appearance ———
-echo "→ Applying appearance (Adwaita-dark, elementary-xfce, Iosevka, 1.15 scale)"
-xset_ xsettings /Net/ThemeName string "Adwaita-dark"
+echo "→ Applying appearance (Greybird-dark, elementary-xfce, Iosevka, DPI 125)"
+xset_ xsettings /Net/ThemeName string "Greybird-dark"
 xset_ xsettings /Net/IconThemeName string "elementary-xfce-dark"
 xset_ xsettings /Gtk/FontName string "Iosevka Nerd Font Bold 12"
 xset_ xsettings /Gtk/MonospaceFontName string "Iosevka Nerd Font 12"
-# Same 1.15 as GNOME's text-scaling-factor: X11 has no fractional window scale,
-# so scale via DPI (96 * 1.15 = 110) and keep the integer window scale at 1.
-xset_ xsettings /Xft/DPI int 110
-xset_ xsettings /Xfce/LastCustomDPI int 110
+# X11 has no fractional window scale, so scale via DPI (96 * 1.30 = 125) and
+# keep the integer window scale at 1.
+xset_ xsettings /Xft/DPI int 125
+xset_ xsettings /Xfce/LastCustomDPI int 125
 xset_ xsettings /Gdk/WindowScalingFactor int 1
 xset_ xfwm4 /general/title_font string "Iosevka Nerd Font Oblique 12"
 xset_ xfwm4 /general/borderless_maximize bool true
+xset_ xsettings /Gtk/CursorThemeSize int 72
+# Focus follows the mouse without raising (like GNOME's sloppy focus); no workspace wrap-around.
+xset_ xfwm4 /general/click_to_focus bool false
+xset_ xfwm4 /general/raise_on_focus bool false
+xset_ xfwm4 /general/wrap_workspaces bool false
 xset_ xfce4-desktop /desktop-icons/style int 0
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark 2>/dev/null || true
 
@@ -74,6 +79,7 @@ xset_ xsettings /Net/SoundThemeName string "freedesktop"
 mkdir -p ~/.local/bin ~/.config/autostart
 ln -sfn "$DIR/scripts/xkb-bell-sound" ~/.local/bin/xkb-bell-sound
 ln -sfn "$DIR/scripts/snip" ~/.local/bin/snip
+ln -sfn "$DIR/scripts/tile-thirds" ~/.local/bin/tile-thirds
 cat > ~/.config/autostart/xkb-bell-sound.desktop <<EOF
 [Desktop Entry]
 Type=Application
@@ -89,49 +95,41 @@ xfconf-query -c xfwm4 -r -p /general/workspace_names 2>/dev/null || true
 xfconf-query -c xfwm4 -n -a -p /general/workspace_names \
   -t string -s 1 -t string -s 2 -t string -s 3 -t string -s 4 -t string -s 5
 
-# ——— Panels ———
-echo "→ Configuring panels"
-# Both panels were pinned to a monitor name that no longer exists (HDMI-1), so
-# neither drew. Pin them to the largest connected output instead; re-runs heal it.
+# ——— Panels: load the hand-made layout snapshot from xfce/ ———
+echo "→ Loading panel layout (xfce/)"
+CFG=~/.config/xfce4
+XML="$CFG/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
+mkdir -p "$CFG/xfconf/xfce-perchannel-xml" "$CFG/panel" ~/dotfiles_old
+# Keep whatever panel config exists, once per run, before replacing it.
+[ -f "$XML" ] && cp -f "$XML" ~/dotfiles_old/xfce4-panel.xml.bak
+# Replace the files while the panel and xfconfd are stopped, so xfconfd re-reads them.
+xfce4-panel -q >/dev/null 2>&1 || true
+pkill -x xfconfd 2>/dev/null || true
+sleep 1
+sed "s#%HOME%#$HOME#g" "$DIR/xfce/xfce4-panel.xml" > "$XML"
+cp -f "$DIR/xfce/panel/datetime-16.rc" "$CFG/panel/"
+for d in "$DIR"/xfce/panel/launcher-*; do
+  n="$(basename "$d")"
+  rm -rf "$CFG/panel/$n"
+  mkdir -p "$CFG/panel/$n"
+  for f in "$d"/*.desktop; do
+    sed "s#%HOME%#$HOME#g" "$f" > "$CFG/panel/$n/$(basename "$f")"
+  done
+done
+
+# The snapshot has no monitor names (a stale output-name hides the panels).
+# Pin both panels to the largest connected output; re-runs heal it.
 OUT="$(xrandr --query 2>/dev/null | awk '
   / connected/ { name=$1; for (i=1;i<=NF;i++) if ($i ~ /^[0-9]+x[0-9]+\+/) { split($i,g,/[x+]/); a=g[1]*g[2]; if (a>max) { max=a; best=name } } }
   END { print best }')"
+(setsid xfce4-panel >/dev/null 2>&1 &)
+sleep 3
 if [ -n "$OUT" ]; then
   for n in 1 2; do
-    xfconf-query -c xfce4-panel -p "/panels/panel-$n/output-name" >/dev/null 2>&1 &&
-      xfconf-query -c xfce4-panel -p "/panels/panel-$n/output-name" -s "$OUT"
+    xset_ xfce4-panel "/panels/panel-$n/output-name" string "$OUT"
   done
   echo "  panels pinned to $OUT"
 fi
-
-P=/plugins
-# panel-1 (top bar), left to right: tasklist | <expand> | whisker | pager (miniatures)
-# | systray | power manager | clock | separator.  Plugin ids match a stock Xfce panel.
-xset_ xfce4-panel "$P/plugin-2" string tasklist
-xset_ xfce4-panel "$P/plugin-2/grouping" uint 1
-xset_ xfce4-panel "$P/plugin-7" string separator
-xset_ xfce4-panel "$P/plugin-7/style" uint 0
-xset_ xfce4-panel "$P/plugin-7/expand" bool true
-xset_ xfce4-panel "$P/plugin-1" string whiskermenu
-xset_ xfce4-panel "$P/plugin-4" string pager
-xset_ xfce4-panel "$P/plugin-4/miniature-view" bool true
-xset_ xfce4-panel "$P/plugin-4/rows" uint 1
-xset_ xfce4-panel "$P/plugin-4/numbering" bool false
-xset_ xfce4-panel "$P/plugin-4/wrap-workspaces" bool false
-xset_ xfce4-panel "$P/plugin-6" string systray
-xset_ xfce4-panel "$P/plugin-6/square-icons" bool true
-xset_ xfce4-panel "$P/plugin-9" string power-manager-plugin
-xset_ xfce4-panel "$P/plugin-8" string clock
-xset_ xfce4-panel "$P/plugin-8/digital-layout" uint 3
-xset_ xfce4-panel "$P/plugin-8/digital-time-format" string "%H:%M"
-xset_ xfce4-panel "$P/plugin-8/digital-time-font" string "Iosevka Nerd Font Propo Semi-Bold 12"
-xset_ xfce4-panel "$P/plugin-10" string separator
-xfconf-query -c xfce4-panel -n -a -p /panels/panel-1/plugin-ids \
-  -t int -s 2 -t int -s 7 -t int -s 1 -t int -s 4 -t int -s 6 -t int -s 9 -t int -s 8 -t int -s 10
-xset_ xfce4-panel /panels/panel-1/size uint 28
-xset_ xfce4-panel /panels/panel-1/icon-size uint 22
-# panel-2 is the autohide dock: left exactly as it was.
-xfce4-panel -r >/dev/null 2>&1 || true
 
 # ——— Keybindings (Super-based) ———
 echo "→ Applying keybindings"
@@ -140,7 +138,17 @@ cmd "<Super>Return" "ptyxis --new-window"
 cmd "<Super>d"      "rofi -show drun"
 cmd "<Super>e"      "thunar"
 cmd "<Super>s"      "snip"
+cmd "<Super>r"      "xfce4-appfinder"     # full window like the dock button (default is the collapsed -c bar)
 cmd "<Super>b"      "rofi -show window"   # window switcher
+# Tiling (tile-thirds: columns on landscape monitors, rows on portrait ones)
+cmd "<Alt><Super>h"     "tile-thirds first"
+cmd "<Alt><Super>j"     "tile-thirds second"
+cmd "<Alt><Super>l"     "tile-thirds third"
+cmd "<Alt><Super>y"     "tile-thirds first2"
+cmd "<Alt><Super>o"     "tile-thirds last2"
+cmd "<Alt><Super>Left"  "tile-thirds half-a"
+cmd "<Alt><Super>Right" "tile-thirds half-b"
+cmd "<Alt><Super>Up"    "tile-thirds full"
 # Windows
 bind "<Super>q" close_window_key
 bind "<Super>f" maximize_window_key

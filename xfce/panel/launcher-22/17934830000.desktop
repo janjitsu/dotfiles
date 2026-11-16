@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Calendário
+Comment=Calendar
+Exec=gnome-calendar
+Icon=org.gnome.Calendar
+Terminal=false
+StartupNotify=true
+Categories=GNOME;GTK;Office;Calendar;

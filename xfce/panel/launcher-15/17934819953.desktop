@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=exo-open --launch WebBrowser %u
+Icon=org.xfce.webbrowser
+StartupNotify=true
+Terminal=false
+Categories=Network;X-XFCE;X-Xfce-Toplevel;
+Keywords[pt_BR]=internet;web;navegador;surfar;explorar;xfce;
+Keywords[pt]=internet;web;navegador;surfar;explorador;xfce;
+Keywords=internet;web;browser;surf;explore;xfce;
+OnlyShowIn=XFCE;
+X-XFCE-MimeType=x-scheme-handler/http;x-scheme-handler/https;
+X-AppStream-Ignore=True
+Name[pt_BR]=Navegador web
+Name[pt]=Navegador web
+Name=Web Browser
+Comment[pt_BR]=Navegar pela web
+Comment[pt]=Navegar na web
+Comment=Browse the web
+X-Desktop-File-Install-Version=0.28
+X-XFCE-Source=file:///usr/share/applications/xfce4-web-browser.desktop

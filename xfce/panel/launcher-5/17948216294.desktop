@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=13.0
+Type=Application
+Terminal=false
+Exec=%HOME%/apps/postman/Postman
+Name=Postman
+Icon=%HOME%/apps/postman/app/resources/app/assets/icon.png
+X-XFCE-Source=file://%HOME%/.local/share/applications/postman.desktop

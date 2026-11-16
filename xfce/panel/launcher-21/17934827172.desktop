@@ -1,0 +1,45 @@
+[Desktop Entry]
+Name[pt]=Terminal
+Name[pt_BR]=Terminal
+Name=Terminal
+Comment[pt]=Um terminal orientado a contentores para o GNOME
+Comment[pt_BR]=Um terminal orientado a contêineres para GNOME
+Comment=A container-oriented terminal for GNOME
+Exec=ptyxis
+Icon=org.gnome.Ptyxis
+DBusActivatable=true
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;System;TerminalEmulator;
+GenericName[pt]=Terminal
+GenericName[pt_BR]=Terminal
+GenericName=Terminal
+Keywords[pt]=terminal;prompt;ptyxis;shell;comando;linha de comandos;cmd;cli;container;contentor;podman;toolbox;distrobox;
+Keywords[pt_BR]=terminal;prompt;ptyxis;shell;comando;linha de comando;cmd;cli;container;contêiner;podman;toolbox;distrobox;
+Keywords=terminal;prompt;ptyxis;shell;command;commandline;cmd;cli;console;container;podman;toolbox;distrobox;
+Actions=new-window;new-tab;preferences;
+X-ExecArg=--
+X-TerminalArgTitle=--title
+X-TerminalArgDir=--working-directory
+X-TerminalArgAppId=--gapplication-app-id
+X-KDE-AuthorizeAction=shell_access
+X-XFCE-Source=file:///usr/share/applications/org.gnome.Ptyxis.desktop
+
+[Desktop Action new-window]
+Name[pt]=Nova janela
+Name[pt_BR]=Nova janela
+Name=New Window
+Exec=ptyxis --new-window
+
+[Desktop Action new-tab]
+Name[pt]=Novo separador
+Name[pt_BR]=Nova aba
+Name=New Tab
+Exec=ptyxis --tab
+
+[Desktop Action preferences]
+Name[pt]=Preferências
+Name[pt_BR]=Preferências
+Name=Preferences
+Exec=ptyxis --preferences

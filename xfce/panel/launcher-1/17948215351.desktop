@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Exec=%HOME%/apps/obsidian/obsidian.AppImage
+Name=Obsidian
+Categories=Office;
+Icon=%HOME%/apps/obsidian/obsidian.png
+X-XFCE-Source=file://%HOME%/.local/share/applications/obsidian.desktop

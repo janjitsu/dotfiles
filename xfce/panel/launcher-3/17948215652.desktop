@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=13.0
+Type=Application
+Terminal=false
+Exec=%HOME%/apps/idea/bin/idea
+Name=IntelliJ
+Icon=%HOME%/apps/idea/bin/idea.png
+X-XFCE-Source=file://%HOME%/.local/share/applications/idea.desktop

@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=exo-open --launch FileManager %u
+Icon=org.xfce.filemanager
+StartupNotify=true
+Terminal=false
+Categories=Utility;X-XFCE;X-Xfce-Toplevel;
+Keywords[pt_BR]=arquivo;gerenciador;explorador;navegador;sistema de arquivos;diretório;pasta;xfce;
+Keywords[pt]=ficheiro;gestor;explorador;navegador;sistema de ficheiros;diretório;pasta;xfce;
+Keywords=file;manager;explorer;browse;filesystem;directory;folder;xfce;
+OnlyShowIn=XFCE;
+X-XFCE-MimeType=inode/directory;x-scheme-handler/trash;
+X-AppStream-Ignore=True
+Name[pt_BR]=Gerenciador de arquivos
+Name[pt]=Gestor de ficheiros
+Name=File Manager
+Comment[pt_BR]=Navegar pelo sistema de arquivos
+Comment[pt]=Explorar sistema de ficheiros
+Comment=Browse the file system
+X-Desktop-File-Install-Version=0.28
+X-XFCE-Source=file:///usr/share/applications/xfce4-file-manager.desktop

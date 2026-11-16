@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name[pt_BR]=Gerenciador de configurações
+Name[pt]=Gestor de Definições
+Name=Settings Manager
+Comment[pt_BR]=Gerenciador de Configurações Gráficas para Xfce
+Comment[pt]=Gestor gráfico de definições do Xfce
+Comment=Graphical Settings Manager for Xfce
+Keywords[pt_BR]=controle;painel;centro;sistema;configurações;personalização;hardware;
+Keywords[pt]=controlo;painel;centro;sistema;definições;personalizar;equipamento;
+Keywords=control;panel;center;system;settings;personalize;hardware;
+Exec=xfce4-settings-manager
+Icon=org.xfce.settings.manager
+Terminal=false
+Type=Application
+Categories=X-XFCE;Settings;DesktopSettings;
+OnlyShowIn=XFCE;
+X-XfceSettingsManagerHidden=true
+X-Desktop-File-Install-Version=0.28
+X-XFCE-Source=file:///usr/share/applications/xfce-settings-manager.desktop
