@@ -1,25 +1,36 @@
 #!/bin/bash
-# @TODO install kanata in /usr/local/bin
 
 # --- Configuration ---
 ZIP_URL="https://github.com/jtroo/kanata/releases/download/v1.10.1/kanata-linux-binaries-v1.10.1-x64.zip"
-TARGET_DIR="$HOME/apps/kanata"
-BIN_PATH="$TARGET_DIR/kanata"
+BIN_PATH="/usr/local/bin/kanata_linux_x64"
 # Change this to the actual path of your .kbd file
 CONFIG_PATH="$HOME/dotfiles/kanata.kbd"
 
-# --- 1. Download and Extract ---
-echo "Creating directory at $TARGET_DIR..."
-mkdir -p "$TARGET_DIR"
+# --- 1. Download and Install ---
 mkdir -p "$(dirname "$CONFIG_PATH")"
 
-echo "Downloading and extracting Kanata..."
-curl -L "$ZIP_URL" -o /tmp/kanata.zip
-unzip -o /tmp/kanata.zip -d "$TARGET_DIR"
-rm /tmp/kanata.zip
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
 
-# The zip contains 'kanata' and 'kanata_w_cmd'. We want the main binary.
-chmod +x "$TARGET_DIR"/*
+echo "Downloading and extracting Kanata..."
+curl -L "$ZIP_URL" -o "$TMP_DIR/kanata.zip"
+unzip -o "$TMP_DIR/kanata.zip" -d "$TMP_DIR/bin"
+
+# The zip contains the main binary (kanata_linux_x64) plus a cmd-enabled variant. We want the main one.
+SRC_BIN="$(find "$TMP_DIR/bin" -type f -name 'kanata_linux_x64' | head -n 1)"
+if [ -z "$SRC_BIN" ]; then
+  echo "kanata_linux_x64 not found in the downloaded zip" >&2
+  exit 1
+fi
+
+# Root-owned, because the service runs as root (a user-writable binary would be a privilege escalation).
+# 'install' copies instead of moving, so the file gets the SELinux label of /usr/local/bin
+# (bin_t) rather than keeping user_home_t, which systemd is not allowed to execute on Fedora.
+echo "Installing Kanata to $BIN_PATH..."
+sudo install -o root -g root -m 755 "$SRC_BIN" "$BIN_PATH"
+if command -v restorecon > /dev/null; then
+  sudo restorecon -v "$BIN_PATH"
+fi
 
 # --- 2. Permission Setup (uinput) ---
 echo "Setting up uinput permissions..."
