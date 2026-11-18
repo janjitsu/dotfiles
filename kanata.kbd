@@ -37,6 +37,7 @@
 )
 
 ;; Arrows on the Colemak h / l / n / e keys (physical h / u / j / k)
+;; PrtSc gives the real Print Screen here (in the default layer it is ralt)
 (deflayer nav
-  _ _ _ _ _ _ _ left up down rght
+  _ _ _ prtsc _ _ _ left up down rght
 )
