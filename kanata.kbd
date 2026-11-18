@@ -18,16 +18,25 @@
   ret-shift (tap-hold 150 150 ret lshift)
 )
 
+(defalias
+  ;; Tap: c / m | Hold: navigation layer (timeout: 150ms)
+  c-lyr (tap-hold 150 150 c (layer-while-held nav))
+  m-lyr (tap-hold 150 150 m (layer-while-held nav))
+)
+
+;; `ro` exists on the JIS laptop, `prtsc` on the ThinkPad (same physical spot).
+;; Each machine only has one of them, so the other entry never fires.
+;; Key names are physical (QWERTY) positions; the OS layout is Colemak.
 (defsrc
-  spc ralt ro f1
+  spc ralt ro prtsc f1 c m h u j k
 )
 
 
 (deflayer default
-  @spc-ctrl @ret-shift ralt mlft
+  @spc-ctrl @ret-shift ralt ralt mlft @c-lyr @m-lyr h u j k
 )
 
-;;(layer-toggle layer1)
-;;(deflayer layer1
-;;  _ _ lalt _ _
-;;)
+;; Arrows on the Colemak h / l / n / e keys (physical h / u / j / k)
+(deflayer nav
+  _ _ _ _ _ _ _ left up down rght
+)
