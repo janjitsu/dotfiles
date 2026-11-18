@@ -71,7 +71,7 @@ else
   echo "TerminalEmulator=ptyxis" >> ~/.config/xfce4/helpers.rc
 fi
 
-# ——— Terminal bell: freedesktop theme sound instead of the raw X beep ———
+# ——— Terminal bell: drum sample (sounds/drum.wav) instead of the raw X beep ———
 echo "→ Terminal bell sound"
 xset_ xsettings /Net/EnableEventSounds bool true
 xset_ xsettings /Net/EnableInputFeedbackSounds bool true
@@ -84,7 +84,7 @@ cat > ~/.config/autostart/xkb-bell-sound.desktop <<EOF
 [Desktop Entry]
 Type=Application
 Name=XKB bell sound
-Comment=Play the sound theme bell instead of the X server beep
+Comment=Play a drum hit instead of the X server beep
 Exec=$HOME/.local/bin/xkb-bell-sound
 OnlyShowIn=XFCE;
 EOF

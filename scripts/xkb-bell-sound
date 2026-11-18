@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Play the freedesktop sound theme's bell instead of the raw X speaker beep.
+"""Play a drum hit (sounds/drum.wav) instead of the raw X speaker beep.
 
 GNOME (mutter) did this itself; XFCE does not, so terminals (Ptyxis etc.) fall
 back to the X server's PC-speaker-style beep. This listens for XKB BellNotify
 events, turns the server's own audible bell off (XkbAudibleBell control), and
-plays 'bell-window-system' through libcanberra. Uses ctypes + libX11 only.
+plays the drum sample from the repo's sounds/ dir with pw-play (paplay fallback). Uses ctypes + libX11 only.
 """
 import ctypes
 import ctypes.util
+import os
+import shutil
 import subprocess
 import sys
 import time
@@ -15,6 +17,9 @@ import time
 XKB_USE_CORE_KBD = 0x0100
 XKB_BELL_NOTIFY_MASK = 1 << 8
 XKB_AUDIBLE_BELL_MASK = 1 << 9
+
+SOUND = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "sounds", "drum.wav")
+PLAYER = shutil.which("pw-play") or shutil.which("paplay") or "paplay"
 
 x11 = ctypes.CDLL(ctypes.util.find_library("X11"))
 x11.XOpenDisplay.restype = ctypes.c_void_p
@@ -50,7 +55,7 @@ while True:
         continue
     last = now
     subprocess.Popen(
-        ["canberra-gtk-play", "-i", "bell-window-system"],
+        [PLAYER, SOUND],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
